@@ -93,8 +93,7 @@ system.beforeEvents.startup.subscribe((initEvent) => {
       block.setPermutation(
         block.permutation
           .withState("revive_dinos:stage", 0)
-          .withState("revive_dinos:target_face", face)
-          .withState("revive_dinos:used_faces", 0),
+          .withState("revive_dinos:target_face", face),
       );
     },
   });
@@ -644,21 +643,24 @@ world.afterEvents.entityHitBlock.subscribe((event) => {
     return;
   }
 
-  // Marca a face atual como já interagida e sorteia uma nova entre as que
-  // ainda não foram usadas (bitmask), para nunca repetir uma face anterior.
-  const newMask = usedMask | (1 << targetFace);
+  // Marca a face atual como já interagida e sorteia a próxima entre as que
+  // ainda não foram usadas, para nunca repetir uma face anterior.
+  const jaUsada = (f) =>
+    f === targetFace ||
+    block.permutation.getState(`revive_dinos:used_${f}`) === true;
+
   const disponiveis = [];
   for (let f = 0; f < 6; f++) {
-    if (!(newMask & (1 << f))) disponiveis.push(f);
+    if (!jaUsada(f)) disponiveis.push(f);
   }
   const novaFace = disponiveis[Math.floor(Math.random() * disponiveis.length)];
 
-  // A textura base muda conforme o stage (permutations do bloco) simulando a
-  // escavação; o highlight vai para a nova face-alvo.
+  // A textura base muda conforme o stage (permutations) simulando escavação;
+  // o highlight vai para a nova face-alvo, e a face atual fica marcada como usada.
   block.setPermutation(
     block.permutation
       .withState("revive_dinos:stage", stage + 1)
-      .withState("revive_dinos:target_face", novaFace)
-      .withState("revive_dinos:used_faces", newMask),
+      .withState(`revive_dinos:used_${targetFace}`, true)
+      .withState("revive_dinos:target_face", novaFace),
   );
 });
