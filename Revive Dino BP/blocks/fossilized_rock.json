@@ -12,10 +12,12 @@
       }
     },
     "components": {
+      "minecraft:display_name": "tile.revive_dinos:fossilized_rock.name",
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 3.0
       },
       "minecraft:loot": "loot_tables/blocks/fossil_rock_poor.json",
+      "minecraft:geometry": "minecraft:geometry.full_block",
       "minecraft:material_instances": {
         "*": {
           "texture": "fossil_rock_base",
