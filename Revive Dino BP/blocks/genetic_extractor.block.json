@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "revive_dinos:genetic_extractor": {},
+      "revive_dinos:extractor_machine": {},
       "minecraft:display_name": "tile.revive_dinos:genetic_extractor.name",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,

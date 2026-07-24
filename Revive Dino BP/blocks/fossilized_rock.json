@@ -3,6 +3,9 @@
   "minecraft:block": {
     "description": {
       "identifier": "revive_dinos:fossilized_rock",
+      "menu_category": {
+        "category": "nature"
+      },
       "states": {
         "revive_dinos:stage": [0, 1, 2, 3],
         "revive_dinos:target_face": [0, 1, 2, 3, 4, 5]

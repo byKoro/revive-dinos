@@ -43,6 +43,7 @@ function acharEntidade(block, dimension) {
 }
 
 const ENTITY_ID = "revive_dinos:genetic_extractor_ui";
+const BLOCK_ID = "revive_dinos:genetic_extractor";
 const OUTLINE_ID = "revive_dinos:outline_selection";
 const FAKE_SELECTION = "revive_dinos:fake_selection";
 const RANGE = 8;
@@ -50,7 +51,7 @@ const RANGE = 8;
 system.beforeEvents.startup.subscribe((initEvent) => {
   const reg = initEvent.blockComponentRegistry;
 
-  reg.registerCustomComponent("revive_dinos:genetic_extractor", {
+  reg.registerCustomComponent("revive_dinos:extractor_machine", {
     onPlace: ({ block, dimension }) => {
       if (acharEntidade(block, dimension)) return;
       criarEntidade(block, dimension);
@@ -491,6 +492,9 @@ world.afterEvents.dataDrivenEntityTrigger.subscribe(
 
     const block = entity.dimension.getBlock(entity.location);
     if (!block || block.isAir) return;
+    // Blocos órfãos (ex.: instâncias antigas após renomear o identifier) não
+    // têm os states deste bloco; mexer neles quebra o setPermutation.
+    if (block.typeId !== BLOCK_ID) return;
 
     const center = block.center();
     const fakeSelection = block.permutation.getState(FAKE_SELECTION);
