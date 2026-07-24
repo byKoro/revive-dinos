@@ -10,12 +10,42 @@
         },
         {
           "type": "item",
-          "name": "revive_dinos:fossil_femur_danificado",
+          "name": "revive_dinos:fossil_dente_danificado",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_garra_danificado",
           "weight": 1
         },
         {
           "type": "item",
           "name": "revive_dinos:fossil_costela_danificado",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_vertebra_danificado",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_femur_danificado",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_umero_danificado",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_cauda_danificado",
+          "weight": 1
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_fragmento_danificado",
           "weight": 1
         }
       ]

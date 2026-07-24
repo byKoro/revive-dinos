@@ -2,7 +2,7 @@
   "format_version": "1.21.100",
   "minecraft:block": {
     "description": {
-      "identifier": "revive_dinos:genetic_extrator",
+      "identifier": "revive_dinos:genetic_extractor",
       "menu_category": {
         "category": "nature"
       },
@@ -31,10 +31,10 @@
       "minecraft:destructible_by_explosion": {
         "explosion_resistance": 30
       },
-      "minecraft:geometry": "geometry.genetic_extrator",
+      "minecraft:geometry": "geometry.genetic_extractor",
       "minecraft:material_instances": {
         "*": {
-          "texture": "genetic_extrator",
+          "texture": "genetic_extractor",
           "render_method": "alpha_test"
         }
       },

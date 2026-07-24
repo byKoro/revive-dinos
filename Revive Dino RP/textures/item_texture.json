@@ -98,8 +98,8 @@
     "revive_dinos_dna_trex": {
       "textures": "textures/revive_dinos/items/dna_trex"
     },
-    "genetic_extrator": {
-      "textures": "textures/blocks/genetic_extrator"
+    "genetic_extractor": {
+      "textures": "textures/blocks/genetic_extractor"
     },
     "revive_dinos_genetic_extractor_ui": {
       "textures": "textures/revive_dinos/ui/genetic_extractor_ui"
@@ -115,6 +115,9 @@
     },
     "revive_dinos_placeholder_invisible": {
       "textures": "textures/revive_dinos/items/placeholder_invisible"
+    },
+    "revive_dinos_hammer": {
+      "textures": "textures/revive_dinos/items/hammer"
     }
   }
 }
