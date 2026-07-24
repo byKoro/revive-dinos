@@ -13,6 +13,15 @@
     "fossil_rock_base": {
       "textures": "textures/blocks/fossil_rock_base"
     },
+    "fossil_rock_base_1": {
+      "textures": "textures/blocks/fossil_rock_base_1"
+    },
+    "fossil_rock_base_2": {
+      "textures": "textures/blocks/fossil_rock_base_2"
+    },
+    "fossil_rock_base_3": {
+      "textures": "textures/blocks/fossil_rock_base_3"
+    },
     "fossil_rock_highlight": {
       "textures": "textures/blocks/fossil_rock_highlight"
     }
