@@ -1,0 +1,31 @@
+{
+	"format_version": 2,
+	"metadata": {
+		"authors": ["koro"],
+		"generated_with": {
+			"bridge": ["2.7.54"],
+			"dash": ["0.11.7"],
+			"blockbench_block_wizard": ["1.7.0"]
+		}
+	},
+	"header": {
+		"name": "pack.name",
+		"description": "pack.description",
+		"min_engine_version": [1, 26, 0],
+		"uuid": "88528728-3a4a-4186-968b-37c1f859d635",
+		"version": [1, 0, 0]
+	},
+	"modules": [
+		{
+			"type": "resources",
+			"uuid": "fe089030-343a-4f42-b90a-7708b1be900e",
+			"version": [1, 0, 0]
+		}
+	],
+	"dependencies": [
+		{
+			"uuid": "e65ab5c6-2ea0-48b3-8d98-4be59e824055",
+			"version": [1, 0, 0]
+		}
+	]
+}

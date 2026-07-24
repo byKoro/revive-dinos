@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "revive_dinos:placeholder_invisible",
+      "menu_category": {
+        "category": "none"
+      }
+    },
+    "components": {
+      "minecraft:icon": "revive_dinos_placeholder_invisible",
+      "minecraft:display_name": {
+        "value": "display.revive_dinos:placeholder.name"
+      },
+      "minecraft:max_stack_size": 1
+    }
+  }
+}

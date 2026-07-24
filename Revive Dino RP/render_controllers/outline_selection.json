@@ -1,0 +1,14 @@
+{
+  "format_version": "1.20.80",
+  "render_controllers": {
+    "controller.render.outline_selection": {
+      "geometry": "geometry.default",
+      "materials": [
+        {
+          "*": "material.default"
+        }
+      ],
+      "textures": ["texture.default"]
+    }
+  }
+}

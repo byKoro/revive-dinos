@@ -1,0 +1,29 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_cranio_danificado",
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_cranio_intacto",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_femur_danificado",
+          "weight": 40
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_femur_intacto",
+          "weight": 10
+        }
+      ]
+    }
+  ]
+}

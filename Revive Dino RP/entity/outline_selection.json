@@ -1,0 +1,18 @@
+{
+  "format_version": "1.20.80",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "revive_dinos:outline_selection",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/outline_selection"
+      },
+      "geometry": {
+        "default": "geometry.outline_selection"
+      },
+      "render_controllers": ["controller.render.outline_selection"]
+    }
+  }
+}

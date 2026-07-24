@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "revive_dinos:test_tube",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "revive_dinos_test_tube",
+      "minecraft:display_name": {
+        "value": "item.revive_dinos:test_tube.name"
+      },
+      "minecraft:max_stack_size": 16
+    }
+  }
+}

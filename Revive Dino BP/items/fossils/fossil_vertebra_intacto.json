@@ -1,0 +1,23 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "revive_dinos:fossil_vertebra_intacto",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "revive_dinos_fossil_vertebra_intacto",
+      "minecraft:display_name": {
+        "value": "item.revive_dinos:fossil_vertebra_intacto.name"
+      },
+      "minecraft:max_stack_size": 64,
+      "minecraft:tags": {
+        "tags": [
+          "revive_dinos:fossil"
+        ]
+      }
+    }
+  }
+}

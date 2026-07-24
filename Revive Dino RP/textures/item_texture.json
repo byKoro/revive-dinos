@@ -1,0 +1,120 @@
+{
+  "resource_pack_name": "revive_dinos",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "revive_dinos_fossil_cranio_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_cranio_danificado"
+    },
+    "revive_dinos_fossil_cranio_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_cranio_intacto"
+    },
+    "revive_dinos_fossil_cranio_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_cranio_pristino"
+    },
+    "revive_dinos_fossil_dente_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_dente_danificado"
+    },
+    "revive_dinos_fossil_dente_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_dente_intacto"
+    },
+    "revive_dinos_fossil_dente_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_dente_pristino"
+    },
+    "revive_dinos_fossil_garra_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_garra_danificado"
+    },
+    "revive_dinos_fossil_garra_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_garra_intacto"
+    },
+    "revive_dinos_fossil_garra_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_garra_pristino"
+    },
+    "revive_dinos_fossil_costela_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_costela_danificado"
+    },
+    "revive_dinos_fossil_costela_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_costela_intacto"
+    },
+    "revive_dinos_fossil_costela_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_costela_pristino"
+    },
+    "revive_dinos_fossil_vertebra_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_vertebra_danificado"
+    },
+    "revive_dinos_fossil_vertebra_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_vertebra_intacto"
+    },
+    "revive_dinos_fossil_vertebra_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_vertebra_pristino"
+    },
+    "revive_dinos_fossil_femur_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_femur_danificado"
+    },
+    "revive_dinos_fossil_femur_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_femur_intacto"
+    },
+    "revive_dinos_fossil_femur_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_femur_pristino"
+    },
+    "revive_dinos_fossil_umero_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_umero_danificado"
+    },
+    "revive_dinos_fossil_umero_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_umero_intacto"
+    },
+    "revive_dinos_fossil_umero_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_umero_pristino"
+    },
+    "revive_dinos_fossil_cauda_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_cauda_danificado"
+    },
+    "revive_dinos_fossil_cauda_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_cauda_intacto"
+    },
+    "revive_dinos_fossil_cauda_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_cauda_pristino"
+    },
+    "revive_dinos_fossil_fragmento_danificado": {
+      "textures": "textures/revive_dinos/items/fossil_fragmento_danificado"
+    },
+    "revive_dinos_fossil_fragmento_intacto": {
+      "textures": "textures/revive_dinos/items/fossil_fragmento_intacto"
+    },
+    "revive_dinos_fossil_fragmento_pristino": {
+      "textures": "textures/revive_dinos/items/fossil_fragmento_pristino"
+    },
+    "revive_dinos_dna_dodo": {
+      "textures": "textures/revive_dinos/items/dna_dodo"
+    },
+    "revive_dinos_dna_triceratops": {
+      "textures": "textures/revive_dinos/items/dna_triceratops"
+    },
+    "revive_dinos_dna_pterodactyl": {
+      "textures": "textures/revive_dinos/items/dna_pterodactyl"
+    },
+    "revive_dinos_dna_velociraptor": {
+      "textures": "textures/revive_dinos/items/dna_velociraptor"
+    },
+    "revive_dinos_dna_trex": {
+      "textures": "textures/revive_dinos/items/dna_trex"
+    },
+    "genetic_extrator": {
+      "textures": "textures/blocks/genetic_extrator"
+    },
+    "revive_dinos_genetic_extractor_ui": {
+      "textures": "textures/revive_dinos/ui/genetic_extractor_ui"
+    },
+    "revive_dinos_test_tube": {
+      "textures": "textures/revive_dinos/items/test_tube"
+    },
+    "revive_dinos_genetic_material": {
+      "textures": "textures/revive_dinos/items/genetic_material"
+    },
+    "revive_dinos_fossil_femur": {
+      "textures": "textures/revive_dinos/items/fossil_femur"
+    },
+    "revive_dinos_placeholder_invisible": {
+      "textures": "textures/revive_dinos/items/placeholder_invisible"
+    }
+  }
+}

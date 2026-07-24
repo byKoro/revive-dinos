@@ -1,0 +1,60 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "revive_dinos:genetic_extractor_ui_progress_4",
+      "menu_category": {
+        "category": "none",
+        "is_hidden_in_commands": true
+      },
+      "states": {
+        "revive_dinos:progress": [
+          4,
+          5
+        ]
+      }
+    },
+    "components": {
+      "revive_dinos:ui_placeholder": {},
+      "minecraft:display_name": "display.revive_dinos:placeholder.name",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "revive_dinos_genetic_extractor_ui",
+          "render_method": "alpha_test",
+          "face_dimming": false,
+          "ambient_occlusion": false
+        }
+      },
+      "minecraft:geometry": {
+        "identifier": "geometry.genetic_extractor_ui_right.progress",
+        "bone_visibility": {
+          "progress_19": "q.block_state('revive_dinos:progress') >= 19",
+          "progress_18": "q.block_state('revive_dinos:progress') >= 18",
+          "progress_17": "q.block_state('revive_dinos:progress') >= 17",
+          "progress_16": "q.block_state('revive_dinos:progress') >= 16",
+          "progress_15": "q.block_state('revive_dinos:progress') >= 15",
+          "progress_14": "q.block_state('revive_dinos:progress') >= 14",
+          "progress_13": "q.block_state('revive_dinos:progress') >= 13",
+          "progress_12": "q.block_state('revive_dinos:progress') >= 12",
+          "progress_11": "q.block_state('revive_dinos:progress') >= 11",
+          "progress_10": "q.block_state('revive_dinos:progress') >= 10",
+          "progress_9": "q.block_state('revive_dinos:progress') >= 9",
+          "progress_8": "q.block_state('revive_dinos:progress') >= 8",
+          "progress_7": "q.block_state('revive_dinos:progress') >= 7",
+          "progress_6": "q.block_state('revive_dinos:progress') >= 6",
+          "progress_5": "q.block_state('revive_dinos:progress') >= 5",
+          "progress_4": "q.block_state('revive_dinos:progress') >= 4",
+          "progress_3": "q.block_state('revive_dinos:progress') >= 3",
+          "progress_2": "q.block_state('revive_dinos:progress') >= 2",
+          "progress_1": "q.block_state('revive_dinos:progress') >= 1"
+        }
+      },
+      "minecraft:collision_box": false,
+      "minecraft:selection_box": false,
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.1
+      },
+      "minecraft:light_dampening": 0
+    }
+  }
+}

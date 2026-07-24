@@ -1,0 +1,91 @@
+{
+  "format_version": [1, 1, 0],
+  "revive_dinos:genetic_extractor_ui_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_0": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_1": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_2": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_3": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_4": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_5": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_6": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_7": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_8": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_10": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_11": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_12": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_13": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_14": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_15": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_16": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_18": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  },
+  "revive_dinos:genetic_extractor_ui_progress_19": {
+    "sound": "stone",
+    "textures": "revive_dinos_genetic_extractor_ui"
+  }
+}
