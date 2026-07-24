@@ -2,7 +2,7 @@
   "format_version": "1.21.100",
   "minecraft:block": {
     "description": {
-      "identifier": "revive_dinos:genetic_extrator",
+      "identifier": "revive_dinos:genetic_extractor",
       "menu_category": {
         "category": "nature"
       },
@@ -21,7 +21,7 @@
       }
     },
     "components": {
-      "revive_dinos:genetic_extractor": {},
+      "revive_dinos:extractor_machine": {},
       "minecraft:display_name": "tile.revive_dinos:genetic_extractor.name",
       "minecraft:collision_box": true,
       "minecraft:selection_box": true,
@@ -31,10 +31,10 @@
       "minecraft:destructible_by_explosion": {
         "explosion_resistance": 30
       },
-      "minecraft:geometry": "geometry.genetic_extrator",
+      "minecraft:geometry": "geometry.genetic_extractor",
       "minecraft:material_instances": {
         "*": {
-          "texture": "genetic_extrator",
+          "texture": "genetic_extractor",
           "render_method": "alpha_test"
         }
       },

@@ -43,6 +43,7 @@ function acharEntidade(block, dimension) {
 }
 
 const ENTITY_ID = "revive_dinos:genetic_extractor_ui";
+const BLOCK_ID = "revive_dinos:genetic_extractor";
 const OUTLINE_ID = "revive_dinos:outline_selection";
 const FAKE_SELECTION = "revive_dinos:fake_selection";
 const RANGE = 8;
@@ -50,7 +51,7 @@ const RANGE = 8;
 system.beforeEvents.startup.subscribe((initEvent) => {
   const reg = initEvent.blockComponentRegistry;
 
-  reg.registerCustomComponent("revive_dinos:genetic_extractor", {
+  reg.registerCustomComponent("revive_dinos:extractor_machine", {
     onPlace: ({ block, dimension }) => {
       if (acharEntidade(block, dimension)) return;
       criarEntidade(block, dimension);
@@ -82,6 +83,19 @@ system.beforeEvents.startup.subscribe((initEvent) => {
   // Blocos de UI nunca devem existir no mundo: viram ar se forem colocados.
   reg.registerCustomComponent("revive_dinos:ui_placeholder", {
     onPlace: ({ block }) => block.setType("minecraft:air"),
+  });
+
+  // Rocha Fossilizada: sorteia a face-alvo inicial ao ser colocada. Sem isso
+  // ela cairia sempre na face 0 (de baixo), pois é o valor padrão do state.
+  reg.registerCustomComponent("revive_dinos:fossil_rock", {
+    onPlace: ({ block }) => {
+      const face = Math.floor(Math.random() * 6);
+      block.setPermutation(
+        block.permutation
+          .withState("revive_dinos:stage", 0)
+          .withState("revive_dinos:target_face", face),
+      );
+    },
   });
 });
 
@@ -491,6 +505,9 @@ world.afterEvents.dataDrivenEntityTrigger.subscribe(
 
     const block = entity.dimension.getBlock(entity.location);
     if (!block || block.isAir) return;
+    // Blocos órfãos (ex.: instâncias antigas após renomear o identifier) não
+    // têm os states deste bloco; mexer neles quebra o setPermutation.
+    if (block.typeId !== BLOCK_ID) return;
 
     const center = block.center();
     const fakeSelection = block.permutation.getState(FAKE_SELECTION);
@@ -567,77 +584,83 @@ const faceMap = {
   East: 5,
 };
 
+const FOSSIL_ID = "revive_dinos:fossilized_rock";
+
 world.afterEvents.entityHitBlock.subscribe((event) => {
   const player = event.damagingEntity;
   const block = event.hitBlock;
 
-  if (
-    player.typeId !== "minecraft:player" ||
-    block.typeId !== "revive_dinos:fossilized_rock"
-  )
+  if (player?.typeId !== "minecraft:player" || block?.typeId !== FOSSIL_ID)
     return;
 
   const equipment = player.getComponent("minecraft:equippable");
-  const mainhandSlot = equipment.getEquipmentSlot("Mainhand");
-  const item = mainhandSlot.getItem();
+  const mainhandSlot = equipment?.getEquipmentSlot("Mainhand");
+  const item = mainhandSlot?.getItem();
 
-  // Verifica se é o martelo (Altere para o ID correto do seu martelo)
+  // Só o martelo aciona o minigame
   if (!item || item.typeId !== "revive_dinos:hammer") return;
 
-  // 1. Lida com a Durabilidade do Martelo (1 ponto por batida)
+  // 1. Durabilidade do martelo (1 ponto por batida)
   if (player.getGameMode() !== GameMode.creative) {
     const durability = item.getComponent("minecraft:durability");
     if (durability) {
       if (durability.damage + 1 >= durability.maxDurability) {
-        mainhandSlot.setItem(undefined); // Quebra o martelo
+        mainhandSlot.setItem(undefined); // quebra o martelo
         player.playSound("random.break");
       } else {
         durability.damage += 1;
-        mainhandSlot.setItem(item); // Atualiza o dano no inventário
+        mainhandSlot.setItem(item);
       }
     }
   }
 
-  // 2. Lógica do Minigame da Rocha
-  const blockFaceStr = event.blockFace;
-  const hitFaceId = faceMap[blockFaceStr];
-
-  // Pega as traits atuais do bloco
-  const currentStage = block.permutation.getState("revive_dinos:stage") || 0;
+  // 2. Minigame
+  const hitFaceId = faceMap[event.blockFace];
+  const stage = block.permutation.getState("revive_dinos:stage") ?? 0;
   const targetFace =
-    block.permutation.getState("revive_dinos:target_face") || 0;
+    block.permutation.getState("revive_dinos:target_face") ?? 0;
+  const usedMask = block.permutation.getState("revive_dinos:used_faces") ?? 0;
 
-  if (hitFaceId === targetFace) {
-    // ACERTOU A FACE
-    if (currentStage >= 3) {
-      // Estágio final concluído - Sucesso Máximo
-      block.dimension.runCommandAsync(
-        `loot spawn ${block.x} ${block.y} ${block.z} loot "blocks/fossil_rock_high"`,
-      );
-      block.dimension.runCommandAsync(
-        `setblock ${block.x} ${block.y} ${block.z} air destroy`,
-      );
-      player.playSound("dig.stone");
-    } else {
-      // Avança para o próximo estágio
-      const nextStage = currentStage + 1;
-      const newTargetFace = Math.floor(Math.random() * 6); // Sorteia nova face
+  const dim = block.dimension;
+  const { x, y, z } = block.location;
 
-      block.setPermutation(
-        block.permutation
-          .withState("revive_dinos:stage", nextStage)
-          .withState("revive_dinos:target_face", newTargetFace),
-      );
-      player.playSound("dig.stone");
-    }
-  } else {
-    // ERROU A FACE
-    block.dimension.runCommandAsync(
-      `loot spawn ${block.x} ${block.y} ${block.z} loot "blocks/fossil_rock_mid"`,
-    );
-    block.dimension.runCommandAsync(
-      `setblock ${block.x} ${block.y} ${block.z} air destroy`,
-    );
-    player.playSound("random.glass"); // Som punitivo para erro
+  // ERROU a face -> quebra e dropa qualidade média.
+  // setType (não "setblock ... destroy") para NÃO soltar também o loot padrão.
+  if (hitFaceId !== targetFace) {
+    dim.runCommand(`loot spawn ${x} ${y} ${z} loot "blocks/fossil_rock_mid"`);
+    block.setType("minecraft:air");
+    player.playSound("random.glass");
+    return;
   }
+
+  // ACERTOU
+  player.playSound("dig.stone");
+
+  // Último estágio -> quebra e dropa alta qualidade
+  if (stage >= 3) {
+    dim.runCommand(`loot spawn ${x} ${y} ${z} loot "blocks/fossil_rock_high"`);
+    block.setType("minecraft:air");
+    return;
+  }
+
+  // Marca a face atual como já interagida e sorteia a próxima entre as que
+  // ainda não foram usadas, para nunca repetir uma face anterior.
+  const jaUsada = (f) =>
+    f === targetFace ||
+    block.permutation.getState(`revive_dinos:used_${f}`) === true;
+
+  const disponiveis = [];
+  for (let f = 0; f < 6; f++) {
+    if (!jaUsada(f)) disponiveis.push(f);
+  }
+  const novaFace = disponiveis[Math.floor(Math.random() * disponiveis.length)];
+
+  // A textura base muda conforme o stage (permutations) simulando escavação;
+  // o highlight vai para a nova face-alvo, e a face atual fica marcada como usada.
+  block.setPermutation(
+    block.permutation
+      .withState("revive_dinos:stage", stage + 1)
+      .withState(`revive_dinos:used_${targetFace}`, true)
+      .withState("revive_dinos:target_face", novaFace),
+  );
 });

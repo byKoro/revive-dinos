@@ -39,3 +39,7 @@ item.revive_dinos:dna_triceratops.name=Triceratops DNA
 item.revive_dinos:dna_pterodactyl.name=Pterodactyl DNA
 item.revive_dinos:dna_velociraptor.name=Velociraptor DNA
 item.revive_dinos:dna_trex.name=T-Rex DNA
+
+item.revive_dinos:hammer.name=Excavation Hammer
+
+tile.revive_dinos:fossilized_rock.name=Fossilized Rock

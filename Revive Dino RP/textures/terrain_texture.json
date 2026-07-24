@@ -4,14 +4,23 @@
   "padding": 8,
   "num_mip_levels": 4,
   "texture_data": {
-    "genetic_extrator": {
-      "textures": "textures/blocks/genetic_extrator"
+    "genetic_extractor": {
+      "textures": "textures/blocks/genetic_extractor"
     },
     "revive_dinos_genetic_extractor_ui": {
       "textures": "textures/revive_dinos/ui/genetic_extractor_ui"
     },
     "fossil_rock_base": {
       "textures": "textures/blocks/fossil_rock_base"
+    },
+    "fossil_rock_base_1": {
+      "textures": "textures/blocks/fossil_rock_base_1"
+    },
+    "fossil_rock_base_2": {
+      "textures": "textures/blocks/fossil_rock_base_2"
+    },
+    "fossil_rock_base_3": {
+      "textures": "textures/blocks/fossil_rock_base_3"
     },
     "fossil_rock_highlight": {
       "textures": "textures/blocks/fossil_rock_highlight"

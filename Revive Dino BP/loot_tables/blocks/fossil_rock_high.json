@@ -15,8 +15,73 @@
         },
         {
           "type": "item",
+          "name": "revive_dinos:fossil_dente_pristino",
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_dente_intacto",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_garra_pristino",
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_garra_intacto",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_costela_pristino",
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_costela_intacto",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_vertebra_pristino",
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_vertebra_intacto",
+          "weight": 10
+        },
+        {
+          "type": "item",
           "name": "revive_dinos:fossil_femur_pristino",
           "weight": 30
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_femur_intacto",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_umero_pristino",
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_umero_intacto",
+          "weight": 10
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_cauda_pristino",
+          "weight": 30
+        },
+        {
+          "type": "item",
+          "name": "revive_dinos:fossil_cauda_intacto",
+          "weight": 10
         },
         {
           "type": "item",
@@ -26,7 +91,7 @@
         {
           "type": "item",
           "name": "revive_dinos:fossil_fragmento_intacto",
-          "weight": 15
+          "weight": 8
         }
       ]
     }

@@ -3,16 +3,28 @@
   "minecraft:block": {
     "description": {
       "identifier": "revive_dinos:fossilized_rock",
+      "menu_category": {
+        "category": "nature"
+      },
       "states": {
         "revive_dinos:stage": [0, 1, 2, 3],
-        "revive_dinos:target_face": [0, 1, 2, 3, 4, 5]
+        "revive_dinos:target_face": [0, 1, 2, 3, 4, 5],
+        "revive_dinos:used_0": [false, true],
+        "revive_dinos:used_1": [false, true],
+        "revive_dinos:used_2": [false, true],
+        "revive_dinos:used_3": [false, true],
+        "revive_dinos:used_4": [false, true],
+        "revive_dinos:used_5": [false, true]
       }
     },
     "components": {
+      "revive_dinos:fossil_rock": {},
+      "minecraft:display_name": "tile.revive_dinos:fossilized_rock.name",
       "minecraft:destructible_by_mining": {
         "seconds_to_destroy": 3.0
       },
       "minecraft:loot": "loot_tables/blocks/fossil_rock_poor.json",
+      "minecraft:geometry": "minecraft:geometry.full_block",
       "minecraft:material_instances": {
         "*": {
           "texture": "fossil_rock_base",
@@ -22,74 +34,362 @@
     },
     "permutations": [
       {
-        "condition": "q.block_state('revive_dinos:target_face') == 0",
+        "condition": "q.block_state('revive_dinos:stage') == 0 && q.block_state('revive_dinos:target_face') == 0",
         "components": {
           "minecraft:material_instances": {
             "down": {
               "texture": "fossil_rock_highlight",
               "render_method": "opaque"
             },
-            "*": { "texture": "fossil_rock_base" }
+            "*": {
+              "texture": "fossil_rock_base",
+              "render_method": "opaque"
+            }
           }
         }
       },
       {
-        "condition": "q.block_state('revive_dinos:target_face') == 1",
+        "condition": "q.block_state('revive_dinos:stage') == 0 && q.block_state('revive_dinos:target_face') == 1",
         "components": {
           "minecraft:material_instances": {
             "up": {
               "texture": "fossil_rock_highlight",
               "render_method": "opaque"
             },
-            "*": { "texture": "fossil_rock_base" }
+            "*": {
+              "texture": "fossil_rock_base",
+              "render_method": "opaque"
+            }
           }
         }
       },
       {
-        "condition": "q.block_state('revive_dinos:target_face') == 2",
+        "condition": "q.block_state('revive_dinos:stage') == 0 && q.block_state('revive_dinos:target_face') == 2",
         "components": {
           "minecraft:material_instances": {
             "north": {
               "texture": "fossil_rock_highlight",
               "render_method": "opaque"
             },
-            "*": { "texture": "fossil_rock_base" }
+            "*": {
+              "texture": "fossil_rock_base",
+              "render_method": "opaque"
+            }
           }
         }
       },
       {
-        "condition": "q.block_state('revive_dinos:target_face') == 3",
+        "condition": "q.block_state('revive_dinos:stage') == 0 && q.block_state('revive_dinos:target_face') == 3",
         "components": {
           "minecraft:material_instances": {
             "south": {
               "texture": "fossil_rock_highlight",
               "render_method": "opaque"
             },
-            "*": { "texture": "fossil_rock_base" }
+            "*": {
+              "texture": "fossil_rock_base",
+              "render_method": "opaque"
+            }
           }
         }
       },
       {
-        "condition": "q.block_state('revive_dinos:target_face') == 4",
+        "condition": "q.block_state('revive_dinos:stage') == 0 && q.block_state('revive_dinos:target_face') == 4",
         "components": {
           "minecraft:material_instances": {
             "west": {
               "texture": "fossil_rock_highlight",
               "render_method": "opaque"
             },
-            "*": { "texture": "fossil_rock_base" }
+            "*": {
+              "texture": "fossil_rock_base",
+              "render_method": "opaque"
+            }
           }
         }
       },
       {
-        "condition": "q.block_state('revive_dinos:target_face') == 5",
+        "condition": "q.block_state('revive_dinos:stage') == 0 && q.block_state('revive_dinos:target_face') == 5",
         "components": {
           "minecraft:material_instances": {
             "east": {
               "texture": "fossil_rock_highlight",
               "render_method": "opaque"
             },
-            "*": { "texture": "fossil_rock_base" }
+            "*": {
+              "texture": "fossil_rock_base",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 1 && q.block_state('revive_dinos:target_face') == 0",
+        "components": {
+          "minecraft:material_instances": {
+            "down": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_1",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 1 && q.block_state('revive_dinos:target_face') == 1",
+        "components": {
+          "minecraft:material_instances": {
+            "up": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_1",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 1 && q.block_state('revive_dinos:target_face') == 2",
+        "components": {
+          "minecraft:material_instances": {
+            "north": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_1",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 1 && q.block_state('revive_dinos:target_face') == 3",
+        "components": {
+          "minecraft:material_instances": {
+            "south": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_1",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 1 && q.block_state('revive_dinos:target_face') == 4",
+        "components": {
+          "minecraft:material_instances": {
+            "west": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_1",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 1 && q.block_state('revive_dinos:target_face') == 5",
+        "components": {
+          "minecraft:material_instances": {
+            "east": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_1",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 2 && q.block_state('revive_dinos:target_face') == 0",
+        "components": {
+          "minecraft:material_instances": {
+            "down": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_2",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 2 && q.block_state('revive_dinos:target_face') == 1",
+        "components": {
+          "minecraft:material_instances": {
+            "up": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_2",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 2 && q.block_state('revive_dinos:target_face') == 2",
+        "components": {
+          "minecraft:material_instances": {
+            "north": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_2",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 2 && q.block_state('revive_dinos:target_face') == 3",
+        "components": {
+          "minecraft:material_instances": {
+            "south": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_2",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 2 && q.block_state('revive_dinos:target_face') == 4",
+        "components": {
+          "minecraft:material_instances": {
+            "west": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_2",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 2 && q.block_state('revive_dinos:target_face') == 5",
+        "components": {
+          "minecraft:material_instances": {
+            "east": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_2",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 3 && q.block_state('revive_dinos:target_face') == 0",
+        "components": {
+          "minecraft:material_instances": {
+            "down": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_3",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 3 && q.block_state('revive_dinos:target_face') == 1",
+        "components": {
+          "minecraft:material_instances": {
+            "up": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_3",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 3 && q.block_state('revive_dinos:target_face') == 2",
+        "components": {
+          "minecraft:material_instances": {
+            "north": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_3",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 3 && q.block_state('revive_dinos:target_face') == 3",
+        "components": {
+          "minecraft:material_instances": {
+            "south": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_3",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 3 && q.block_state('revive_dinos:target_face') == 4",
+        "components": {
+          "minecraft:material_instances": {
+            "west": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_3",
+              "render_method": "opaque"
+            }
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:stage') == 3 && q.block_state('revive_dinos:target_face') == 5",
+        "components": {
+          "minecraft:material_instances": {
+            "east": {
+              "texture": "fossil_rock_highlight",
+              "render_method": "opaque"
+            },
+            "*": {
+              "texture": "fossil_rock_base_3",
+              "render_method": "opaque"
+            }
           }
         }
       }
