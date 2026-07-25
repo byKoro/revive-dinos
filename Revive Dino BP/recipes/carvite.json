@@ -1,0 +1,31 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "revive_dinos:carvite"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "CBC",
+      "BMB",
+      "CBC"
+    ],
+    "key": {
+      "C": {
+        "item": "minecraft:coal"
+      },
+      "B": {
+        "item": "minecraft:blaze_powder"
+      },
+      "M": {
+        "item": "minecraft:magma_cream"
+      }
+    },
+    "result": {
+      "item": "revive_dinos:carvite",
+      "count": 4
+    }
+  }
+}

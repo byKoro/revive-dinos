@@ -2,15 +2,15 @@
   "format_version": "1.21.100",
   "minecraft:item": {
     "description": {
-      "identifier": "revive_dinos:genetic_material",
+      "identifier": "revive_dinos:replication_enzyme",
       "menu_category": {
         "category": "items"
       }
     },
     "components": {
-      "minecraft:icon": "revive_dinos_genetic_material",
+      "minecraft:icon": "revive_dinos_replication_enzyme",
       "minecraft:display_name": {
-        "value": "item.revive_dinos:genetic_material.name"
+        "value": "item.revive_dinos:replication_enzyme.name"
       },
       "minecraft:max_stack_size": 64
     }

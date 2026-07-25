@@ -1,0 +1,31 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "revive_dinos:circuit_board"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "RCR",
+      "CQC",
+      "RCR"
+    ],
+    "key": {
+      "R": {
+        "item": "minecraft:redstone"
+      },
+      "C": {
+        "item": "minecraft:copper_ingot"
+      },
+      "Q": {
+        "item": "minecraft:quartz"
+      }
+    },
+    "result": {
+      "item": "revive_dinos:circuit_board",
+      "count": 1
+    }
+  }
+}

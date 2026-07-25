@@ -1,0 +1,18 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "revive_dinos:complete_dna_velociraptor",
+      "menu_category": {
+        "category": "items"
+      }
+    },
+    "components": {
+      "minecraft:icon": "revive_dinos_complete_dna_velociraptor",
+      "minecraft:display_name": {
+        "value": "item.revive_dinos:complete_dna_velociraptor.name"
+      },
+      "minecraft:max_stack_size": 64
+    }
+  }
+}
