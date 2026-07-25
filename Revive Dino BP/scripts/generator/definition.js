@@ -45,8 +45,8 @@ export const generatorDef = {
   routeIngredient: (item) =>
     infoCombustivel(item?.typeId) ? GENERATOR_FUEL_SLOT : undefined,
 
-  /** Agachar + olhar: mostra geração por tick, combustível e buffer. */
-  onSneakLook: (entity, player) => {
+  /** Status em tempo real: geração por tick, buffer e combustível restante. */
+  statusTexto: (entity) => {
     const carga = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
     const fuel = entity.getDynamicProperty(PROP_ENTITY_FUEL) ?? 0;
     const rate = entity.getDynamicProperty(PROP_ENTITY_RATE) ?? 0;
@@ -55,8 +55,6 @@ export const generatorDef = {
     const status = fuel > 0 ? `§a+${rate}/tick` : "§cparado";
     const segundos = (fuel / 20).toFixed(1);
 
-    player.onScreenDisplay.setActionBar(
-      `§6Gerador§r  ${status}§r  §7|§r Buffer: ${fmt(carga)}/${fmt(GENERATOR_MAX_CHARGE)}  §7|§r Combustível: ${segundos}s`,
-    );
+    return `§6Gerador§r  ${status}§r  §7|§r Buffer: ${fmt(carga)}/${fmt(GENERATOR_MAX_CHARGE)}  §7|§r Combustível: ${segundos}s`;
   },
 };

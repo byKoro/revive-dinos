@@ -38,9 +38,14 @@ export function cargaDaFonte(dimension, block) {
  * MAX_CABLE_REACH cabos (ou adjacente). Retorna o bloco da fonte.
  */
 export function buscarFonte(dimension, origem) {
+  const base = {
+    x: Math.floor(origem.x),
+    y: Math.floor(origem.y),
+    z: Math.floor(origem.z),
+  };
   const chave = (l) => `${l.x},${l.y},${l.z}`;
-  const visitados = new Set([chave(origem)]);
-  const fila = [{ pos: origem, dist: 0 }];
+  const visitados = new Set([chave(base)]);
+  const fila = [{ pos: base, dist: 0 }];
 
   while (fila.length > 0) {
     const { pos, dist } = fila.shift();
@@ -84,9 +89,16 @@ export function consumirDaFonte(dimension, block, quantidade) {
  * cache de topologia estável.
  */
 export function coletarFontes(dimension, origem) {
+  // A posição da entidade é fracionária (centro do bloco). Alinhar na grade
+  // evita chaves de visitados inconsistentes e vizinhos calculados errado.
+  const base = {
+    x: Math.floor(origem.x),
+    y: Math.floor(origem.y),
+    z: Math.floor(origem.z),
+  };
   const chave = (l) => `${l.x},${l.y},${l.z}`;
-  const visitados = new Set([chave(origem)]);
-  const fila = [{ pos: origem, dist: 0 }];
+  const visitados = new Set([chave(base)]);
+  const fila = [{ pos: base, dist: 0 }];
   const fontes = [];
 
   while (fila.length > 0) {
@@ -119,9 +131,14 @@ export function coletarFontes(dimension, origem) {
  * enxergava geradores diretamente adjacentes).
  */
 export function buscarBlocoComCarga(dimension, origem, tiposAceitos) {
+  const base = {
+    x: Math.floor(origem.x),
+    y: Math.floor(origem.y),
+    z: Math.floor(origem.z),
+  };
   const chave = (l) => `${l.x},${l.y},${l.z}`;
-  const visitados = new Set([chave(origem)]);
-  const fila = [{ pos: origem, dist: 0 }];
+  const visitados = new Set([chave(base)]);
+  const fila = [{ pos: base, dist: 0 }];
 
   while (fila.length > 0) {
     const { pos, dist } = fila.shift();

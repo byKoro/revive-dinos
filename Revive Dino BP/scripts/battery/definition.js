@@ -24,6 +24,9 @@ import { consumirCargaPendente } from "./transfer";
 export const BATTERY_UI_ENTITY_ID = "revive_dinos:battery_ui";
 export const COMPONENT_BATTERY = "revive_dinos:battery_machine";
 
+/** Guarda a carga do tick anterior para calcular a variação exibida. */
+const PROP_ULTIMA_CARGA = "revive_dinos:last_charge";
+
 const formatar = (n) => n.toLocaleString("en-US");
 
 export const batteryDef = {
@@ -45,13 +48,18 @@ export const batteryDef = {
   processTick: tickBattery,
   routeIngredient: () => undefined,
 
-  /** Agachar + olhar: mostra a carga atual. */
-  onSneakLook: (entity, player) => {
+  /** Status em tempo real (agachar + olhar): carga, %, e variação. */
+  statusTexto: (entity) => {
     const carga = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
+    const anterior = entity.getDynamicProperty(PROP_ULTIMA_CARGA) ?? carga;
+    entity.setDynamicProperty(PROP_ULTIMA_CARGA, carga);
+
+    const delta = carga - anterior;
     const pct = Math.floor((carga / BATTERY_MAX_CHARGE) * 100);
-    player.onScreenDisplay.setActionBar(
-      `§eBateria§r  ${formatar(carga)} / ${formatar(BATTERY_MAX_CHARGE)}  §7(${pct}%)`,
-    );
+    const tendencia =
+      delta > 0 ? `§a+${formatar(delta)}/tick` : delta < 0 ? `§c${formatar(delta)}/tick` : "§7estável";
+
+    return `§eBateria§r  ${formatar(carga)} / ${formatar(BATTERY_MAX_CHARGE)}  §7(${pct}%)§r  ${tendencia}`;
   },
 
   /** Ao colocar: restaura a carga que estava salva no item. */

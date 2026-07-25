@@ -14,6 +14,7 @@ import {
   garantirPosicao,
   removerEntidade,
 } from "./entity";
+import { atualizarStatus } from "./status";
 
 export function makeMachineComponent(def) {
   return {
@@ -39,6 +40,8 @@ export function makeMachineComponent(def) {
       }
       garantirPosicao(entity, block);
       def.processTick(entity, def);
+      // Status em tempo real (agachar + olhar), se a máquina expõe statusTexto
+      atualizarStatus(entity, block, def);
     },
   };
 }

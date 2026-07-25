@@ -181,3 +181,68 @@ O jeito simples e comprovado (UtilityCraft): `collision_box` zero (atravessa)
 Uma hitbox que cresce com as conexões é possível gerando permutations (uma
 por combinação de estados, com a caixa = bounding box dos braços conectados),
 mas é bem mais verboso e normalmente desnecessário.
+
+
+---
+
+## Regras do sistema de energia (valem para TODA máquina nova)
+
+### Energia entra por qualquer face
+
+Máquina nunca tem "face de energia". Ela aceita energia pelas **6 faces**
+(norte, sul, leste, oeste, cima, baixo), seja de uma fonte diretamente
+adjacente ou de um cabo. A bateria e o gerador também **distribuem pelas 6
+faces**. Isso é consequência de `DIRECTIONS` (em `energy/constants.js`) cobrir
+os 6 vizinhos — não fixar face em nenhum lugar.
+
+Para o cabo conectar visualmente e a rede reconhecer a máquina nova, adicione
+o id dela ao `CONNECTABLE` em `energy/cable.js`.
+
+### Rede unificada
+
+A máquina não escolhe uma fonte: `energy/consumer.js` soma a carga de **todas**
+as fontes alcançáveis pela rede de cabos e cobra o custo do conjunto.
+
+- Drena **gerador primeiro**, **bateria depois** (bateria é reserva).
+- Consumo é **tudo ou nada**: se o total não cobre o custo, nada é consumido e
+  a máquina pausa (não perde progresso).
+- A topologia é **cacheada por 20 ticks**, o que mantém a velocidade de
+  processamento constante independente do comprimento do cabo.
+
+Para consumir energia numa máquina nova:
+
+```js
+import { consumirEnergia } from "../energy/consumer";
+import { ENERGY_COST } from "../energy/constants";
+
+if (!consumirEnergia(entity, ENERGY_COST.minhaMaquina)) return; // pausa
+```
+
+### Balanceamento
+
+Geração precisa **superar** o consumo, senão a máquina fica esperando carga e
+parece travada (foi um bug real: consumo 30/tick contra geração 5/tick fazia a
+receita levar 6× mais tempo). Referência atual: carvão gera 40/tick, carvite
+100/tick; o Extrator consome 30/tick.
+
+### Status na action bar (tempo real)
+
+Basta a definição expor `statusTexto(entity, def)`. O framework chama isso no
+**tick do bloco** quando há um jogador agachado olhando para ele.
+
+Não usar o `entity_sensor` para isso: ele tem cadência própria (vários ticks),
+o que faz os números parecerem congelados.
+
+### Persistir estado no item ao quebrar
+
+Padrão usado pela bateria (carga sobrevive a quebrar/recolocar):
+
+1. Bloco aponta `minecraft:loot` para uma loot table **vazia** (senão dropa
+   duas vezes: a do bloco e a nossa).
+2. `def.onBroken(entity, block, player)` cria o ItemStack, grava o valor numa
+   dynamic property do item e escreve a **lore** visível.
+3. `def.onPlaced(entity, block)` restaura. Como o `onPlace` não recebe o item
+   usado, a captura acontece no interact (ver `battery/transfer.js`).
+
+Itens com dynamic property **não empilham** — aqui isso é desejável, cada
+unidade carrega o próprio estado.
