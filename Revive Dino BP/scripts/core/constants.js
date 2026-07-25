@@ -28,6 +28,7 @@ export const OUTLINE_ENTITY_ID = "revive_dinos:outline_selection";
 // ITENS
 // ---------------------------------------------------------------------------
 export const HAMMER_ITEM_ID = "revive_dinos:hammer";
+export const PLACEHOLDER_ITEM_ID = "revive_dinos:placeholder_invisible";
 
 // ---------------------------------------------------------------------------
 // CUSTOM COMPONENTS (V2)

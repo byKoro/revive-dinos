@@ -1,32 +1,31 @@
 /**
- * extractor/events.js
+ * machine/events.js
  * ---------------------------------------------------------------------------
- * Assinaturas de evento de mundo que pertencem ao Extrator e não caberiam
- * num módulo mais específico.
+ * Eventos de mundo compartilhados por todas as máquinas.
  * ---------------------------------------------------------------------------
  */
 
 import { system, world } from "@minecraft/server";
 import { EVENT_DESTROYED_BLOCK } from "../core/constants";
 import { removerEntidade } from "./entity";
+import { defPorEntidade } from "./registry";
 import { limparInventarioDoJogador } from "./ui";
 
 /**
- * Segunda camada de remoção da entidade: o `inside_block_notifier` do JSON
- * dispara quando ela fica dentro de ar, cobrindo explosão, pistão e
- * /setblock — casos em que `onPlayerBreak` nunca roda.
+ * Segunda camada de remoção: o inside_block_notifier dispara quando a
+ * entidade fica dentro de ar (explosão, pistão, /setblock). Vale para
+ * qualquer máquina registrada.
  */
 export function registrarRemocaoPorDestruicao() {
   world.afterEvents.dataDrivenEntityTrigger.subscribe(
-    ({ entity }) => removerEntidade(entity),
+    ({ entity }) => {
+      if (defPorEntidade(entity?.typeId)) removerEntidade(entity);
+    },
     { eventTypes: [EVENT_DESTROYED_BLOCK] },
   );
 }
 
-/**
- * Rede de segurança: limpa quem entrar no mundo carregando peças de sessões
- * anteriores, já que a varredura por tick só acontece perto do bloco.
- */
+/** Limpa quem entrar no mundo carregando peças de sessões anteriores. */
 export function registrarLimpezaAoEntrar() {
   world.afterEvents.playerSpawn.subscribe(({ player }) => {
     system.run(() => limparInventarioDoJogador(player));

@@ -1,77 +1,58 @@
 /**
  * main.js
  * ---------------------------------------------------------------------------
- * Ponto de entrada do addon. Só registra custom components e assina eventos —
- * toda a lógica vive nos módulos.
+ * Ponto de entrada. Registra custom components e assina eventos — a lógica
+ * vive nos módulos.
  *
- * Estrutura das pastas:
+ * Pastas:
  *   core/       constantes e utilidades sem dependência de feature
- *   extractor/  Extrator Genético (bloco, entidade, fake UI, funil, seleção)
- *   fossil/     Rocha Fossilizada (minigame do martelo)
- *
- * Custom Components V2: o registro acontece em `system.beforeEvents.startup`.
- * `world.beforeEvents.worldInitialize` é V1 e não funciona aqui.
+ *   machine/    framework genérico de máquina (entidade, fake UI, seleção,
+ *               funil, ancoragem) dirigido por "definições"
+ *   extractor/  definição + receitas do Extrator Genético
+ *   generator/  definição + queima do Gerador a Combustão
+ *   energy/     cabo + rede de energia
+ *   fossil/     minigame da Rocha Fossilizada
  * ---------------------------------------------------------------------------
  */
 
 import { system } from "@minecraft/server";
+import { COMPONENT_UI_PLACEHOLDER, COMPONENT_ENERGY_CABLE, COMPONENT_FOSSIL_ROCK } from "./core/constants";
 
-import {
-  COMPONENT_EXTRACTOR,
-  COMPONENT_FOSSIL_ROCK,
-  COMPONENT_UI_PLACEHOLDER,
-  COMPONENT_ENERGY_CABLE,
-} from "./core/constants";
+import { registrarMaquina } from "./machine/registry";
+import { makeMachineComponent, uiPlaceholderComponent } from "./machine/component";
+import { registrarSelecaoFalsa } from "./machine/selection";
+import { registrarHopper } from "./machine/hopper";
+import { registrarLimpezaAoEntrar, registrarRemocaoPorDestruicao } from "./machine/events";
 
-import {
-  extractorMachineComponent,
-  uiPlaceholderComponent,
-} from "./extractor/component";
-import {
-  registrarLimpezaAoEntrar,
-  registrarRemocaoPorDestruicao,
-} from "./extractor/events";
-import { registrarCompatibilidadeComFunil } from "./extractor/hopper";
-import { registrarSelecaoFalsa } from "./extractor/selection";
+import { extractorDef } from "./extractor/definition";
+import { generatorDef } from "./generator/definition";
 
+import { energyCableComponent } from "./energy/cable";
 import { registrarMinigameDaRocha } from "./fossil/minigame";
 import { fossilRockComponent } from "./fossil/rock";
 
-import { energyCableComponent } from "./energy/cable";
-import { generatorComponent } from "./energy/generator";
-import { COMPONENT_GENERATOR } from "./energy/constants";
+// Registra as máquinas no framework (os handlers genéricos despacham por elas)
+registrarMaquina(extractorDef);
+registrarMaquina(generatorDef);
 
 // ---------------------------------------------------------------------------
 // Custom components (V2)
 // ---------------------------------------------------------------------------
 system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
-  blockComponentRegistry.registerCustomComponent(
-    COMPONENT_EXTRACTOR,
-    extractorMachineComponent,
-  );
-  blockComponentRegistry.registerCustomComponent(
-    COMPONENT_UI_PLACEHOLDER,
-    uiPlaceholderComponent,
-  );
-  blockComponentRegistry.registerCustomComponent(
-    COMPONENT_FOSSIL_ROCK,
-    fossilRockComponent,
-  );
-  blockComponentRegistry.registerCustomComponent(
-    COMPONENT_ENERGY_CABLE,
-    energyCableComponent,
-  );
-  blockComponentRegistry.registerCustomComponent(
-    COMPONENT_GENERATOR,
-    generatorComponent,
-  );
+  const reg = blockComponentRegistry;
+
+  reg.registerCustomComponent(extractorDef.componentId, makeMachineComponent(extractorDef));
+  reg.registerCustomComponent(generatorDef.componentId, makeMachineComponent(generatorDef));
+  reg.registerCustomComponent(COMPONENT_UI_PLACEHOLDER, uiPlaceholderComponent);
+  reg.registerCustomComponent(COMPONENT_ENERGY_CABLE, energyCableComponent);
+  reg.registerCustomComponent(COMPONENT_FOSSIL_ROCK, fossilRockComponent);
 });
 
 // ---------------------------------------------------------------------------
 // Eventos de mundo
 // ---------------------------------------------------------------------------
-registrarRemocaoPorDestruicao();
-registrarCompatibilidadeComFunil();
 registrarSelecaoFalsa();
+registrarHopper();
+registrarRemocaoPorDestruicao();
 registrarLimpezaAoEntrar();
 registrarMinigameDaRocha();

@@ -2,29 +2,40 @@
  * energy/network.js
  * ---------------------------------------------------------------------------
  * Busca de energia via BFS pela rede de cabos. As máquinas chamam
- * `buscarFonte()` para achar um gerador ou bateria com carga, conectado por
- * até MAX_CABLE_REACH blocos de cabo (ou diretamente adjacente).
+ * `buscarFonte()` para achar um gerador/bateria com carga, ligado por até
+ * MAX_CABLE_REACH cabos (ou adjacente).
  *
- * A carga vive em dynamic properties do mundo (ver storage.js), não no bloco.
+ * A carga vive na ENTIDADE-container da fonte; aqui a gente localiza essa
+ * entidade pela posição do bloco (SOURCE_ENTITY_BY_BLOCK) e lê/consome dela.
  * ---------------------------------------------------------------------------
  */
 
 import {
-  BATTERY_BLOCK_ID,
   CABLE_BLOCK_ID,
   DIRECTIONS,
-  GENERATOR_BLOCK_ID,
   MAX_CABLE_REACH,
+  PROP_ENTITY_CHARGE,
+  SOURCE_ENTITY_BY_BLOCK,
 } from "./constants";
-import { consumirCarga, getCarga } from "./storage";
 
-const ehFonte = (typeId) =>
-  typeId === BATTERY_BLOCK_ID || typeId === GENERATOR_BLOCK_ID;
+/** Entidade-container de uma fonte (gerador/bateria), ou undefined. */
+function entidadeDaFonte(dimension, block) {
+  const entType = SOURCE_ENTITY_BY_BLOCK[block.typeId];
+  if (!entType) return undefined;
+  return dimension.getEntities({
+    location: block.center(),
+    type: entType,
+    maxDistance: 2,
+  })[0];
+}
+
+export function cargaDaFonte(dimension, block) {
+  return entidadeDaFonte(dimension, block)?.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
+}
 
 /**
- * Acha uma fonte (gerador ou bateria) com carga > 0, ligada ao bloco `origem`
- * por no máximo MAX_CABLE_REACH cabos. Aceita fonte diretamente adjacente.
- * Retorna o bloco da fonte, ou undefined.
+ * Acha uma fonte com carga > 0 ligada ao bloco `origem` por até
+ * MAX_CABLE_REACH cabos (ou adjacente). Retorna o bloco da fonte.
  */
 export function buscarFonte(dimension, origem) {
   const chave = (l) => `${l.x},${l.y},${l.z}`;
@@ -33,7 +44,6 @@ export function buscarFonte(dimension, origem) {
 
   while (fila.length > 0) {
     const { pos, dist } = fila.shift();
-
     for (const dir of DIRECTIONS) {
       const prox = {
         x: pos.x + dir.offset.x,
@@ -47,24 +57,22 @@ export function buscarFonte(dimension, origem) {
       const bloco = dimension.getBlock(prox);
       if (!bloco) continue;
 
-      if (ehFonte(bloco.typeId) && getCarga(bloco.location) > 0) {
+      if (SOURCE_ENTITY_BY_BLOCK[bloco.typeId] && cargaDaFonte(dimension, bloco) > 0) {
         return bloco;
       }
-
       if (bloco.typeId === CABLE_BLOCK_ID && dist < MAX_CABLE_REACH) {
         fila.push({ pos: prox, dist: dist + 1 });
       }
     }
   }
-
   return undefined;
 }
 
-/**
- * Consome `quantidade` da fonte encontrada. Retorna true se havia o
- * suficiente. As máquinas devem chamar isto por tick de processamento.
- */
-export function consumirDaFonte(fonte, quantidade) {
-  if (!fonte) return false;
-  return consumirCarga(fonte.location, quantidade);
+/** Consome `quantidade` da fonte. Retorna true se havia o suficiente. */
+export function consumirDaFonte(dimension, block, quantidade) {
+  const ent = entidadeDaFonte(dimension, block);
+  const carga = ent?.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
+  if (!ent || carga < quantidade) return false;
+  ent.setDynamicProperty(PROP_ENTITY_CHARGE, carga - quantidade);
+  return true;
 }

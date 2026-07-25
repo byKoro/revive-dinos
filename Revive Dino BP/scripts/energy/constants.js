@@ -14,6 +14,22 @@ export const CARVITE_ITEM_ID = "revive_dinos:carvite";
 /** Custom component (V2) do gerador — difere do identifier do bloco. */
 export const COMPONENT_GENERATOR = "revive_dinos:generator_machine";
 
+/** Entidade-container do gerador (mesma arquitetura do extrator). */
+export const GENERATOR_UI_ENTITY_ID = "revive_dinos:combustion_generator_ui";
+
+/** Slot de combustível dentro do container do gerador. */
+export const GENERATOR_FUEL_SLOT = 2;
+
+/** Dynamic properties guardadas NA ENTIDADE da fonte de energia. */
+export const PROP_ENTITY_CHARGE = "revive_dinos:e_charge";
+export const PROP_ENTITY_FUEL = "revive_dinos:e_fuel";
+export const PROP_ENTITY_RATE = "revive_dinos:e_rate";
+
+/** Bloco-fonte -> entidade que guarda a carga (para a rede achar a energia). */
+export const SOURCE_ENTITY_BY_BLOCK = {
+  [GENERATOR_BLOCK_ID]: GENERATOR_UI_ENTITY_ID,
+};
+
 /** Tag que identifica blocos que participam da rede de energia. */
 export const ENERGY_TAG = "revive_dinos:energy_connectable";
 
