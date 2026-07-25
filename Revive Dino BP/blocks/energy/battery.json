@@ -46,7 +46,10 @@
           1
         ]
       },
-      "minecraft:loot": "loot_tables/blocks/empty.json"
+      "minecraft:loot": "loot_tables/blocks/empty.json",
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      }
     },
     "permutations": [
       {

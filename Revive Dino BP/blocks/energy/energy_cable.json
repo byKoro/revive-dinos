@@ -89,6 +89,9 @@
           10,
           10
         ]
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
       }
     },
     "permutations": [

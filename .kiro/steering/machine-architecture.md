@@ -246,3 +246,22 @@ Padrão usado pela bateria (carga sobrevive a quebrar/recolocar):
 
 Itens com dynamic property **não empilham** — aqui isso é desejável, cada
 unidade carrega o próprio estado.
+
+
+### Bloco de máquina precisa ser imóvel a pistão
+
+Todo bloco que tem entidade-container (ou estado próprio) precisa de:
+
+```json
+"minecraft:movable": { "movement_type": "immovable" }
+```
+
+Sem isso o pistão **empurra o bloco**: ele muda de posição, a entidade fica
+para trás dentro de ar, o `inside_block_notifier` dispara `destroyed_block` e a
+máquina **dropa o item sem o bloco ter sido quebrado** — duplicando o item e
+deixando um bloco órfão sem entidade.
+
+`movement_type` aceita `push_pull` (padrão), `push`, `popped` (destrói ao ser
+movido) e `immovable` (pistão simplesmente não move). Para máquinas use sempre
+`immovable`. Já aplicado em: extrator, gerador, bateria, cabo, sintetizador e
+rocha fossilizada.
