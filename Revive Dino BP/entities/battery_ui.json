@@ -1,0 +1,174 @@
+{
+  "format_version": "1.21.60",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "revive_dinos:battery_ui",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "revive_dinos:with_collision": {
+        "minecraft:collision_box": {
+          "width": 1.0,
+          "height": 1.0
+        }
+      },
+      "revive_dinos:no_collision": {
+        "minecraft:collision_box": {
+          "width": 0.0,
+          "height": 0.0
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "inanimate",
+          "immovable"
+        ]
+      },
+      "minecraft:nameable": {
+        "allow_name_tag_renaming": false
+      },
+      "minecraft:inside_block_notifier": {
+        "block_list": [
+          {
+            "block": {
+              "name": "minecraft:air"
+            },
+            "entered_block_event": {
+              "event": "revive_dinos:destroyed_block"
+            }
+          }
+        ]
+      },
+      "minecraft:inventory": {
+        "container_type": "minecart_chest",
+        "can_be_siphoned_from": false,
+        "inventory_size": 27
+      },
+      "minecraft:collision_box": {
+        "width": 0.0,
+        "height": 0.0
+      },
+      "minecraft:physics": {
+        "has_collision": false,
+        "has_gravity": false
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": "no"
+        }
+      },
+      "minecraft:health": {
+        "value": 1,
+        "max": 1,
+        "min": 1
+      },
+      "minecraft:entity_sensor": {
+        "relative_range": false,
+        "subsensors": [
+          {
+            "range": [
+              8,
+              8
+            ],
+            "event_filters": [
+              {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "value": "player",
+                    "subject": "other"
+                  },
+                  {
+                    "test": "has_tag",
+                    "value": "revive_dinos:interface_open",
+                    "operator": "equals",
+                    "subject": "other"
+                  }
+                ]
+              }
+            ],
+            "event": "revive_dinos:is_opened"
+          },
+          {
+            "range": [
+              8,
+              8
+            ],
+            "event_filters": [
+              {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "value": "player",
+                    "subject": "other"
+                  }
+                ]
+              }
+            ],
+            "event": "revive_dinos:player_nearby"
+          }
+        ]
+      },
+      "minecraft:timer": {
+        "time": 0.5,
+        "looping": true,
+        "time_down_event": {
+          "event": "revive_dinos:hopper_compatibility"
+        }
+      },
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:knockback_resistance": {
+        "value": 1.0,
+        "max": 1.0
+      },
+      "minecraft:fire_immune": true,
+      "minecraft:persistent": {}
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "revive_dinos:with_collision"
+          ]
+        }
+      },
+      "revive_dinos:add_collision": {
+        "add": {
+          "component_groups": [
+            "revive_dinos:with_collision"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "revive_dinos:no_collision"
+          ]
+        }
+      },
+      "revive_dinos:remove_collision": {
+        "add": {
+          "component_groups": [
+            "revive_dinos:no_collision"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "revive_dinos:with_collision"
+          ]
+        }
+      },
+      "revive_dinos:is_opened": {},
+      "revive_dinos:player_nearby": {},
+      "revive_dinos:hopper_compatibility": {},
+      "revive_dinos:destroyed_block": {}
+    }
+  }
+}

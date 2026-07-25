@@ -78,7 +78,12 @@ function protegerSlotDeSaida(entity, inv) {
   }
   if (atual.typeId === layout.placeholderItem) return;
   if (SAIDAS.has(atual.typeId)) return;
-  entity.dimension.spawnItem(atual, entity.location);
+  const jogador = entity.dimension.getPlayers({
+    location: entity.location,
+    maxDistance: 10,
+    closest: 1,
+  })[0];
+  entity.dimension.spawnItem(atual, jogador?.location ?? entity.location);
   inv.setItem(layout.output, criarItem(layout.placeholderItem));
 }
 

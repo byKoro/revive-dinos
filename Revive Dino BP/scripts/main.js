@@ -26,6 +26,7 @@ import { registrarLimpezaAoEntrar, registrarRemocaoPorDestruicao } from "./machi
 
 import { extractorDef } from "./extractor/definition";
 import { generatorDef } from "./generator/definition";
+import { batteryDef } from "./battery/definition";
 
 import { energyCableComponent } from "./energy/cable";
 import { registrarMinigameDaRocha } from "./fossil/minigame";
@@ -34,6 +35,7 @@ import { fossilRockComponent } from "./fossil/rock";
 // Registra as máquinas no framework (os handlers genéricos despacham por elas)
 registrarMaquina(extractorDef);
 registrarMaquina(generatorDef);
+registrarMaquina(batteryDef);
 
 // ---------------------------------------------------------------------------
 // Custom components (V2)
@@ -43,6 +45,7 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
 
   reg.registerCustomComponent(extractorDef.componentId, makeMachineComponent(extractorDef));
   reg.registerCustomComponent(generatorDef.componentId, makeMachineComponent(generatorDef));
+  reg.registerCustomComponent(batteryDef.componentId, makeMachineComponent(batteryDef));
   reg.registerCustomComponent(COMPONENT_UI_PLACEHOLDER, uiPlaceholderComponent);
   reg.registerCustomComponent(COMPONENT_ENERGY_CABLE, energyCableComponent);
   reg.registerCustomComponent(COMPONENT_FOSSIL_ROCK, fossilRockComponent);

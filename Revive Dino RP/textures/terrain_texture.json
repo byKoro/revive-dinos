@@ -36,6 +36,12 @@
     },
     "combustion_generator_front": {
       "textures": "textures/blocks/energy/combustion_generator_front"
+    },
+    "battery_side": {
+      "textures": "textures/blocks/energy/battery_side"
+    },
+    "battery_top": {
+      "textures": "textures/blocks/energy/battery_top"
     }
   }
 }

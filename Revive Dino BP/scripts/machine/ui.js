@@ -55,12 +55,20 @@ export function montarUi(def, entity) {
 
 /**
  * Repõe uma peça retirada/trocada. Item legítimo do jogador num slot que não
- * é dele volta ao mundo (nunca some).
+ * é dele volta ao jogador mais próximo (dropa na posição dele, não do bloco).
  */
 function forcarPeca(entity, inv, slot, esperado) {
   const atual = inv.getItem(slot);
   if (atual?.typeId === esperado) return;
-  if (atual && !ehItemDeUi(atual)) entity.dimension.spawnItem(atual, entity.location);
+  if (atual && !ehItemDeUi(atual)) {
+    const jogador = entity.dimension.getPlayers({
+      location: entity.location,
+      maxDistance: 10,
+      closest: 1,
+    })[0];
+    const dropPos = jogador?.location ?? entity.location;
+    entity.dimension.spawnItem(atual, dropPos);
+  }
   inv.setItem(slot, criarItem(esperado));
 }
 

@@ -28,6 +28,7 @@ export const PROP_ENTITY_RATE = "revive_dinos:e_rate";
 /** Bloco-fonte -> entidade que guarda a carga (para a rede achar a energia). */
 export const SOURCE_ENTITY_BY_BLOCK = {
   [GENERATOR_BLOCK_ID]: GENERATOR_UI_ENTITY_ID,
+  [BATTERY_BLOCK_ID]: "revive_dinos:battery_ui",
 };
 
 /** Tag que identifica blocos que participam da rede de energia. */
