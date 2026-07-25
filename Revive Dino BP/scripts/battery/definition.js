@@ -16,8 +16,8 @@ import {
   BATTERY_BLOCK_ID,
   BATTERY_MAX_CHARGE,
   PROP_ENTITY_CHARGE,
-  PROP_ITEM_CHARGE,
 } from "../energy/constants";
+import { loreDaCarga } from "./charge";
 import { tickBattery } from "./processing";
 import { consumirCargaPendente } from "./transfer";
 
@@ -69,25 +69,24 @@ export const batteryDef = {
   },
 
   /**
-   * Ao quebrar: dropa a bateria com a carga gravada (o bloco não tem loot
-   * próprio, então este é o único drop — sem duplicar).
+   * Ao quebrar: dropa a bateria com a carga gravada na lore (o bloco usa loot
+   * table vazia, então este é o único drop — sem duplicar).
+   *
+   * `block` pode não existir quando a remoção vem por explosão/pistão, por
+   * isso tudo aqui tem fallback para a entidade.
    */
   onBroken: (entity, block, player) => {
+    const dim = block?.dimension ?? entity?.dimension;
+    if (!dim) return;
+
     const carga = entity?.isValid
       ? (entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0)
       : 0;
 
     const item = new ItemStack(BATTERY_BLOCK_ID, 1);
-    if (carga > 0) {
-      item.setDynamicProperty(PROP_ITEM_CHARGE, carga);
-      const pct = Math.floor((carga / BATTERY_MAX_CHARGE) * 100);
-      item.setLore([
-        `§7Energia: §e${formatar(carga)}§7 / ${formatar(BATTERY_MAX_CHARGE)}`,
-        `§7Carga: §a${pct}%`,
-      ]);
-    }
+    if (carga > 0) item.setLore(loreDaCarga(carga));
 
-    const pos = player?.location ?? block.center();
-    block.dimension.spawnItem(item, pos);
+    const pos = player?.location ?? block?.center?.() ?? entity?.location;
+    if (pos) dim.spawnItem(item, pos);
   },
 };

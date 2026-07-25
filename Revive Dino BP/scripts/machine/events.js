@@ -19,7 +19,12 @@ import { limparInventarioDoJogador } from "./ui";
 export function registrarRemocaoPorDestruicao() {
   world.afterEvents.dataDrivenEntityTrigger.subscribe(
     ({ entity }) => {
-      if (defPorEntidade(entity?.typeId)) removerEntidade(entity);
+      const def = defPorEntidade(entity?.typeId);
+      if (!def) return;
+      // Máquinas que guardam estado no item (ex.: bateria) precisam dropar
+      // também nesta rota, senão o bloco some sem devolver nada.
+      def.onBroken?.(entity, undefined, undefined, def);
+      removerEntidade(entity);
     },
     { eventTypes: [EVENT_DESTROYED_BLOCK] },
   );

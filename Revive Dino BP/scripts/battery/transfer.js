@@ -11,7 +11,8 @@
  */
 
 import { world } from "@minecraft/server";
-import { BATTERY_BLOCK_ID, PROP_ITEM_CHARGE } from "../energy/constants";
+import { BATTERY_BLOCK_ID } from "../energy/constants";
+import { cargaDaLore } from "./charge";
 
 /** playerId -> { carga, tick } */
 const pendentes = new Map();
@@ -24,7 +25,7 @@ export function registrarTransferenciaDeBateria() {
     const item = ev.itemStack;
     if (item?.typeId !== BATTERY_BLOCK_ID) return;
 
-    const carga = item.getDynamicProperty(PROP_ITEM_CHARGE) ?? 0;
+    const carga = cargaDaLore(item);
     if (carga > 0) {
       pendentes.set(ev.player.id, {
         carga,

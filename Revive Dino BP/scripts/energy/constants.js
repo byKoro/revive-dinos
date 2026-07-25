@@ -25,8 +25,9 @@ export const PROP_ENTITY_CHARGE = "revive_dinos:e_charge";
 export const PROP_ENTITY_FUEL = "revive_dinos:e_fuel";
 export const PROP_ENTITY_RATE = "revive_dinos:e_rate";
 
-/** Dynamic property gravada no ItemStack da bateria (carga persistida). */
-export const PROP_ITEM_CHARGE = "revive_dinos:stored_charge";
+// A carga persistida no ItemStack da bateria vive na LORE do item (ver
+// battery/charge.js): o Bedrock não permite dynamic property em item
+// empilhável, e o item de um bloco é sempre empilhável.
 
 /** Bloco-fonte -> entidade que guarda a carga (para a rede achar a energia). */
 export const SOURCE_ENTITY_BY_BLOCK = {
