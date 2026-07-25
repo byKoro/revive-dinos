@@ -29,6 +29,7 @@ import { generatorDef } from "./generator/definition";
 import { batteryDef } from "./battery/definition";
 
 import { energyCableComponent } from "./energy/cable";
+import { registrarTransferenciaDeBateria } from "./battery/transfer";
 import { registrarMinigameDaRocha } from "./fossil/minigame";
 import { fossilRockComponent } from "./fossil/rock";
 
@@ -58,4 +59,5 @@ registrarSelecaoFalsa();
 registrarHopper();
 registrarRemocaoPorDestruicao();
 registrarLimpezaAoEntrar();
+registrarTransferenciaDeBateria();
 registrarMinigameDaRocha();

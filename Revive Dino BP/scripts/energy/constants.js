@@ -25,6 +25,9 @@ export const PROP_ENTITY_CHARGE = "revive_dinos:e_charge";
 export const PROP_ENTITY_FUEL = "revive_dinos:e_fuel";
 export const PROP_ENTITY_RATE = "revive_dinos:e_rate";
 
+/** Dynamic property gravada no ItemStack da bateria (carga persistida). */
+export const PROP_ITEM_CHARGE = "revive_dinos:stored_charge";
+
 /** Bloco-fonte -> entidade que guarda a carga (para a rede achar a energia). */
 export const SOURCE_ENTITY_BY_BLOCK = {
   [GENERATOR_BLOCK_ID]: GENERATOR_UI_ENTITY_ID,

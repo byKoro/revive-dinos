@@ -15,7 +15,11 @@ import {
   COMPONENT_GENERATOR,
   GENERATOR_BLOCK_ID,
   GENERATOR_FUEL_SLOT,
+  GENERATOR_MAX_CHARGE,
   GENERATOR_UI_ENTITY_ID,
+  PROP_ENTITY_CHARGE,
+  PROP_ENTITY_FUEL,
+  PROP_ENTITY_RATE,
 } from "../energy/constants";
 import { infoCombustivel } from "../energy/fuel";
 import { tickGenerator } from "./processing";
@@ -40,4 +44,19 @@ export const generatorDef = {
   // Funil só insere combustível, e só no slot de combustível
   routeIngredient: (item) =>
     infoCombustivel(item?.typeId) ? GENERATOR_FUEL_SLOT : undefined,
+
+  /** Agachar + olhar: mostra geração por tick, combustível e buffer. */
+  onSneakLook: (entity, player) => {
+    const carga = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
+    const fuel = entity.getDynamicProperty(PROP_ENTITY_FUEL) ?? 0;
+    const rate = entity.getDynamicProperty(PROP_ENTITY_RATE) ?? 0;
+    const fmt = (n) => n.toLocaleString("en-US");
+
+    const status = fuel > 0 ? `§a+${rate}/tick` : "§cparado";
+    const segundos = (fuel / 20).toFixed(1);
+
+    player.onScreenDisplay.setActionBar(
+      `§6Gerador§r  ${status}§r  §7|§r Buffer: ${fmt(carga)}/${fmt(GENERATOR_MAX_CHARGE)}  §7|§r Combustível: ${segundos}s`,
+    );
+  },
 };

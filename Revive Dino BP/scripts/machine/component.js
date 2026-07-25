@@ -19,11 +19,16 @@ export function makeMachineComponent(def) {
   return {
     onPlace: ({ block, dimension }) => {
       if (acharEntidade(def, block, dimension)) return;
-      criarEntidade(def, block, dimension);
+      const entity = criarEntidade(def, block, dimension);
+      // Gancho opcional: permite restaurar estado salvo no item (ex.: carga)
+      def.onPlaced?.(entity, block, def);
     },
 
-    onPlayerBreak: ({ block, dimension }) => {
-      removerEntidade(acharEntidade(def, block, dimension));
+    onPlayerBreak: ({ block, dimension, player }) => {
+      const entity = acharEntidade(def, block, dimension);
+      // Gancho opcional ANTES de remover: permite salvar estado no item dropado
+      def.onBroken?.(entity, block, player, def);
+      removerEntidade(entity);
     },
 
     onTick: ({ block, dimension }) => {

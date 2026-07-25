@@ -53,6 +53,9 @@ export function registrarSelecaoFalsa() {
       if (!agachado && !fakeSelection) ativar(entity, block);
       if (agachado && fakeSelection) desativar(entity, block);
       if (!agachado) entity.dimension.spawnEntity(OUTLINE_ENTITY_ID, center);
+
+      // Agachado + olhando: a máquina pode exibir seu status na action bar
+      if (agachado) def.onSneakLook?.(entity, player, block, def);
     },
     { eventTypes: [EVENT_PLAYER_NEARBY] },
   );

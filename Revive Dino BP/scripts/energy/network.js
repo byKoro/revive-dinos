@@ -76,3 +76,42 @@ export function consumirDaFonte(dimension, block, quantidade) {
   ent.setDynamicProperty(PROP_ENTITY_CHARGE, carga - quantidade);
   return true;
 }
+
+/**
+ * BFS que acha um bloco de um tipo específico com carga > 0, ligado por cabos.
+ * Usado pela bateria para puxar de geradores mesmo à distância (antes ela só
+ * enxergava geradores diretamente adjacentes).
+ */
+export function buscarBlocoComCarga(dimension, origem, tiposAceitos) {
+  const chave = (l) => `${l.x},${l.y},${l.z}`;
+  const visitados = new Set([chave(origem)]);
+  const fila = [{ pos: origem, dist: 0 }];
+
+  while (fila.length > 0) {
+    const { pos, dist } = fila.shift();
+    for (const dir of DIRECTIONS) {
+      const prox = {
+        x: pos.x + dir.offset.x,
+        y: pos.y + dir.offset.y,
+        z: pos.z + dir.offset.z,
+      };
+      const k = chave(prox);
+      if (visitados.has(k)) continue;
+      visitados.add(k);
+
+      const bloco = dimension.getBlock(prox);
+      if (!bloco) continue;
+
+      if (tiposAceitos.has(bloco.typeId) && cargaDaFonte(dimension, bloco) > 0) {
+        return bloco;
+      }
+      if (bloco.typeId === CABLE_BLOCK_ID && dist < MAX_CABLE_REACH) {
+        fila.push({ pos: prox, dist: dist + 1 });
+      }
+    }
+  }
+  return undefined;
+}
+
+/** Entidade de uma fonte, exposto para quem precisa ler/escrever carga. */
+export { entidadeDaFonte };
