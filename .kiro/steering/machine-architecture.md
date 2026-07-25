@@ -150,3 +150,34 @@ a receita aceitar (não pela face do bloco).
 5. [ ] Registrar constants em `core/constants.js`.
 6. [ ] Registrar component + eventos em `main.js`.
 7. [ ] Testar: spawn, interação, funil, explosão, /kill, playerSpawn, agachar.
+
+
+---
+
+## Blocos conectáveis (cabos, tubos) — pegadinha do eixo X
+
+Blocos com braços direcionais (cabo de energia) que aparecem/somem por
+`bone_visibility` lendo states de conexão têm uma pegadinha do modelo de bloco
+do Bedrock:
+
+- **O eixo X do modelo é espelhado** em relação ao mundo: `model +X = oeste`,
+  `model -X = leste`. O eixo Z é padrão (`model -Z = norte`, `model +Z = sul`)
+  e o Y também (`model +Y = cima`).
+- Portanto o braço **"leste"** deve ficar em **model -X**, e o **"oeste"** em
+  **model +X** (parece invertido, mas é o correto). Norte/sul/cima/baixo ficam
+  na posição intuitiva.
+- A **detecção no script** usa offsets de MUNDO normais (leste = x+1,
+  oeste = x-1, norte = z-1, sul = z+1). Não inverter a detecção — inverter
+  só a posição do braço na geometria.
+
+Referência comprovada: o cabo do addon UtilityCraft. Se for criar outro bloco
+conectável, copie a disposição de bones dele (norte -Z, sul +Z, oeste +X,
+leste -X) em vez de deduzir pela tentativa.
+
+### Hitbox de cabo
+
+O jeito simples e comprovado (UtilityCraft): `collision_box` zero (atravessa)
++ `selection_box` fixo 8×8×8 (fácil de mirar/quebrar), sem permutations.
+Uma hitbox que cresce com as conexões é possível gerando permutations (uma
+por combinação de estados, com a caixa = bounding box dos braços conectados),
+mas é bem mais verboso e normalmente desnecessário.
