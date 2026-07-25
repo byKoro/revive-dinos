@@ -18,6 +18,50 @@ import { buscarFonte, consumirDaFonte } from "../energy/network";
 
 const SAIDAS = saidasPossiveis();
 
+/** Intervalo (em ticks) entre re-buscas de fonte de energia via BFS. */
+const CACHE_INTERVALO = 20;
+
+/**
+ * Tenta consumir energia. Usa cache para evitar BFS todo tick.
+ * Retorna true se consumiu, false se não há energia.
+ */
+function consumirEnergia(entity) {
+  const dim = entity.dimension;
+  const loc = entity.location;
+
+  // Cache: guarda a posição da última fonte encontrada como string "x,y,z"
+  let cacheFonte = entity.getDynamicProperty("revive_dinos:cached_source");
+  let cacheAge = entity.getDynamicProperty("revive_dinos:cache_age") ?? CACHE_INTERVALO;
+
+  // Tenta usar a fonte em cache primeiro (sem BFS)
+  if (cacheFonte && cacheAge < CACHE_INTERVALO) {
+    const [sx, sy, sz] = cacheFonte.split(",").map(Number);
+    const bloco = dim.getBlock({ x: sx, y: sy, z: sz });
+    if (bloco && consumirDaFonte(dim, bloco, ENERGY_COST.extractor)) {
+      entity.setDynamicProperty("revive_dinos:cache_age", cacheAge + 1);
+      return true;
+    }
+    // Cache inválido (fonte sumiu ou sem carga) — invalida
+    cacheFonte = undefined;
+  }
+
+  // BFS: buscar nova fonte (roda a cada CACHE_INTERVALO ticks ou se cache falhou)
+  const fonte = buscarFonte(dim, loc);
+  if (!fonte) {
+    entity.setDynamicProperty("revive_dinos:cached_source", undefined);
+    entity.setDynamicProperty("revive_dinos:cache_age", 0);
+    return false;
+  }
+
+  // Consome e atualiza o cache
+  if (!consumirDaFonte(dim, fonte, ENERGY_COST.extractor)) return false;
+
+  const fl = fonte.location;
+  entity.setDynamicProperty("revive_dinos:cached_source", `${fl.x},${fl.y},${fl.z}`);
+  entity.setDynamicProperty("revive_dinos:cache_age", 0);
+  return true;
+}
+
 export function tickExtractor(entity, def) {
   const inv = inventarioDe(entity);
   if (!inv) return;
@@ -30,8 +74,7 @@ export function tickExtractor(entity, def) {
   if (!match || !saidaTemEspaco(inv)) return zerar(def, entity, inv);
 
   // Verifica energia: sem fonte com carga → pausa (não perde progresso)
-  const fonte = buscarFonte(entity.dimension, entity.location);
-  if (!fonte || !consumirDaFonte(entity.dimension, fonte, ENERGY_COST.extractor)) return;
+  if (!consumirEnergia(entity)) return;
 
   const total = match.recipe.time;
   const progresso = (entity.getDynamicProperty(PROP_PROGRESS) ?? 0) + 1;
