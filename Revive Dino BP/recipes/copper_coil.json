@@ -24,10 +24,8 @@
       "item": "revive_dinos:copper_coil",
       "count": 4
     },
-    "unlock": [
-      {
-        "context": "AlwaysUnlocked"
-      }
-    ]
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    }
   }
 }

@@ -7,11 +7,9 @@
     "tags": [
       "crafting_table"
     ],
-    "unlock": [
-      {
-        "context": "AlwaysUnlocked"
-      }
-    ],
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
     "pattern": [
       "   ",
       "CCC",
