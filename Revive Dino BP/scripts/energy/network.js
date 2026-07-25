@@ -78,6 +78,42 @@ export function consumirDaFonte(dimension, block, quantidade) {
 }
 
 /**
+ * BFS que coleta TODAS as fontes (geradores e baterias) alcançáveis pela rede
+ * de cabos. Base da rede unificada: a máquina soma a carga de todas elas.
+ * Inclui fontes com carga zero — quem filtra é o consumidor, o que mantém o
+ * cache de topologia estável.
+ */
+export function coletarFontes(dimension, origem) {
+  const chave = (l) => `${l.x},${l.y},${l.z}`;
+  const visitados = new Set([chave(origem)]);
+  const fila = [{ pos: origem, dist: 0 }];
+  const fontes = [];
+
+  while (fila.length > 0) {
+    const { pos, dist } = fila.shift();
+    for (const dir of DIRECTIONS) {
+      const prox = {
+        x: pos.x + dir.offset.x,
+        y: pos.y + dir.offset.y,
+        z: pos.z + dir.offset.z,
+      };
+      const k = chave(prox);
+      if (visitados.has(k)) continue;
+      visitados.add(k);
+
+      const bloco = dimension.getBlock(prox);
+      if (!bloco) continue;
+
+      if (SOURCE_ENTITY_BY_BLOCK[bloco.typeId]) fontes.push(bloco);
+      if (bloco.typeId === CABLE_BLOCK_ID && dist < MAX_CABLE_REACH) {
+        fila.push({ pos: prox, dist: dist + 1 });
+      }
+    }
+  }
+  return fontes;
+}
+
+/**
  * BFS que acha um bloco de um tipo específico com carga > 0, ligado por cabos.
  * Usado pela bateria para puxar de geradores mesmo à distância (antes ela só
  * enxergava geradores diretamente adjacentes).
