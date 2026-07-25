@@ -76,17 +76,25 @@ export const batteryDef = {
    * isso tudo aqui tem fallback para a entidade.
    */
   onBroken: (entity, block, player) => {
-    const dim = block?.dimension ?? entity?.dimension;
+    // `isValid` tem que ser checado ANTES de tocar em qualquer propriedade:
+    // numa entidade já removida, até ler `.dimension` lança InvalidEntityError
+    // (optional chaining não protege contra isso).
+    const entidadeViva = entity?.isValid === true;
+
+    const dim = block?.dimension ?? (entidadeViva ? entity.dimension : undefined);
     if (!dim) return;
 
-    const carga = entity?.isValid
+    const carga = entidadeViva
       ? (entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0)
       : 0;
 
     const item = new ItemStack(BATTERY_BLOCK_ID, 1);
     if (carga > 0) item.setLore(loreDaCarga(carga));
 
-    const pos = player?.location ?? block?.center?.() ?? entity?.location;
+    const pos =
+      player?.location ??
+      block?.center?.() ??
+      (entidadeViva ? entity.location : undefined);
     if (pos) dim.spawnItem(item, pos);
   },
 };

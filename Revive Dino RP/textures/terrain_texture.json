@@ -42,6 +42,15 @@
     },
     "battery_top": {
       "textures": "textures/blocks/energy/battery_top"
+    },
+    "biomass_synthesizer_side": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_side"
+    },
+    "biomass_synthesizer_top": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_top"
+    },
+    "biomass_synthesizer_front": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_front"
     }
   }
 }

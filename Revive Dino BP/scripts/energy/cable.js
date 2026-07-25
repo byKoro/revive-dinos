@@ -18,7 +18,8 @@ import { EXTRACTOR_BLOCK_ID } from "../core/constants";
 const CONNECTABLE = new Set([
   ...ENERGY_NETWORK_BLOCKS,
   EXTRACTOR_BLOCK_ID,
-  // Futuramente: SYNTHESIZER_BLOCK_ID, SEQUENCER_BLOCK_ID, INCUBATOR_BLOCK_ID
+  "revive_dinos:biomass_synthesizer",
+  // Futuramente: SEQUENCER_BLOCK_ID, INCUBATOR_BLOCK_ID
 ]);
 
 /**

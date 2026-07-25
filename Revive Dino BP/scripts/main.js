@@ -27,6 +27,7 @@ import { registrarLimpezaAoEntrar, registrarRemocaoPorDestruicao } from "./machi
 import { extractorDef } from "./extractor/definition";
 import { generatorDef } from "./generator/definition";
 import { batteryDef } from "./battery/definition";
+import { synthesizerDef } from "./synthesizer/definition";
 
 import { energyCableComponent } from "./energy/cable";
 import { registrarTransferenciaDeBateria } from "./battery/transfer";
@@ -37,6 +38,7 @@ import { fossilRockComponent } from "./fossil/rock";
 registrarMaquina(extractorDef);
 registrarMaquina(generatorDef);
 registrarMaquina(batteryDef);
+registrarMaquina(synthesizerDef);
 
 // ---------------------------------------------------------------------------
 // Custom components (V2)
@@ -47,6 +49,7 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
   reg.registerCustomComponent(extractorDef.componentId, makeMachineComponent(extractorDef));
   reg.registerCustomComponent(generatorDef.componentId, makeMachineComponent(generatorDef));
   reg.registerCustomComponent(batteryDef.componentId, makeMachineComponent(batteryDef));
+  reg.registerCustomComponent(synthesizerDef.componentId, makeMachineComponent(synthesizerDef));
   reg.registerCustomComponent(COMPONENT_UI_PLACEHOLDER, uiPlaceholderComponent);
   reg.registerCustomComponent(COMPONENT_ENERGY_CABLE, energyCableComponent);
   reg.registerCustomComponent(COMPONENT_FOSSIL_ROCK, fossilRockComponent);

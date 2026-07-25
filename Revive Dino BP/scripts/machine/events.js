@@ -19,7 +19,11 @@ import { limparInventarioDoJogador } from "./ui";
 export function registrarRemocaoPorDestruicao() {
   world.afterEvents.dataDrivenEntityTrigger.subscribe(
     ({ entity }) => {
-      const def = defPorEntidade(entity?.typeId);
+      // A outra rota de remoção (onPlayerBreak) pode ter chegado primeiro:
+      // sem este guard, mexer na entidade já removida lança InvalidEntityError.
+      if (entity?.isValid !== true) return;
+
+      const def = defPorEntidade(entity.typeId);
       if (!def) return;
       // Máquinas que guardam estado no item (ex.: bateria) precisam dropar
       // também nesta rota, senão o bloco some sem devolver nada.
