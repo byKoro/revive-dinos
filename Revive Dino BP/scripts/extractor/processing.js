@@ -13,6 +13,8 @@ import { PROP_FRAME, PROP_PROGRESS } from "../core/constants";
 import { cabeNaPilha, consumirUm, criarItem, inventarioDe } from "../core/items";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
 import { findRecipe, layout, pickOutput, saidasPossiveis } from "./config";
+import { ENERGY_COST } from "../energy/constants";
+import { buscarFonte, consumirDaFonte } from "../energy/network";
 
 const SAIDAS = saidasPossiveis();
 
@@ -26,6 +28,10 @@ export function tickExtractor(entity, def) {
 
   const match = findRecipe(inv.getItem(layout.inputA), inv.getItem(layout.inputB));
   if (!match || !saidaTemEspaco(inv)) return zerar(def, entity, inv);
+
+  // Verifica energia: sem fonte com carga → pausa (não perde progresso)
+  const fonte = buscarFonte(entity.dimension, entity.location);
+  if (!fonte || !consumirDaFonte(entity.dimension, fonte, ENERGY_COST.extractor)) return;
 
   const total = match.recipe.time;
   const progresso = (entity.getDynamicProperty(PROP_PROGRESS) ?? 0) + 1;
