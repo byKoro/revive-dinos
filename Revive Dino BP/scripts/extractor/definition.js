@@ -31,4 +31,9 @@ export const extractorDef = {
   },
   processTick: tickExtractor,
   routeIngredient: (item) => slotParaIngrediente(item),
+  // Roteamento por direcao: top=fossil(inputA), sides=tube(inputB)
+  hopperRouting: {
+    top: cfg.inputA,
+    side: cfg.inputB,
+  },
 };

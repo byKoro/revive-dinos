@@ -75,6 +75,14 @@ export function restaurarSlotsDeUi(def, entity, inv, frameProp) {
     forcarPeca(entity, inv, L.progressSlot, idProgresso(L, frame));
   }
 
+  // Protege inputs: se uma peca de UI parar num slot de entrada, devolve.
+  for (const slot of L.inputs) {
+    const item = inv.getItem(slot);
+    if (item && ehItemDeUi(item)) {
+      inv.setItem(slot, undefined);
+    }
+  }
+
   const res = reservados(L);
   for (let slot = 0; slot < inv.size; slot++) {
     if (res.includes(slot)) continue;
