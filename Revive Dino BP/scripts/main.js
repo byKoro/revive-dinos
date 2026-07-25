@@ -20,6 +20,7 @@ import {
   COMPONENT_EXTRACTOR,
   COMPONENT_FOSSIL_ROCK,
   COMPONENT_UI_PLACEHOLDER,
+  COMPONENT_ENERGY_CABLE,
 } from "./core/constants";
 
 import {
@@ -36,6 +37,8 @@ import { registrarSelecaoFalsa } from "./extractor/selection";
 import { registrarMinigameDaRocha } from "./fossil/minigame";
 import { fossilRockComponent } from "./fossil/rock";
 
+import { energyCableComponent } from "./energy/cable";
+
 // ---------------------------------------------------------------------------
 // Custom components (V2)
 // ---------------------------------------------------------------------------
@@ -51,6 +54,10 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
   blockComponentRegistry.registerCustomComponent(
     COMPONENT_FOSSIL_ROCK,
     fossilRockComponent,
+  );
+  blockComponentRegistry.registerCustomComponent(
+    COMPONENT_ENERGY_CABLE,
+    energyCableComponent,
   );
 });
 

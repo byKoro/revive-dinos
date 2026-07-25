@@ -1,0 +1,97 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "revive_dinos:energy_cable",
+      "menu_category": {
+        "category": "construction"
+      },
+      "states": {
+        "revive_dinos:connected_north": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_south": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_east": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_west": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_up": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_down": [
+          false,
+          true
+        ]
+      }
+    },
+    "components": {
+      "minecraft:display_name": "tile.revive_dinos:energy_cable.name",
+      "minecraft:geometry": {
+        "identifier": "geometry.energy_cable",
+        "bone_visibility": {
+          "center": true,
+          "north": "q.block_state('revive_dinos:connected_north')",
+          "south": "q.block_state('revive_dinos:connected_south')",
+          "east": "q.block_state('revive_dinos:connected_east')",
+          "west": "q.block_state('revive_dinos:connected_west')",
+          "up": "q.block_state('revive_dinos:connected_up')",
+          "down": "q.block_state('revive_dinos:connected_down')"
+        }
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "energy_cable",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -3,
+          0,
+          -3
+        ],
+        "size": [
+          6,
+          6,
+          6
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -3,
+          0,
+          -3
+        ],
+        "size": [
+          6,
+          6,
+          6
+        ]
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.5
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 5
+      },
+      "minecraft:map_color": "#FFD700",
+      "tag:revive_dinos:energy_connectable": {},
+      "revive_dinos:cable_connector": {},
+      "minecraft:tick": {
+        "interval_range": [
+          10,
+          10
+        ]
+      }
+    }
+  }
+}

@@ -29,6 +29,11 @@
     "result": {
       "item": "revive_dinos:replication_enzyme",
       "count": 1
-    }
+    },
+    "unlock": [
+      {
+        "context": "AlwaysUnlocked"
+      }
+    ]
   }
 }

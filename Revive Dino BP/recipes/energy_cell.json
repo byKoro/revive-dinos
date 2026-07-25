@@ -29,6 +29,11 @@
     "result": {
       "item": "revive_dinos:energy_cell",
       "count": 1
-    }
+    },
+    "unlock": [
+      {
+        "context": "AlwaysUnlocked"
+      }
+    ]
   }
 }

@@ -24,6 +24,9 @@
     },
     "fossil_rock_highlight": {
       "textures": "textures/blocks/fossil_rock_highlight"
+    },
+    "energy_cable": {
+      "textures": "textures/blocks/energy/energy_cable"
     }
   }
 }

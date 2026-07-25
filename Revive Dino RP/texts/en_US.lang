@@ -32,11 +32,11 @@ item.revive_dinos:fossil_cauda_pristino.name=Pristine Tail Fossil
 item.revive_dinos:fossil_fragmento_danificado.name=Damaged Mysterious Fragment Fossil
 item.revive_dinos:fossil_fragmento_intacto.name=Intact Mysterious Fragment Fossil
 item.revive_dinos:fossil_fragmento_pristino.name=Pristine Mysterious Fragment Fossil
-item.revive_dinos:dna_dodo.name=Dodo DNA
-item.revive_dinos:dna_triceratops.name=Triceratops DNA
-item.revive_dinos:dna_pterodactyl.name=Pterodactyl DNA
-item.revive_dinos:dna_velociraptor.name=Velociraptor DNA
-item.revive_dinos:dna_trex.name=T-Rex DNA
+item.revive_dinos:dna_dodo.name=Incomplete Dodo DNA
+item.revive_dinos:dna_triceratops.name=Incomplete Triceratops DNA
+item.revive_dinos:dna_pterodactyl.name=Incomplete Pterodactyl DNA
+item.revive_dinos:dna_velociraptor.name=Incomplete Velociraptor DNA
+item.revive_dinos:dna_trex.name=Incomplete T-Rex DNA
 
 item.revive_dinos:hammer.name=Excavation Hammer
 
@@ -56,3 +56,4 @@ item.revive_dinos:complete_dna_velociraptor.name=Complete Velociraptor DNA
 item.revive_dinos:egg_velociraptor.name=Velociraptor Egg
 item.revive_dinos:complete_dna_trex.name=Complete T-Rex DNA
 item.revive_dinos:egg_trex.name=T-Rex Egg
+tile.revive_dinos:energy_cable.name=Energy Cable

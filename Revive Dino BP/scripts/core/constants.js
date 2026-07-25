@@ -36,6 +36,7 @@ export const HAMMER_ITEM_ID = "revive_dinos:hammer";
 export const COMPONENT_EXTRACTOR = "revive_dinos:extractor_machine";
 export const COMPONENT_UI_PLACEHOLDER = "revive_dinos:ui_placeholder";
 export const COMPONENT_FOSSIL_ROCK = "revive_dinos:fossil_rock";
+export const COMPONENT_ENERGY_CABLE = "revive_dinos:cable_connector";
 
 // ---------------------------------------------------------------------------
 // BLOCK STATES
