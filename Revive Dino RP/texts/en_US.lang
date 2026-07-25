@@ -57,3 +57,4 @@ item.revive_dinos:egg_velociraptor.name=Velociraptor Egg
 item.revive_dinos:complete_dna_trex.name=Complete T-Rex DNA
 item.revive_dinos:egg_trex.name=T-Rex Egg
 tile.revive_dinos:energy_cable.name=Energy Cable
+tile.revive_dinos:combustion_generator.name=Combustion Generator

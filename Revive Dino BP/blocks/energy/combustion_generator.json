@@ -1,0 +1,43 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "revive_dinos:combustion_generator",
+      "menu_category": {
+        "category": "construction"
+      }
+    },
+    "components": {
+      "revive_dinos:generator_machine": {},
+      "minecraft:display_name": "tile.revive_dinos:combustion_generator.name",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "combustion_generator_side",
+          "render_method": "opaque"
+        },
+        "up": {
+          "texture": "combustion_generator_top",
+          "render_method": "opaque"
+        },
+        "north": {
+          "texture": "combustion_generator_front",
+          "render_method": "opaque"
+        }
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 2.5
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 15
+      },
+      "minecraft:map_color": "#3a3a3a",
+      "minecraft:tick": {
+        "interval_range": [
+          10,
+          10
+        ]
+      }
+    }
+  }
+}

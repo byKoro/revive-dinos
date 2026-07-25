@@ -27,6 +27,15 @@
     },
     "energy_cable": {
       "textures": "textures/blocks/energy/energy_cable"
+    },
+    "combustion_generator_side": {
+      "textures": "textures/blocks/energy/combustion_generator_side"
+    },
+    "combustion_generator_top": {
+      "textures": "textures/blocks/energy/combustion_generator_top"
+    },
+    "combustion_generator_front": {
+      "textures": "textures/blocks/energy/combustion_generator_front"
     }
   }
 }

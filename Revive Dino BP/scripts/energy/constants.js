@@ -9,17 +9,25 @@ export const CABLE_BLOCK_ID = "revive_dinos:energy_cable";
 export const GENERATOR_BLOCK_ID = "revive_dinos:combustion_generator";
 export const BATTERY_BLOCK_ID = "revive_dinos:battery";
 
+export const CARVITE_ITEM_ID = "revive_dinos:carvite";
+
+/** Custom component (V2) do gerador — difere do identifier do bloco. */
+export const COMPONENT_GENERATOR = "revive_dinos:generator_machine";
+
 /** Tag que identifica blocos que participam da rede de energia. */
 export const ENERGY_TAG = "revive_dinos:energy_connectable";
 
 /** Alcance máximo em blocos de cabo entre fonte e máquina (BFS). */
 export const MAX_CABLE_REACH = 16;
 
-/** Dynamic property: carga armazenada na bateria. */
-export const PROP_CHARGE = "revive_dinos:charge";
+/** Capacidade máxima de carga que o gerador acumula no próprio buffer. */
+export const GENERATOR_MAX_CHARGE = 10000;
 
 /** Capacidade máxima da bateria. */
-export const BATTERY_MAX_CHARGE = 10000;
+export const BATTERY_MAX_CHARGE = 100000;
+
+/** Quantos ticks de queima o gerador processa por tick do bloco. */
+export const GENERATOR_TICK_INTERVAL = 10;
 
 /** Custo energético por tick de processamento de cada máquina. */
 export const ENERGY_COST = {
@@ -27,12 +35,6 @@ export const ENERGY_COST = {
   synthesizer: 20,
   sequencer: 50,
   incubator: 100,
-};
-
-/** Geração de carga por tick por tipo de combustível. */
-export const FUEL_GENERATION = {
-  default: 5,   // carvão vanilla e similares
-  carvite: 10,  // combustível sintético
 };
 
 /**

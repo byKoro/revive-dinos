@@ -38,6 +38,8 @@ import { registrarMinigameDaRocha } from "./fossil/minigame";
 import { fossilRockComponent } from "./fossil/rock";
 
 import { energyCableComponent } from "./energy/cable";
+import { generatorComponent } from "./energy/generator";
+import { COMPONENT_GENERATOR } from "./energy/constants";
 
 // ---------------------------------------------------------------------------
 // Custom components (V2)
@@ -58,6 +60,10 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
   blockComponentRegistry.registerCustomComponent(
     COMPONENT_ENERGY_CABLE,
     energyCableComponent,
+  );
+  blockComponentRegistry.registerCustomComponent(
+    COMPONENT_GENERATOR,
+    generatorComponent,
   );
 });
 
