@@ -26,10 +26,20 @@ export function ehItemDeUi(item) {
 const idFundo = (L, slot) => `${L.uiBackgroundId}_${slot}`;
 const idProgresso = (L, frame) => `${L.uiProgressId}_${frame}`;
 
+/**
+ * Conjunto de slots reservados, memoizado por layout. Antes isso recriava
+ * arrays e fazia includes() dentro de um loop por tick — custo desnecessário
+ * multiplicado por cada máquina no mundo.
+ */
+const cacheReservados = new WeakMap();
 function reservados(L) {
-  const r = [...L.inputs, ...L.outputs, ...L.backgroundSlots];
-  if (L.progressSlot != null) r.push(L.progressSlot);
-  return r;
+  let set = cacheReservados.get(L);
+  if (!set) {
+    set = new Set([...L.inputs, ...L.outputs, ...L.backgroundSlots]);
+    if (L.progressSlot != null) set.add(L.progressSlot);
+    cacheReservados.set(L, set);
+  }
+  return set;
 }
 
 /** Montagem inicial, uma vez no spawn da entidade. */
@@ -47,7 +57,7 @@ export function montarUi(def, entity) {
       inv.setItem(slot, criarItem(idFundo(L, slot)));
     } else if (slot === L.progressSlot) {
       inv.setItem(slot, criarItem(idProgresso(L, 0)));
-    } else if (!res.includes(slot)) {
+    } else if (!res.has(slot)) {
       inv.setItem(slot, criarItem(L.placeholderItem));
     }
   }
@@ -93,7 +103,7 @@ export function restaurarSlotsDeUi(def, entity, inv, frameProp) {
 
   const res = reservados(L);
   for (let slot = 0; slot < inv.size; slot++) {
-    if (res.includes(slot)) continue;
+    if (res.has(slot)) continue;
     forcarPeca(entity, inv, slot, L.placeholderItem);
   }
 }
@@ -119,8 +129,24 @@ export function limparInventarioDoJogador(player) {
   if (cursor && ehItemDeUi(cursor.item)) cursor.clear();
 }
 
-/** Apaga peças que viraram item no chão perto da máquina. */
+/**
+ * Apaga peças que viraram item no chão perto da máquina.
+ *
+ * getEntities é caro para rodar a cada tick em cada máquina, então a varredura
+ * acontece a cada VARREDURA_INTERVALO ticks. Peças no chão não são urgentes:
+ * o importante é que desapareçam, não que desapareçam no mesmo tick.
+ */
+const VARREDURA_INTERVALO = 20;
+const PROP_VARREDURA = "revive_dinos:scan_tick";
+
 export function limparItensDropados(entity) {
+  const contador = (entity.getDynamicProperty(PROP_VARREDURA) ?? 0) + 1;
+  if (contador < VARREDURA_INTERVALO) {
+    entity.setDynamicProperty(PROP_VARREDURA, contador);
+    return;
+  }
+  entity.setDynamicProperty(PROP_VARREDURA, 0);
+
   const dropados = entity.dimension.getEntities({
     type: "minecraft:item",
     location: entity.location,

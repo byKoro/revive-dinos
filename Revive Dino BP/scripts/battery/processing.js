@@ -23,7 +23,7 @@ import {
 import { limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
 
 /** Quanto a bateria puxa do gerador adjacente por tick. */
-const TAXA_CARGA = 50;
+const TAXA_CARGA = 500;
 
 export function tickBattery(entity, def) {
   const inv = inventarioDe(entity);

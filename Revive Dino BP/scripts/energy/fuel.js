@@ -16,16 +16,16 @@
 import { CARVITE_ITEM_ID } from "./constants";
 
 const TABELA = {
-  "minecraft:coal": { ticks: 1600, rate: 5 },
-  "minecraft:charcoal": { ticks: 1600, rate: 5 },
-  "minecraft:coal_block": { ticks: 16000, rate: 5 },
-  "minecraft:blaze_rod": { ticks: 2400, rate: 8 },
-  "minecraft:lava_bucket": { ticks: 20000, rate: 6 },
-  "minecraft:dried_kelp_block": { ticks: 4000, rate: 5 },
-  "minecraft:stick": { ticks: 100, rate: 3 },
-  "minecraft:bamboo": { ticks: 50, rate: 3 },
-  "minecraft:blaze_powder": { ticks: 1200, rate: 6 },
-  [CARVITE_ITEM_ID]: { ticks: 3200, rate: 10 },
+  "minecraft:coal": { ticks: 1600, rate: 40 },
+  "minecraft:charcoal": { ticks: 1600, rate: 40 },
+  "minecraft:coal_block": { ticks: 16000, rate: 40 },
+  "minecraft:blaze_rod": { ticks: 2400, rate: 60 },
+  "minecraft:lava_bucket": { ticks: 20000, rate: 50 },
+  "minecraft:dried_kelp_block": { ticks: 4000, rate: 35 },
+  "minecraft:stick": { ticks: 100, rate: 20 },
+  "minecraft:bamboo": { ticks: 50, rate: 20 },
+  "minecraft:blaze_powder": { ticks: 1200, rate: 45 },
+  [CARVITE_ITEM_ID]: { ticks: 3200, rate: 100 },
 };
 
 /** Sufixos da família da madeira (queimam como planks). */
@@ -43,7 +43,7 @@ export function infoCombustivel(typeId) {
 
   // madeira genérica (evita listar cada tipo de árvore)
   if (MADEIRA.some((sufixo) => typeId.endsWith(sufixo))) {
-    return { ticks: 300, rate: 4 };
+    return { ticks: 300, rate: 25 };
   }
   return undefined;
 }
