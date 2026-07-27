@@ -29,7 +29,17 @@ const pendentes = new Map();
 const INTERVALO = 5;
 
 /** Por quantos ticks um registro continua válido depois de visto. */
-const VALIDADE = 40;
+const VALIDADE = 200;
+
+/**
+ * Registro direto, usado no momento em que o jogador quebra a bateria.
+ * É o caminho principal do fluxo "quebrei e recoloquei": não depende da lore
+ * nem de o polling ter passado enquanto o item estava na mão.
+ */
+export function registrarCargaDoJogador(player, carga) {
+  if (!player || carga <= 0) return;
+  pendentes.set(player.id, { carga, tick: system.currentTick });
+}
 
 function maoDoJogador(player) {
   return player.getComponent("minecraft:equippable")?.getEquipmentSlot("Mainhand")?.getItem();

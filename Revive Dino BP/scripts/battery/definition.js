@@ -19,7 +19,7 @@ import {
 } from "../energy/constants";
 import { loreDaCarga } from "./charge";
 import { tickBattery } from "./processing";
-import { consumirCargaPendente } from "./transfer";
+import { consumirCargaPendente, registrarCargaDoJogador } from "./transfer";
 
 export const BATTERY_UI_ENTITY_ID = "revive_dinos:battery_ui";
 export const COMPONENT_BATTERY = "revive_dinos:battery_machine";
@@ -89,7 +89,12 @@ export const batteryDef = {
       : 0;
 
     const item = new ItemStack(BATTERY_BLOCK_ID, 1);
-    if (carga > 0) item.setLore(loreDaCarga(carga));
+    if (carga > 0) {
+      item.setLore(loreDaCarga(carga));
+      // Caminho direto: quem quebrou já fica com a carga registrada, então
+      // recolocar funciona mesmo que a leitura da lore falhe.
+      registrarCargaDoJogador(player, carga);
+    }
 
     const pos =
       player?.location ??
