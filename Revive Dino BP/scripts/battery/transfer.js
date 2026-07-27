@@ -3,18 +3,19 @@
  * ---------------------------------------------------------------------------
  * Ponte entre o item de bateria e o bloco colocado.
  *
- * Problema: o gancho `onPlace` do bloco não recebe o item usado, e quando ele
- * roda o item já saiu da mão. Precisamos saber a carga ANTES da colocação.
+ * O gancho `onPlace` do bloco não recebe o item usado, e quando ele roda o item
+ * já saiu da mão. Também não há evento estável de colocação de bloco
+ * (`playerInteractWithBlock` não dispara para colocação e `playerPlaceBlock`
+ * ainda é experimental).
  *
- * Por que não usar um evento de colocação:
- *  - `playerInteractWithBlock` não dispara de forma confiável para colocação
- *    de bloco (é o que fazia a carga voltar sempre zerada).
- *  - `playerPlaceBlock` (before) ainda é experimental, então não serve para
- *    um addon estável.
+ * Solução: a carga da bateria que o jogador está SEGURANDO é gravada numa
+ * dynamic property DELE, atualizada a cada tick. Ao colocar, o `onPlaced` lê
+ * esse valor.
  *
- * Solução: vigiar a mão do jogador por polling. Se ele está segurando uma
- * bateria com carga, guardamos esse valor; ao colocar, o `onPlaced` consome.
- * O registro tem validade curta, então não "vaza" para uma colocação futura.
+ * Por que isso funciona com várias baterias em qualquer ordem: o valor guardado
+ * é sempre o da bateria que está na mão AGORA. Como o jogador precisa estar
+ * segurando exatamente a bateria que vai colocar, o valor lido é o dela — não
+ * importa quantas ele tenha quebrado nem em que ordem vá recolocar.
  * ---------------------------------------------------------------------------
  */
 
@@ -22,51 +23,53 @@ import { system, world } from "@minecraft/server";
 import { BATTERY_BLOCK_ID } from "../energy/constants";
 import { cargaDaLore } from "./charge";
 
-/** playerId -> { carga, tick } */
-const pendentes = new Map();
+const PROP_CARGA_NA_MAO = "revive_dinos:held_charge";
+const PROP_CARGA_TICK = "revive_dinos:held_tick";
 
-/** De quantos em quantos ticks a mão é verificada. */
-const INTERVALO = 5;
-
-/** Por quantos ticks um registro continua válido depois de visto. */
+/** Por quantos ticks o registro continua válido. */
 const VALIDADE = 200;
 
+function itemNaMao(player) {
+  try {
+    return player
+      .getComponent("minecraft:equippable")
+      ?.getEquipmentSlot("Mainhand")
+      ?.getItem();
+  } catch {
+    return undefined;
+  }
+}
+
 /**
- * Registro direto, usado no momento em que o jogador quebra a bateria.
- * É o caminho principal do fluxo "quebrei e recoloquei": não depende da lore
- * nem de o polling ter passado enquanto o item estava na mão.
+ * Registro direto: usado no momento em que o jogador quebra a bateria, para o
+ * fluxo "quebrei e recoloquei" não depender de nada além disso.
  */
 export function registrarCargaDoJogador(player, carga) {
   if (!player || carga <= 0) return;
-  pendentes.set(player.id, { carga, tick: system.currentTick });
-}
-
-function maoDoJogador(player) {
-  return player.getComponent("minecraft:equippable")?.getEquipmentSlot("Mainhand")?.getItem();
+  try {
+    player.setDynamicProperty(PROP_CARGA_NA_MAO, carga);
+    player.setDynamicProperty(PROP_CARGA_TICK, system.currentTick);
+  } catch {
+    // jogador saiu; nada a fazer
+  }
 }
 
 export function registrarTransferenciaDeBateria() {
+  // Todo tick: se há bateria carregada na mão, guarda a carga dela no jogador.
   system.runInterval(() => {
-    const agora = system.currentTick;
-
     for (const player of world.getPlayers()) {
-      const item = maoDoJogador(player);
+      const item = itemNaMao(player);
       if (item?.typeId !== BATTERY_BLOCK_ID) continue;
 
       const carga = cargaDaLore(item);
-      if (carga > 0) pendentes.set(player.id, { carga, tick: agora });
+      if (carga > 0) registrarCargaDoJogador(player, carga);
     }
-
-    // Limpa registros velhos para a memória não crescer
-    for (const [id, pend] of pendentes) {
-      if (agora - pend.tick > VALIDADE) pendentes.delete(id);
-    }
-  }, INTERVALO);
+  }, 1);
 }
 
 /**
- * Consome a carga registrada do jogador mais próximo. Retorna 0 se não houver
- * nada pendente (bateria nova, ou colocada sem carga).
+ * Carga registrada do jogador mais próximo do bloco colocado.
+ * Retorna 0 se não houver registro válido (bateria nova ou descarregada).
  */
 export function consumirCargaPendente(dimension, location) {
   const player = dimension.getPlayers({
@@ -76,13 +79,15 @@ export function consumirCargaPendente(dimension, location) {
   })[0];
   if (!player) return 0;
 
-  const pend = pendentes.get(player.id);
-  if (!pend) return 0;
+  const carga = player.getDynamicProperty(PROP_CARGA_NA_MAO) ?? 0;
+  const tick = player.getDynamicProperty(PROP_CARGA_TICK) ?? -Infinity;
 
-  pendentes.delete(player.id);
+  if (carga <= 0) return 0;
+  if (system.currentTick - tick > VALIDADE) return 0;
 
-  // Registro velho demais: não era desta colocação
-  if (system.currentTick - pend.tick > VALIDADE) return 0;
+  // Consome o registro para não reaproveitar numa colocação seguinte
+  player.setDynamicProperty(PROP_CARGA_NA_MAO, undefined);
+  player.setDynamicProperty(PROP_CARGA_TICK, undefined);
 
-  return pend.carga;
+  return carga;
 }

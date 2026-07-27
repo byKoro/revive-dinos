@@ -18,6 +18,7 @@ import {
   PROP_ENTITY_CHARGE,
 } from "../energy/constants";
 import { loreDaCarga } from "./charge";
+import { gravarEspelho, lerEspelho, limparEspelho } from "./mirror";
 import { tickBattery } from "./processing";
 import { consumirCargaPendente, registrarCargaDoJogador } from "./transfer";
 
@@ -62,10 +63,25 @@ export const batteryDef = {
     return `§eBateria§r  ${formatar(carga)} / ${formatar(BATTERY_MAX_CHARGE)}  §7(${pct}%)§r  ${tendencia}`;
   },
 
-  /** Ao colocar: restaura a carga que estava salva no item. */
+  /**
+   * Ao colocar: restaura a carga registrada no jogador que está colocando.
+   * O espelho por posição entra como segunda chance (bateria recolocada no
+   * mesmo lugar após a entidade ter sido recriada, por exemplo).
+   */
   onPlaced: (entity, block) => {
-    const carga = consumirCargaPendente(block.dimension, block.location);
-    if (carga > 0) entity.setDynamicProperty(PROP_ENTITY_CHARGE, carga);
+    const doJogador = consumirCargaPendente(block.dimension, block.location);
+    const carga = doJogador > 0 ? doJogador : lerEspelho(block.location);
+
+    entity.setDynamicProperty(PROP_ENTITY_CHARGE, carga);
+    gravarEspelho(block.location, carga);
+  },
+
+  /**
+   * Entidade recriada (/kill, chunk, auto-recuperação): a carga pertence ao
+   * bloco, então volta do espelho.
+   */
+  onRestored: (entity, block) => {
+    entity.setDynamicProperty(PROP_ENTITY_CHARGE, lerEspelho(block.location));
   },
 
   /**
@@ -84,9 +100,15 @@ export const batteryDef = {
     const dim = block?.dimension ?? (entidadeViva ? entity.dimension : undefined);
     if (!dim) return;
 
-    const carga = entidadeViva
+    // Carga da entidade; se ela já morreu, o espelho por posição tem o valor
+    const daEntidade = entidadeViva
       ? (entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0)
       : 0;
+    const posicao = block?.location ?? (entidadeViva ? entity.location : undefined);
+    const carga = daEntidade > 0 ? daEntidade : posicao ? lerEspelho(posicao) : 0;
+
+    // O bloco deixou de existir: o espelho daquela posição não vale mais
+    if (posicao) limparEspelho(posicao);
 
     const item = new ItemStack(BATTERY_BLOCK_ID, 1);
     if (carga > 0) {

@@ -19,9 +19,11 @@ import { atualizarStatus } from "./status";
 export function makeMachineComponent(def) {
   return {
     onPlace: ({ block, dimension }) => {
-      if (acharEntidade(def, block, dimension)) return;
-      const entity = criarEntidade(def, block, dimension);
-      // Gancho opcional: permite restaurar estado salvo no item (ex.: carga)
+      // Reaproveita a entidade se ela já existir, mas o gancho onPlaced roda
+      // SEMPRE. Antes havia um `return` aqui que pulava o gancho — era o que
+      // fazia a bateria voltar zerada quando uma entidade era reencontrada.
+      let entity = acharEntidade(def, block, dimension);
+      if (!entity?.isValid) entity = criarEntidade(def, block, dimension);
       def.onPlaced?.(entity, block, def);
     },
 
@@ -35,7 +37,10 @@ export function makeMachineComponent(def) {
     onTick: ({ block, dimension }) => {
       const entity = acharEntidade(def, block, dimension);
       if (!entity?.isValid) {
-        criarEntidade(def, block, dimension);
+        // Entidade sumiu (/kill, chunk, etc.): recria e deixa a máquina
+        // restaurar o estado que ela persiste por posição (ex.: carga).
+        const nova = criarEntidade(def, block, dimension);
+        def.onRestored?.(nova, block, def);
         return;
       }
       garantirPosicao(entity, block);

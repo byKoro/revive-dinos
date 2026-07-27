@@ -21,6 +21,7 @@ import {
 } from "../energy/constants";
 import { buscarBlocoComCarga, entidadeDaFonte } from "../energy/network";
 import { limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
+import { gravarEspelho, lerEspelho } from "./mirror";
 
 /** Quanto a bateria puxa por tick. Alto para não ser gargalo da rede. */
 const TAXA_CARGA = 500;
@@ -35,7 +36,18 @@ export function tickBattery(entity, def) {
     limparItensDropados(entity);
   }
 
-  const charge = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
+  let charge = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
+
+  // A carga pertence ao BLOCO: se a entidade está zerada mas o espelho tem
+  // valor, ela foi recriada — recupera em vez de perder a energia.
+  const espelho = lerEspelho(entity.location);
+  if (charge <= 0 && espelho > 0) {
+    charge = espelho;
+    entity.setDynamicProperty(PROP_ENTITY_CHARGE, charge);
+  } else if (charge !== espelho) {
+    gravarEspelho(entity.location, charge);
+  }
+
   if (charge >= BATTERY_MAX_CHARGE) return;
 
   // Acha um gerador com carga na rede (adjacente ou via cabo)
