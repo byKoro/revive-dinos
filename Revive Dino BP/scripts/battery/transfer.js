@@ -41,13 +41,17 @@ function itemNaMao(player) {
 }
 
 /**
- * Registro direto: usado no momento em que o jogador quebra a bateria, para o
- * fluxo "quebrei e recoloquei" não depender de nada além disso.
+ * Registra a carga da bateria que o jogador tem em mão.
+ *
+ * Aceita 0 de propósito: uma bateria descarregada precisa SOBRESCREVER o
+ * registro anterior. Ignorar o zero era um exploit — ao segurar uma bateria
+ * vazia, o valor da última bateria carregada continuava lá e era aplicado na
+ * colocação, criando energia do nada (bateria duplicada).
  */
 export function registrarCargaDoJogador(player, carga) {
-  if (!player || carga <= 0) return;
+  if (!player) return;
   try {
-    player.setDynamicProperty(PROP_CARGA_NA_MAO, carga);
+    player.setDynamicProperty(PROP_CARGA_NA_MAO, Math.max(0, carga));
     player.setDynamicProperty(PROP_CARGA_TICK, system.currentTick);
   } catch {
     // jogador saiu; nada a fazer
@@ -55,21 +59,24 @@ export function registrarCargaDoJogador(player, carga) {
 }
 
 export function registrarTransferenciaDeBateria() {
-  // Todo tick: se há bateria carregada na mão, guarda a carga dela no jogador.
+  // Todo tick: o registro espelha EXATAMENTE a bateria que está na mão —
+  // inclusive quando ela está vazia (carga 0).
   system.runInterval(() => {
     for (const player of world.getPlayers()) {
       const item = itemNaMao(player);
       if (item?.typeId !== BATTERY_BLOCK_ID) continue;
-
-      const carga = cargaDaLore(item);
-      if (carga > 0) registrarCargaDoJogador(player, carga);
+      registrarCargaDoJogador(player, cargaDaLore(item));
     }
   }, 1);
 }
 
 /**
- * Carga registrada do jogador mais próximo do bloco colocado.
- * Retorna 0 se não houver registro válido (bateria nova ou descarregada).
+ * Carga da bateria que o jogador mais próximo tinha em mão.
+ *
+ * Retorna `undefined` quando não há registro (aí o chamador pode tentar outra
+ * fonte) e um número — possivelmente 0 — quando há. A diferença importa: um
+ * 0 explícito significa "a bateria colocada estava vazia" e precisa vencer
+ * qualquer valor antigo, senão vira duplicação de energia.
  */
 export function consumirCargaPendente(dimension, location) {
   const player = dimension.getPlayers({
@@ -77,17 +84,19 @@ export function consumirCargaPendente(dimension, location) {
     maxDistance: 8,
     closest: 1,
   })[0];
-  if (!player) return 0;
+  if (!player) return undefined;
 
-  const carga = player.getDynamicProperty(PROP_CARGA_NA_MAO) ?? 0;
+  const carga = player.getDynamicProperty(PROP_CARGA_NA_MAO);
   const tick = player.getDynamicProperty(PROP_CARGA_TICK) ?? -Infinity;
 
-  if (carga <= 0) return 0;
-  if (system.currentTick - tick > VALIDADE) return 0;
+  // Consome sempre que existir, para não reaproveitar numa colocação seguinte
+  if (carga !== undefined) {
+    player.setDynamicProperty(PROP_CARGA_NA_MAO, undefined);
+    player.setDynamicProperty(PROP_CARGA_TICK, undefined);
+  }
 
-  // Consome o registro para não reaproveitar numa colocação seguinte
-  player.setDynamicProperty(PROP_CARGA_NA_MAO, undefined);
-  player.setDynamicProperty(PROP_CARGA_TICK, undefined);
+  if (carga === undefined) return undefined;
+  if (system.currentTick - tick > VALIDADE) return undefined;
 
-  return carga;
+  return Math.max(0, carga);
 }

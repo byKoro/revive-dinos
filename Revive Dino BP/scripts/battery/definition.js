@@ -70,7 +70,11 @@ export const batteryDef = {
    */
   onPlaced: (entity, block) => {
     const doJogador = consumirCargaPendente(block.dimension, block.location);
-    const carga = doJogador > 0 ? doJogador : lerEspelho(block.location);
+
+    // Um valor vindo da mão SEMPRE vence — inclusive 0. Só quando não há
+    // registro nenhum é que o espelho da posição entra, senão uma bateria
+    // vazia colocada onde havia uma carregada herdaria a energia antiga.
+    const carga = doJogador !== undefined ? doJogador : lerEspelho(block.location);
 
     entity.setDynamicProperty(PROP_ENTITY_CHARGE, carga);
     gravarEspelho(block.location, carga);
