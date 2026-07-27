@@ -20,7 +20,7 @@ const CONNECTABLE = new Set([
   EXTRACTOR_BLOCK_ID,
   "revive_dinos:biomass_synthesizer",
   "revive_dinos:gene_sequencer",
-  // Futuramente: INCUBATOR_BLOCK_ID
+  "revive_dinos:incubator",
 ]);
 
 /**

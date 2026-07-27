@@ -29,6 +29,7 @@ import { generatorDef } from "./generator/definition";
 import { batteryDef } from "./battery/definition";
 import { synthesizerDef } from "./synthesizer/definition";
 import { sequencerDef } from "./sequencer/definition";
+import { incubatorDef } from "./incubator/definition";
 
 import { energyCableComponent } from "./energy/cable";
 import { registrarTransferenciaDeBateria } from "./battery/transfer";
@@ -41,6 +42,7 @@ registrarMaquina(generatorDef);
 registrarMaquina(batteryDef);
 registrarMaquina(synthesizerDef);
 registrarMaquina(sequencerDef);
+registrarMaquina(incubatorDef);
 
 // ---------------------------------------------------------------------------
 // Custom components (V2)
@@ -53,6 +55,7 @@ system.beforeEvents.startup.subscribe(({ blockComponentRegistry }) => {
   reg.registerCustomComponent(batteryDef.componentId, makeMachineComponent(batteryDef));
   reg.registerCustomComponent(synthesizerDef.componentId, makeMachineComponent(synthesizerDef));
   reg.registerCustomComponent(sequencerDef.componentId, makeMachineComponent(sequencerDef));
+  reg.registerCustomComponent(incubatorDef.componentId, makeMachineComponent(incubatorDef));
   reg.registerCustomComponent(COMPONENT_UI_PLACEHOLDER, uiPlaceholderComponent);
   reg.registerCustomComponent(COMPONENT_ENERGY_CABLE, energyCableComponent);
   reg.registerCustomComponent(COMPONENT_FOSSIL_ROCK, fossilRockComponent);

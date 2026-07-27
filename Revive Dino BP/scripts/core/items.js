@@ -30,6 +30,22 @@ export function consumirUm(container, slot) {
 }
 
 /**
+ * Remove `quantidade` unidades do slot. Se zerar, o slot fica vazio.
+ * Retorna false (sem alterar nada) se não havia o suficiente.
+ */
+export function consumirVarios(container, slot, quantidade) {
+  const item = container.getItem(slot);
+  if (!item || item.amount < quantidade) return false;
+  container.setItem(
+    slot,
+    item.amount > quantidade
+      ? criarItem(item.typeId, item.amount - quantidade)
+      : undefined,
+  );
+  return true;
+}
+
+/**
  * True se `item` pode receber mais `quantidade` unidades sem passar do
  * tamanho máximo da pilha.
  */

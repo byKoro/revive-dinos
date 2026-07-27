@@ -60,6 +60,15 @@
     },
     "gene_sequencer_front": {
       "textures": "textures/blocks/machines/gene_sequencer_front"
+    },
+    "incubator_side": {
+      "textures": "textures/blocks/machines/incubator_side"
+    },
+    "incubator_top": {
+      "textures": "textures/blocks/machines/incubator_top"
+    },
+    "incubator_front": {
+      "textures": "textures/blocks/machines/incubator_front"
     }
   }
 }
