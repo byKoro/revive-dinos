@@ -1,0 +1,37 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "revive_dinos:combustion_generator"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "pattern": [
+      "ICI",
+      "CFC",
+      "IBI"
+    ],
+    "key": {
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "C": {
+        "item": "revive_dinos:copper_coil"
+      },
+      "F": {
+        "item": "minecraft:furnace"
+      },
+      "B": {
+        "item": "revive_dinos:circuit_board"
+      }
+    },
+    "result": {
+      "item": "revive_dinos:combustion_generator",
+      "count": 1
+    }
+  }
+}

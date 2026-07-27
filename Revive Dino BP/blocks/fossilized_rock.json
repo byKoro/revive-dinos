@@ -7,14 +7,44 @@
         "category": "nature"
       },
       "states": {
-        "revive_dinos:stage": [0, 1, 2, 3],
-        "revive_dinos:target_face": [0, 1, 2, 3, 4, 5],
-        "revive_dinos:used_0": [false, true],
-        "revive_dinos:used_1": [false, true],
-        "revive_dinos:used_2": [false, true],
-        "revive_dinos:used_3": [false, true],
-        "revive_dinos:used_4": [false, true],
-        "revive_dinos:used_5": [false, true]
+        "revive_dinos:stage": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "revive_dinos:target_face": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "revive_dinos:used_0": [
+          false,
+          true
+        ],
+        "revive_dinos:used_1": [
+          false,
+          true
+        ],
+        "revive_dinos:used_2": [
+          false,
+          true
+        ],
+        "revive_dinos:used_3": [
+          false,
+          true
+        ],
+        "revive_dinos:used_4": [
+          false,
+          true
+        ],
+        "revive_dinos:used_5": [
+          false,
+          true
+        ]
       }
     },
     "components": {
@@ -30,6 +60,9 @@
           "texture": "fossil_rock_base",
           "render_method": "opaque"
         }
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
       }
     },
     "permutations": [

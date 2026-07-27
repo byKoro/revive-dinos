@@ -1,0 +1,40 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "revive_dinos:incubator"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "pattern": [
+      "GEG",
+      "BRB",
+      "IEI"
+    ],
+    "key": {
+      "G": {
+        "item": "minecraft:glass"
+      },
+      "E": {
+        "item": "revive_dinos:energy_cell"
+      },
+      "B": {
+        "item": "revive_dinos:circuit_board"
+      },
+      "R": {
+        "item": "minecraft:blaze_rod"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "revive_dinos:incubator",
+      "count": 1
+    }
+  }
+}

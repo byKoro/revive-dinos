@@ -1,10 +1,15 @@
 /**
- * extractorConfig.js
+ * extractor/config.js
  * ---------------------------------------------------------------------------
  * Arquivo de configuração do Extrator Genético.
  * Receitas, tempos, layout de slots e as tabelas de sorteio do DNA.
+ *
+ * É o único arquivo que precisa ser editado para adicionar espécie, receita
+ * ou rebalancear pesos — a lógica que consome isso vive em processing.js.
  * ---------------------------------------------------------------------------
  */
+
+import { indicePorPeso } from "../core/random";
 
 // ---------------------------------------------------------------------------
 // LAYOUT DA INTERFACE
@@ -117,18 +122,6 @@ export function lerFossil(typeId) {
   return { tipo, qualidade };
 }
 
-function sortearPorPeso(pesos) {
-  const total = pesos.reduce((soma, p) => soma + p, 0);
-  if (total <= 0) return undefined;
-
-  let sorte = Math.random() * total;
-  for (let i = 0; i < pesos.length; i++) {
-    sorte -= pesos[i];
-    if (sorte <= 0) return i;
-  }
-  return pesos.length - 1;
-}
-
 /**
  * Sorteia o DNA a partir do fóssil de entrada, combinando o peso do tipo
  * com o multiplicador da faixa de qualidade.
@@ -141,7 +134,7 @@ function dnaDoFossil(itemFossil) {
   const mult = qualidades[info.qualidade];
   const pesos = base.map((p, i) => p * mult[i]);
 
-  const escolhida = sortearPorPeso(pesos);
+  const escolhida = indicePorPeso(pesos);
   if (escolhida === undefined) return undefined;
 
   return { item: especies[escolhida].id, amount: 1 };
@@ -167,7 +160,7 @@ export function pickOutput(recipe, itemA) {
   if (out.item) return { item: out.item, amount: out.amount ?? 1 };
 
   const pool = out.random ?? [];
-  const escolhido = sortearPorPeso(pool.map((e) => e.weight ?? 1));
+  const escolhido = indicePorPeso(pool.map((e) => e.weight ?? 1));
   if (escolhido === undefined) return undefined;
 
   const entry = pool[escolhido];

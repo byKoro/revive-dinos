@@ -1,0 +1,37 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "revive_dinos:replication_enzyme"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "NBN",
+      "BTE",
+      "NBN"
+    ],
+    "key": {
+      "N": {
+        "item": "minecraft:nether_wart"
+      },
+      "B": {
+        "item": "minecraft:blaze_powder"
+      },
+      "T": {
+        "item": "revive_dinos:test_tube"
+      },
+      "E": {
+        "item": "minecraft:glass_bottle"
+      }
+    },
+    "result": {
+      "item": "revive_dinos:replication_enzyme",
+      "count": 1
+    },
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    }
+  }
+}

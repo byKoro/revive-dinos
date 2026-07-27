@@ -1,0 +1,1956 @@
+{
+  "format_version": "1.21.100",
+  "minecraft:block": {
+    "description": {
+      "identifier": "revive_dinos:energy_cable",
+      "menu_category": {
+        "category": "construction"
+      },
+      "states": {
+        "revive_dinos:connected_north": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_south": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_east": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_west": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_up": [
+          false,
+          true
+        ],
+        "revive_dinos:connected_down": [
+          false,
+          true
+        ]
+      }
+    },
+    "components": {
+      "revive_dinos:cable_connector": {},
+      "minecraft:display_name": "tile.revive_dinos:energy_cable.name",
+      "minecraft:geometry": {
+        "identifier": "geometry.energy_cable",
+        "bone_visibility": {
+          "north": "q.block_state('revive_dinos:connected_north')",
+          "south": "q.block_state('revive_dinos:connected_south')",
+          "east": "q.block_state('revive_dinos:connected_east')",
+          "west": "q.block_state('revive_dinos:connected_west')",
+          "up": "q.block_state('revive_dinos:connected_up')",
+          "down": "q.block_state('revive_dinos:connected_down')"
+        }
+      },
+      "minecraft:material_instances": {
+        "*": {
+          "texture": "energy_cable",
+          "render_method": "alpha_test"
+        }
+      },
+      "minecraft:collision_box": {
+        "origin": [
+          -2,
+          6,
+          -2
+        ],
+        "size": [
+          4,
+          4,
+          4
+        ]
+      },
+      "minecraft:selection_box": {
+        "origin": [
+          -2,
+          6,
+          -2
+        ],
+        "size": [
+          4,
+          4,
+          4
+        ]
+      },
+      "minecraft:destructible_by_mining": {
+        "seconds_to_destroy": 0.3
+      },
+      "minecraft:destructible_by_explosion": {
+        "explosion_resistance": 5
+      },
+      "minecraft:map_color": "#FFD700",
+      "minecraft:tick": {
+        "interval_range": [
+          10,
+          10
+        ]
+      },
+      "minecraft:movable": {
+        "movement_type": "immovable"
+      }
+    },
+    "permutations": [
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              4,
+              4,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              4,
+              4,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              4,
+              10,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              4,
+              10,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              4,
+              10,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              4,
+              10,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              4,
+              16,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              4,
+              16,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              4,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              4,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              16,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              16,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              4,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              4,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              16,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              16,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              16,
+              4,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              16,
+              4,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              16,
+              10,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              16,
+              10,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              16,
+              10,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              16,
+              10,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              16,
+              16,
+              4
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              16,
+              16,
+              4
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              4,
+              4,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              4,
+              4,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              4,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              4,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              4,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              4,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              4,
+              16,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              4,
+              16,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              4,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              4,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              16,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              16,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              4,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              4,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              16,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              10,
+              16,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              16,
+              4,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              16,
+              4,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              16,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              16,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              16,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -2
+            ],
+            "size": [
+              16,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "!q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              16,
+              16,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -2
+            ],
+            "size": [
+              16,
+              16,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              4,
+              4,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              4,
+              4,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              4,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              4,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              4,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              4,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              4,
+              16,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              4,
+              16,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              4,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              4,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              16,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              16,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              4,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              4,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              16,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              16,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              16,
+              4,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              16,
+              4,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              16,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              16,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              16,
+              10,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              16,
+              10,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && !q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              16,
+              16,
+              10
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              16,
+              16,
+              10
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              4,
+              4,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              4,
+              4,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              4,
+              10,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              4,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              4,
+              10,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              4,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              4,
+              16,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              4,
+              16,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              4,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              4,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && !q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              16,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -2,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              16,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              4,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              4,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              10,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && !q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              16,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              10,
+              16,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              16,
+              4,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              16,
+              4,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && !q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              16,
+              10,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              16,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && !q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              16,
+              10,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              6,
+              -8
+            ],
+            "size": [
+              16,
+              10,
+              16
+            ]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:connected_north') && q.block_state('revive_dinos:connected_south') && q.block_state('revive_dinos:connected_east') && q.block_state('revive_dinos:connected_west') && q.block_state('revive_dinos:connected_up') && q.block_state('revive_dinos:connected_down')",
+        "components": {
+          "minecraft:collision_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              16,
+              16,
+              16
+            ]
+          },
+          "minecraft:selection_box": {
+            "origin": [
+              -8,
+              0,
+              -8
+            ],
+            "size": [
+              16,
+              16,
+              16
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

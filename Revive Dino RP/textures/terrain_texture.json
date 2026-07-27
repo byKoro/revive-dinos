@@ -24,6 +24,51 @@
     },
     "fossil_rock_highlight": {
       "textures": "textures/blocks/fossil_rock_highlight"
+    },
+    "energy_cable": {
+      "textures": "textures/blocks/energy/energy_cable"
+    },
+    "combustion_generator_side": {
+      "textures": "textures/blocks/energy/combustion_generator_side"
+    },
+    "combustion_generator_top": {
+      "textures": "textures/blocks/energy/combustion_generator_top"
+    },
+    "combustion_generator_front": {
+      "textures": "textures/blocks/energy/combustion_generator_front"
+    },
+    "battery_side": {
+      "textures": "textures/blocks/energy/battery_side"
+    },
+    "battery_top": {
+      "textures": "textures/blocks/energy/battery_top"
+    },
+    "biomass_synthesizer_side": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_side"
+    },
+    "biomass_synthesizer_top": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_top"
+    },
+    "biomass_synthesizer_front": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_front"
+    },
+    "gene_sequencer_side": {
+      "textures": "textures/blocks/machines/gene_sequencer_side"
+    },
+    "gene_sequencer_top": {
+      "textures": "textures/blocks/machines/gene_sequencer_top"
+    },
+    "gene_sequencer_front": {
+      "textures": "textures/blocks/machines/gene_sequencer_front"
+    },
+    "incubator_side": {
+      "textures": "textures/blocks/machines/incubator_side"
+    },
+    "incubator_top": {
+      "textures": "textures/blocks/machines/incubator_top"
+    },
+    "incubator_front": {
+      "textures": "textures/blocks/machines/incubator_front"
     }
   }
 }

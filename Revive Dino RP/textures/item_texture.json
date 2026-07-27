@@ -107,17 +107,59 @@
     "revive_dinos_test_tube": {
       "textures": "textures/revive_dinos/items/test_tube"
     },
-    "revive_dinos_genetic_material": {
-      "textures": "textures/revive_dinos/items/genetic_material"
-    },
-    "revive_dinos_fossil_femur": {
-      "textures": "textures/revive_dinos/items/fossil_femur"
-    },
     "revive_dinos_placeholder_invisible": {
       "textures": "textures/revive_dinos/items/placeholder_invisible"
     },
     "revive_dinos_hammer": {
       "textures": "textures/revive_dinos/items/hammer"
+    },
+    "revive_dinos_copper_coil": {
+      "textures": "textures/revive_dinos/items/copper_coil"
+    },
+    "revive_dinos_circuit_board": {
+      "textures": "textures/revive_dinos/items/circuit_board"
+    },
+    "revive_dinos_energy_cell": {
+      "textures": "textures/revive_dinos/items/energy_cell"
+    },
+    "revive_dinos_carvite": {
+      "textures": "textures/revive_dinos/items/carvite"
+    },
+    "revive_dinos_replication_enzyme": {
+      "textures": "textures/revive_dinos/items/replication_enzyme"
+    },
+    "revive_dinos_biomass": {
+      "textures": "textures/revive_dinos/items/biomass"
+    },
+    "revive_dinos_complete_dna_dodo": {
+      "textures": "textures/revive_dinos/items/complete_dna_dodo"
+    },
+    "revive_dinos_egg_dodo": {
+      "textures": "textures/revive_dinos/items/egg_dodo"
+    },
+    "revive_dinos_complete_dna_triceratops": {
+      "textures": "textures/revive_dinos/items/complete_dna_triceratops"
+    },
+    "revive_dinos_egg_triceratops": {
+      "textures": "textures/revive_dinos/items/egg_triceratops"
+    },
+    "revive_dinos_complete_dna_pterodactyl": {
+      "textures": "textures/revive_dinos/items/complete_dna_pterodactyl"
+    },
+    "revive_dinos_egg_pterodactyl": {
+      "textures": "textures/revive_dinos/items/egg_pterodactyl"
+    },
+    "revive_dinos_complete_dna_velociraptor": {
+      "textures": "textures/revive_dinos/items/complete_dna_velociraptor"
+    },
+    "revive_dinos_egg_velociraptor": {
+      "textures": "textures/revive_dinos/items/egg_velociraptor"
+    },
+    "revive_dinos_complete_dna_trex": {
+      "textures": "textures/revive_dinos/items/complete_dna_trex"
+    },
+    "revive_dinos_egg_trex": {
+      "textures": "textures/revive_dinos/items/egg_trex"
     }
   }
 }

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "revive_dinos:energy_cable"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "pattern": [
+      "   ",
+      "CCC",
+      "   "
+    ],
+    "key": {
+      "C": {
+        "item": "revive_dinos:copper_coil"
+      }
+    },
+    "result": {
+      "item": "revive_dinos:energy_cable",
+      "count": 8
+    }
+  }
+}
