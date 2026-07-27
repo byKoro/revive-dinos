@@ -66,12 +66,13 @@ export function registrarHopper() {
  * Se a definicao tem `hopperRouting`, usa o mapa de direcao->slot.
  * Senao, cai no routeIngredient generico (roteia pelo tipo do item).
  */
-function resolverDestino(item, def, direction) {
+function resolverDestino(item, def, direction, inv) {
   if (def.hopperRouting) {
     const slot = def.hopperRouting[direction];
     return slot !== undefined ? slot : undefined;
   }
-  return def.routeIngredient?.(item, def);
+  // `inv` permite roteamento dinâmico (ex.: primeiro slot de DNA livre)
+  return def.routeIngredient?.(item, def, inv);
 }
 
 function inserirDoFunil(funil, inv, def, direction) {
@@ -81,7 +82,7 @@ function inserirDoFunil(funil, inv, def, direction) {
   for (let slot = 0; slot < funilInv.size; slot++) {
     const item = funilInv.getItem(slot);
     if (!item) continue;
-    const destino = resolverDestino(item, def, direction);
+    const destino = resolverDestino(item, def, direction, inv);
     if (destino === undefined) continue;
 
     const atual = inv.getItem(destino);

@@ -1,0 +1,40 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "revive_dinos:gene_sequencer"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "pattern": [
+      "GBG",
+      "EDE",
+      "IBI"
+    ],
+    "key": {
+      "G": {
+        "item": "minecraft:glass"
+      },
+      "B": {
+        "item": "revive_dinos:circuit_board"
+      },
+      "E": {
+        "item": "revive_dinos:energy_cell"
+      },
+      "D": {
+        "item": "minecraft:diamond"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "revive_dinos:gene_sequencer",
+      "count": 1
+    }
+  }
+}

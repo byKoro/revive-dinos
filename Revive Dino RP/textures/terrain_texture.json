@@ -51,6 +51,15 @@
     },
     "biomass_synthesizer_front": {
       "textures": "textures/blocks/machines/biomass_synthesizer_front"
+    },
+    "gene_sequencer_side": {
+      "textures": "textures/blocks/machines/gene_sequencer_side"
+    },
+    "gene_sequencer_top": {
+      "textures": "textures/blocks/machines/gene_sequencer_top"
+    },
+    "gene_sequencer_front": {
+      "textures": "textures/blocks/machines/gene_sequencer_front"
     }
   }
 }

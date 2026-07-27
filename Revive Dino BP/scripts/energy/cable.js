@@ -19,7 +19,8 @@ const CONNECTABLE = new Set([
   ...ENERGY_NETWORK_BLOCKS,
   EXTRACTOR_BLOCK_ID,
   "revive_dinos:biomass_synthesizer",
-  // Futuramente: SEQUENCER_BLOCK_ID, INCUBATOR_BLOCK_ID
+  "revive_dinos:gene_sequencer",
+  // Futuramente: INCUBATOR_BLOCK_ID
 ]);
 
 /**

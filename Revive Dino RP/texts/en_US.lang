@@ -60,3 +60,4 @@ tile.revive_dinos:energy_cable.name=Energy Cable
 tile.revive_dinos:combustion_generator.name=Combustion Generator
 tile.revive_dinos:battery.name=Energy Battery
 tile.revive_dinos:biomass_synthesizer.name=Biomass Synthesizer
+tile.revive_dinos:gene_sequencer.name=Gene Sequencer
