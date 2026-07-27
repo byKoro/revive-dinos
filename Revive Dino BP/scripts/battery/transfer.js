@@ -3,41 +3,60 @@
  * ---------------------------------------------------------------------------
  * Ponte entre o item de bateria e o bloco colocado.
  *
- * Problema: o gancho onPlace do bloco não recebe o item que foi usado, e no
- * momento em que ele roda o item já saiu da mão. Solução: capturar a carga
- * ANTES da colocação (no interact) e guardá-la por jogador; o onPlaced então
- * consome essa carga pendente.
+ * Problema: o gancho `onPlace` do bloco não recebe o item usado, e quando ele
+ * roda o item já saiu da mão. Precisamos saber a carga ANTES da colocação.
+ *
+ * Por que não usar um evento de colocação:
+ *  - `playerInteractWithBlock` não dispara de forma confiável para colocação
+ *    de bloco (é o que fazia a carga voltar sempre zerada).
+ *  - `playerPlaceBlock` (before) ainda é experimental, então não serve para
+ *    um addon estável.
+ *
+ * Solução: vigiar a mão do jogador por polling. Se ele está segurando uma
+ * bateria com carga, guardamos esse valor; ao colocar, o `onPlaced` consome.
+ * O registro tem validade curta, então não "vaza" para uma colocação futura.
  * ---------------------------------------------------------------------------
  */
 
-import { world } from "@minecraft/server";
+import { system, world } from "@minecraft/server";
 import { BATTERY_BLOCK_ID } from "../energy/constants";
 import { cargaDaLore } from "./charge";
 
 /** playerId -> { carga, tick } */
 const pendentes = new Map();
 
-/** Descarta captura antiga (o jogador desistiu de colocar). */
-const VALIDADE_TICKS = 40;
+/** De quantos em quantos ticks a mão é verificada. */
+const INTERVALO = 5;
+
+/** Por quantos ticks um registro continua válido depois de visto. */
+const VALIDADE = 40;
+
+function maoDoJogador(player) {
+  return player.getComponent("minecraft:equippable")?.getEquipmentSlot("Mainhand")?.getItem();
+}
 
 export function registrarTransferenciaDeBateria() {
-  world.beforeEvents.playerInteractWithBlock.subscribe((ev) => {
-    const item = ev.itemStack;
-    if (item?.typeId !== BATTERY_BLOCK_ID) return;
+  system.runInterval(() => {
+    const agora = system.currentTick;
 
-    const carga = cargaDaLore(item);
-    if (carga > 0) {
-      pendentes.set(ev.player.id, {
-        carga,
-        tick: world.getAbsoluteTime(),
-      });
+    for (const player of world.getPlayers()) {
+      const item = maoDoJogador(player);
+      if (item?.typeId !== BATTERY_BLOCK_ID) continue;
+
+      const carga = cargaDaLore(item);
+      if (carga > 0) pendentes.set(player.id, { carga, tick: agora });
     }
-  });
+
+    // Limpa registros velhos para a memória não crescer
+    for (const [id, pend] of pendentes) {
+      if (agora - pend.tick > VALIDADE) pendentes.delete(id);
+    }
+  }, INTERVALO);
 }
 
 /**
- * Consome a carga que o jogador mais próximo tinha capturada. Retorna 0 se
- * não houver nada pendente (bateria nova, ou colocada sem carga).
+ * Consome a carga registrada do jogador mais próximo. Retorna 0 se não houver
+ * nada pendente (bateria nova, ou colocada sem carga).
  */
 export function consumirCargaPendente(dimension, location) {
   const player = dimension.getPlayers({
@@ -52,8 +71,8 @@ export function consumirCargaPendente(dimension, location) {
 
   pendentes.delete(player.id);
 
-  // Captura velha demais: ignora (não era desta colocação)
-  if (world.getAbsoluteTime() - pend.tick > VALIDADE_TICKS) return 0;
+  // Registro velho demais: não era desta colocação
+  if (system.currentTick - pend.tick > VALIDADE) return 0;
 
   return pend.carga;
 }

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.20.10",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "revive_dinos:test_tube"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "unlock": {
+      "context": "AlwaysUnlocked"
+    },
+    "pattern": [
+      " G ",
+      "G G",
+      " G "
+    ],
+    "key": {
+      "G": {
+        "item": "minecraft:glass"
+      }
+    },
+    "result": {
+      "item": "revive_dinos:test_tube",
+      "count": 3
+    }
+  }
+}

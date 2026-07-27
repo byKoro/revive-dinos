@@ -37,10 +37,9 @@ item.revive_dinos:dna_triceratops.name=Incomplete Triceratops DNA
 item.revive_dinos:dna_pterodactyl.name=Incomplete Pterodactyl DNA
 item.revive_dinos:dna_velociraptor.name=Incomplete Velociraptor DNA
 item.revive_dinos:dna_trex.name=Incomplete T-Rex DNA
-
 item.revive_dinos:hammer.name=Excavation Hammer
-
-tile.revive_dinos:fossilized_rock.name=Fossilized Rockitem.revive_dinos:copper_coil.name=Copper Coil
+tile.revive_dinos:fossilized_rock.name=Fossilized Rock
+item.revive_dinos:copper_coil.name=Copper Coil
 item.revive_dinos:circuit_board.name=Circuit Board
 item.revive_dinos:energy_cell.name=Energy Cell
 item.revive_dinos:carvite.name=Carvite
