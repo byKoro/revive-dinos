@@ -33,11 +33,18 @@ export const generatorDef = {
     inputs: [GENERATOR_FUEL_SLOT],
     outputs: [],
     outputSlot: undefined,
-    backgroundSlots: [],
+
+    backgroundSlots: [9, 17],
+    uiBackgroundId: "revive_dinos:combustion_generator_ui",
+
+    // Chama logo abaixo do slot de combustível, enchendo de baixo para cima
     progressSlot: null,
-    uiBackgroundId: null,
     uiProgressId: null,
-    progressFrames: 0,
+    overlaySlots: [
+      { slot: 22, idPrefix: "revive_dinos:combustion_generator_ui_flame" },
+    ],
+    progressFrames: 16,
+
     placeholderItem: PLACEHOLDER_ITEM_ID,
   },
   processTick: tickGenerator,

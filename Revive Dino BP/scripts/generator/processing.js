@@ -17,10 +17,11 @@ import {
   GENERATOR_MAX_CHARGE,
   PROP_ENTITY_CHARGE,
   PROP_ENTITY_FUEL,
+  PROP_ENTITY_FUEL_MAX,
   PROP_ENTITY_RATE,
 } from "../energy/constants";
 import { infoCombustivel } from "../energy/fuel";
-import { limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
+import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
 
 export function tickGenerator(entity, def) {
   const inv = inventarioDe(entity);
@@ -42,6 +43,8 @@ export function tickGenerator(entity, def) {
       fuel = info.ticks;
       rate = info.rate;
       entity.setDynamicProperty(PROP_ENTITY_RATE, rate);
+      // Guarda o total para a chama saber a altura proporcional
+      entity.setDynamicProperty(PROP_ENTITY_FUEL_MAX, info.ticks);
     }
   }
 
@@ -52,4 +55,24 @@ export function tickGenerator(entity, def) {
     entity.setDynamicProperty(PROP_ENTITY_CHARGE, charge);
     entity.setDynamicProperty(PROP_ENTITY_FUEL, fuel);
   }
+
+  desenharChama(def, entity, inv, fuel);
+}
+
+/**
+ * Altura da chama = combustível restante, como na fornalha: cheia ao acender e
+ * baixando conforme queima. Sem combustível, apaga.
+ */
+function desenharChama(def, entity, inv, fuel) {
+  const frames = def.layout.progressFrames;
+  if (!frames) return;
+
+  if (fuel <= 0) {
+    aplicarFrame(def, entity, inv, 0, PROP_FRAME);
+    return;
+  }
+
+  const total = entity.getDynamicProperty(PROP_ENTITY_FUEL_MAX) ?? fuel;
+  const fracao = Math.min(1, Math.max(0, fuel / Math.max(1, total)));
+  aplicarFrame(def, entity, inv, Math.max(1, Math.ceil(fracao * frames)), PROP_FRAME);
 }

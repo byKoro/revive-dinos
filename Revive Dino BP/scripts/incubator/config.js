@@ -20,11 +20,13 @@ export const layout = {
   output: 15, // ovo
 
   backgroundSlots: [9, 17],
-  progressSlot: 26,
+  uiBackgroundId: "revive_dinos:incubator_ui",
 
-  uiBackgroundId: "revive_dinos:genetic_extractor_ui",
-  uiProgressId: "revive_dinos:genetic_extractor_ui_progress",
-  progressFrames: 19,
+  // Barra vertical (enche de baixo para cima) logo abaixo do slot do DNA
+  progressSlot: null,
+  uiProgressId: null,
+  overlaySlots: [{ slot: 11, idPrefix: "revive_dinos:incubator_ui_bar" }],
+  progressFrames: 16,
 
   placeholderItem: "revive_dinos:placeholder_invisible",
 };

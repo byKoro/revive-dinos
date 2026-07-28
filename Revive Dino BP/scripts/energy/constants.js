@@ -17,8 +17,11 @@ export const COMPONENT_GENERATOR = "revive_dinos:generator_machine";
 /** Entidade-container do gerador (mesma arquitetura do extrator). */
 export const GENERATOR_UI_ENTITY_ID = "revive_dinos:combustion_generator_ui";
 
-/** Slot de combustível dentro do container do gerador. */
-export const GENERATOR_FUEL_SLOT = 2;
+/** Slot de combustível: centro exato da grade 3x9. */
+export const GENERATOR_FUEL_SLOT = 13;
+
+/** Ticks totais do combustível que está queimando (para a altura da chama). */
+export const PROP_ENTITY_FUEL_MAX = "revive_dinos:e_fuel_max";
 
 /** Dynamic properties guardadas NA ENTIDADE da fonte de energia. */
 export const PROP_ENTITY_CHARGE = "revive_dinos:e_charge";

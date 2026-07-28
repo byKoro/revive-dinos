@@ -235,5 +235,333 @@
   "revive_dinos:battery_ui_fill_right_16": {
     "sound": "stone",
     "textures": "revive_dinos_battery_ui"
+  },
+  "revive_dinos:combustion_generator_ui_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_0": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_1": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_2": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_3": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_4": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_5": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_6": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_7": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_8": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_10": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_11": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_12": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_13": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_14": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_15": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:combustion_generator_ui_flame_16": {
+    "sound": "stone",
+    "textures": "revive_dinos_combustion_generator_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_0": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_1": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_2": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_3": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_4": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_5": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_6": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_7": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_8": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_10": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_11": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_12": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_13": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_14": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_15": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_16": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_18": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:biomass_synthesizer_ui_progress_19": {
+    "sound": "stone",
+    "textures": "revive_dinos_biomass_synthesizer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_0": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_1": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_2": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_3": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_4": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_5": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_6": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_7": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_8": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_10": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_11": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_12": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_13": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_14": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_15": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_16": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_18": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:gene_sequencer_ui_progress_19": {
+    "sound": "stone",
+    "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:incubator_ui_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_0": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_1": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_2": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_3": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_4": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_5": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_6": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_7": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_8": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_9": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_10": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_11": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_12": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_13": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_14": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_15": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_16": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
   }
 }

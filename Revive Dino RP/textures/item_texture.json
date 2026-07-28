@@ -163,6 +163,18 @@
     },
     "revive_dinos_battery_ui": {
       "textures": "textures/revive_dinos/ui/battery_ui"
+    },
+    "revive_dinos_combustion_generator_ui": {
+      "textures": "textures/revive_dinos/ui/combustion_generator_ui"
+    },
+    "revive_dinos_biomass_synthesizer_ui": {
+      "textures": "textures/revive_dinos/ui/biomass_synthesizer_ui"
+    },
+    "revive_dinos_gene_sequencer_ui": {
+      "textures": "textures/revive_dinos/ui/gene_sequencer_ui"
+    },
+    "revive_dinos_incubator_ui": {
+      "textures": "textures/revive_dinos/ui/incubator_ui"
     }
   }
 }
