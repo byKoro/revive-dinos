@@ -168,22 +168,6 @@
     "sound": "stone",
     "textures": "revive_dinos_battery_ui"
   },
-  "revive_dinos:battery_ui_fill_left_17": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
-  "revive_dinos:battery_ui_fill_left_18": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
-  "revive_dinos:battery_ui_fill_left_19": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
-  "revive_dinos:battery_ui_fill_left_20": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
   "revive_dinos:battery_ui_fill_right_0": {
     "sound": "stone",
     "textures": "revive_dinos_battery_ui"
@@ -249,22 +233,6 @@
     "textures": "revive_dinos_battery_ui"
   },
   "revive_dinos:battery_ui_fill_right_16": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
-  "revive_dinos:battery_ui_fill_right_17": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
-  "revive_dinos:battery_ui_fill_right_18": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
-  "revive_dinos:battery_ui_fill_right_19": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
-  "revive_dinos:battery_ui_fill_right_20": {
     "sound": "stone",
     "textures": "revive_dinos_battery_ui"
   }

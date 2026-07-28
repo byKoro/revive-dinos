@@ -22,7 +22,11 @@ import { registrarMaquina } from "./machine/registry";
 import { makeMachineComponent, uiPlaceholderComponent } from "./machine/component";
 import { registrarSelecaoFalsa } from "./machine/selection";
 import { registrarHopper } from "./machine/hopper";
-import { registrarLimpezaAoEntrar, registrarRemocaoPorDestruicao } from "./machine/events";
+import {
+  registrarLimpezaAoEntrar,
+  registrarRemocaoPorDestruicao,
+  registrarResetDeSelecaoAoEntrar,
+} from "./machine/events";
 
 import { extractorDef } from "./extractor/definition";
 import { generatorDef } from "./generator/definition";
@@ -68,5 +72,6 @@ registrarSelecaoFalsa();
 registrarHopper();
 registrarRemocaoPorDestruicao();
 registrarLimpezaAoEntrar();
+registrarResetDeSelecaoAoEntrar();
 registrarTransferenciaDeBateria();
 registrarMinigameDaRocha();

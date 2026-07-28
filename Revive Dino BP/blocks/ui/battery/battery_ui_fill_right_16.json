@@ -43,11 +43,7 @@
           "fill_13": "q.block_state('revive_dinos:progress') >= 13",
           "fill_14": "q.block_state('revive_dinos:progress') >= 14",
           "fill_15": "q.block_state('revive_dinos:progress') >= 15",
-          "fill_16": "q.block_state('revive_dinos:progress') >= 16",
-          "fill_17": "q.block_state('revive_dinos:progress') >= 17",
-          "fill_18": "q.block_state('revive_dinos:progress') >= 18",
-          "fill_19": "q.block_state('revive_dinos:progress') >= 19",
-          "fill_20": "q.block_state('revive_dinos:progress') >= 20"
+          "fill_16": "q.block_state('revive_dinos:progress') >= 16"
         }
       },
       "minecraft:collision_box": false,

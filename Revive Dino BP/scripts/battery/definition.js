@@ -25,8 +25,12 @@ import { consumirCargaPendente, registrarCargaDoJogador } from "./transfer";
 export const BATTERY_UI_ENTITY_ID = "revive_dinos:battery_ui";
 export const COMPONENT_BATTERY = "revive_dinos:battery_machine";
 
-/** Fatias da animação de preenchimento (por metade da UI). */
-export const BATTERY_UI_FRAMES = 20;
+/**
+ * Fatias da animação de preenchimento (por metade da UI).
+ * Precisa bater com a quantidade de bones `fill_*` em
+ * `models/blocks/ui/battery_ui.geo.json` — se mudar lá, mude aqui.
+ */
+export const BATTERY_UI_FRAMES = 16;
 
 /** Guarda a carga do tick anterior para calcular a variação exibida. */
 const PROP_ULTIMA_CARGA = "revive_dinos:last_charge";

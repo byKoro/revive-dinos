@@ -81,3 +81,20 @@ function desativar(entity, block) {
   block.setPermutation(block.permutation.withState(STATE_FAKE_SELECTION, false));
   entity.teleport(block.center());
 }
+
+/**
+ * Solta a seleção falsa de uma máquina, deixando o bloco imediatamente
+ * quebrável. Usado ao entrar no mundo: tanto o state `fake_selection` quanto a
+ * colisão da entidade persistem entre sessões, e enquanto isso vale o raycast
+ * acerta a entidade em vez do bloco — era por isso que, ao voltar ao mundo,
+ * agachar não surtia efeito até o entity_sensor disparar segundos depois.
+ */
+export function liberarSelecaoFalsa(entity, block) {
+  if (entity?.isValid !== true || !block) return;
+  if (block.permutation.getState(STATE_FAKE_SELECTION) !== true) {
+    // Mesmo sem o state, garante que a colisão não ficou presa ligada
+    entity.triggerEvent(EVENT_REMOVE_COLLISION);
+    return;
+  }
+  desativar(entity, block);
+}
