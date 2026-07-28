@@ -15,7 +15,7 @@ export const BIOMASS_ITEM_ID = "revive_dinos:biomass";
 
 /** Layout do container (a arte da UI virá depois; por ora só os slots). */
 export const layout = {
-  input: 2, // matéria orgânica
+  input: 11, // matéria orgânica
   output: 15, // biomassa
   placeholderItem: "revive_dinos:placeholder_invisible",
 };
