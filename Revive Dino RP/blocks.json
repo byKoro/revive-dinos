@@ -164,10 +164,6 @@
     "sound": "stone",
     "textures": "revive_dinos_battery_ui"
   },
-  "revive_dinos:battery_ui_fill_left_16": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
   "revive_dinos:battery_ui_fill_right_0": {
     "sound": "stone",
     "textures": "revive_dinos_battery_ui"
@@ -229,10 +225,6 @@
     "textures": "revive_dinos_battery_ui"
   },
   "revive_dinos:battery_ui_fill_right_15": {
-    "sound": "stone",
-    "textures": "revive_dinos_battery_ui"
-  },
-  "revive_dinos:battery_ui_fill_right_16": {
     "sound": "stone",
     "textures": "revive_dinos_battery_ui"
   },

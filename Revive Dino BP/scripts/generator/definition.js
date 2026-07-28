@@ -22,7 +22,8 @@ import {
   PROP_ENTITY_RATE,
 } from "../energy/constants";
 import { infoCombustivel } from "../energy/fuel";
-import { tickGenerator } from "./processing";
+import { limparCampos, restaurarNaEntidade } from "../machine/state";
+import { CAMPOS_GERADOR, tickGenerator } from "./processing";
 
 export const generatorDef = {
   id: "generator",
@@ -51,6 +52,23 @@ export const generatorDef = {
   // Funil só insere combustível, e só no slot de combustível
   routeIngredient: (item) =>
     infoCombustivel(item?.typeId) ? GENERATOR_FUEL_SLOT : undefined,
+
+  /**
+   * O estado do gerador pertence ao BLOCO (ver machine/state.js): ao recolocar
+   * ou quando a entidade é recriada, a carga e o combustível voltam.
+   */
+  onPlaced: (entity, block) => {
+    restaurarNaEntidade(entity, block.location, CAMPOS_GERADOR);
+  },
+
+  onRestored: (entity, block) => {
+    restaurarNaEntidade(entity, block.location, CAMPOS_GERADOR);
+  },
+
+  onBroken: (entity, block) => {
+    const pos = block?.location ?? (entity?.isValid === true ? entity.location : undefined);
+    if (pos) limparCampos(pos, CAMPOS_GERADOR);
+  },
 
   /** Status em tempo real: geração por tick, buffer e combustível restante. */
   statusTexto: (entity) => {

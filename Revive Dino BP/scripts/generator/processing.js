@@ -21,7 +21,20 @@ import {
   PROP_ENTITY_RATE,
 } from "../energy/constants";
 import { infoCombustivel } from "../energy/fuel";
+import { espelharDaEntidade, restaurarNaEntidade } from "../machine/state";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
+
+/**
+ * Estado do gerador espelhado por posição do bloco. É o que impede a máquina
+ * de "parar de gerar" quando a entidade é recriada (ex.: ao entrar no mundo, se
+ * o bloco tica antes da entidade carregar).
+ */
+export const CAMPOS_GERADOR = {
+  "rd_gen_charge": PROP_ENTITY_CHARGE,
+  "rd_gen_fuel": PROP_ENTITY_FUEL,
+  "rd_gen_rate": PROP_ENTITY_RATE,
+  "rd_gen_fuelmax": PROP_ENTITY_FUEL_MAX,
+};
 
 export function tickGenerator(entity, def) {
   const inv = inventarioDe(entity);
@@ -33,6 +46,16 @@ export function tickGenerator(entity, def) {
   let fuel = entity.getDynamicProperty(PROP_ENTITY_FUEL) ?? 0;
   let charge = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
   let rate = entity.getDynamicProperty(PROP_ENTITY_RATE) ?? 0;
+
+  // Entidade nova/zerada mas o bloco tem estado guardado: recupera em vez de
+  // deixar o gerador parado (era o bug do "para de gerar ao voltar ao mundo").
+  if (fuel <= 0 && charge <= 0) {
+    if (restaurarNaEntidade(entity, entity.location, CAMPOS_GERADOR)) {
+      fuel = entity.getDynamicProperty(PROP_ENTITY_FUEL) ?? 0;
+      charge = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
+      rate = entity.getDynamicProperty(PROP_ENTITY_RATE) ?? 0;
+    }
+  }
 
   // Sem combustível queimando: tenta pegar 1 item do slot (se há espaço p/ carga)
   if (fuel <= 0 && charge < GENERATOR_MAX_CHARGE) {
@@ -57,6 +80,9 @@ export function tickGenerator(entity, def) {
   }
 
   desenharChama(def, entity, inv, fuel);
+
+  // Mantém o espelho do bloco em dia
+  espelharDaEntidade(entity, entity.location, CAMPOS_GERADOR);
 }
 
 /**
