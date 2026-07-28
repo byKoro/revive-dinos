@@ -22,6 +22,21 @@ export function criarEntidade(def, block, dimension) {
   return entity;
 }
 
+/** Distância máxima para adotar uma entidade órfã (sem vínculo). */
+const RAIO_ADOCAO = 1.5;
+
+/**
+ * Acha a entidade deste bloco e, no caminho, ELIMINA DUPLICATAS.
+ *
+ * Por que duplicatas existem: ao entrar no mundo o bloco às vezes tica antes da
+ * entidade carregar, então uma nova é criada com o mesmo vínculo. A partir daí
+ * só UMA recebe tick — a outra fica "fantasma", sem a varredura que protege as
+ * peças de UI. Era assim que, depois de sair e voltar, dava para retirar os
+ * blocos da interface na mão.
+ *
+ * O conteúdo da duplicata é dropado antes de removê-la, então nada do jogador
+ * se perde.
+ */
 export function acharEntidade(def, block, dimension) {
   const chave = chaveDePosicao(block.location);
   const candidatos = dimension.getEntities({
@@ -29,10 +44,30 @@ export function acharEntidade(def, block, dimension) {
     type: def.entityId,
     maxDistance: RAIO_BUSCA,
   });
+
+  const minhas = [];
+  const orfas = [];
   for (const e of candidatos) {
-    if (e.getDynamicProperty(PROP_HOME) === chave) return e;
+    if (e?.isValid !== true) continue;
+    const home = e.getDynamicProperty(PROP_HOME);
+    if (home === chave) minhas.push(e);
+    else if (home === undefined) orfas.push(e);
   }
-  return candidatos.find((e) => e.getDynamicProperty(PROP_HOME) === undefined);
+
+  let escolhida = minhas[0];
+
+  // Entidade antiga (criada antes do vínculo existir): adota se estiver aqui
+  if (!escolhida) {
+    escolhida = orfas.find(
+      (e) => distancia(e.location, block.center()) <= RAIO_ADOCAO,
+    );
+    if (escolhida) escolhida.setDynamicProperty(PROP_HOME, chave);
+  }
+
+  // Sobrou mais de uma para este bloco: mantém a primeira e remove o resto
+  for (const dup of minhas.slice(1)) removerEntidade(dup);
+
+  return escolhida;
 }
 
 export function dropInventory(entity) {

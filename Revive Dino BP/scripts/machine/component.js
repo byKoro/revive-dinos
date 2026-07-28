@@ -14,7 +14,14 @@ import {
   garantirPosicao,
   removerEntidade,
 } from "./entity";
+import { gravarEstado, lerEstado, limparEstado } from "./state";
 import { atualizarStatus } from "./status";
+
+/** Contador de ticks sem achar a entidade, por posição de bloco. */
+const PREFIXO_FALTAS = "rd_miss";
+
+/** Quantos ticks esperar a entidade carregar antes de criar outra (~1s). */
+const TICKS_DE_ESPERA = 20;
 
 export function makeMachineComponent(def) {
   return {
@@ -32,17 +39,29 @@ export function makeMachineComponent(def) {
       // Gancho opcional ANTES de remover: permite salvar estado no item dropado
       def.onBroken?.(entity, block, player, def);
       removerEntidade(entity);
+      limparEstado(PREFIXO_FALTAS, block.location);
     },
 
     onTick: ({ block, dimension }) => {
       const entity = acharEntidade(def, block, dimension);
       if (!entity?.isValid) {
-        // Entidade sumiu (/kill, chunk, etc.): recria e deixa a máquina
+        // Ao entrar no mundo o bloco pode ticar ANTES da entidade carregar.
+        // Recriar na hora produzia uma duplicata (uma delas ficava sem tick e
+        // sem proteção da UI), então esperamos um pouco antes de desistir dela.
+        const faltas = lerEstado(PREFIXO_FALTAS, block.location, 0) + 1;
+        if (faltas < TICKS_DE_ESPERA) {
+          gravarEstado(PREFIXO_FALTAS, block.location, faltas);
+          return;
+        }
+        limparEstado(PREFIXO_FALTAS, block.location);
+
+        // Sumiu de verdade (/kill, chunk corrompido): recria e deixa a máquina
         // restaurar o estado que ela persiste por posição (ex.: carga).
         const nova = criarEntidade(def, block, dimension);
         def.onRestored?.(nova, block, def);
         return;
       }
+      limparEstado(PREFIXO_FALTAS, block.location);
       garantirPosicao(entity, block);
       def.processTick(entity, def);
       // Status em tempo real (agachar + olhar), se a máquina expõe statusTexto
