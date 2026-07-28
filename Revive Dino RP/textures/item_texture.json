@@ -160,6 +160,9 @@
     },
     "revive_dinos_egg_trex": {
       "textures": "textures/revive_dinos/items/egg_trex"
+    },
+    "revive_dinos_battery_ui": {
+      "textures": "textures/revive_dinos/ui/battery_ui"
     }
   }
 }

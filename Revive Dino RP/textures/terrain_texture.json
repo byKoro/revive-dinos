@@ -69,6 +69,9 @@
     },
     "incubator_front": {
       "textures": "textures/blocks/machines/incubator_front"
+    },
+    "revive_dinos_battery_ui": {
+      "textures": "textures/revive_dinos/ui/battery_ui"
     }
   }
 }

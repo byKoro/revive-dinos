@@ -37,10 +37,19 @@ function reservados(L) {
   if (!set) {
     set = new Set([...L.inputs, ...L.outputs, ...L.backgroundSlots]);
     if (L.progressSlot != null) set.add(L.progressSlot);
+    for (const o of L.overlaySlots ?? []) set.add(o.slot);
     cacheReservados.set(L, set);
   }
   return set;
 }
+
+/**
+ * Peças de overlay: slots extras que mostram um frame de animação.
+ * A bateria usa dois (metade esquerda e direita) para o preenchimento cobrir
+ * a interface inteira. `progressSlot` continua funcionando para as máquinas
+ * que só têm a barra única.
+ */
+const overlays = (L) => L.overlaySlots ?? [];
 
 /** Montagem inicial, uma vez no spawn da entidade. */
 export function montarUi(def, entity) {
@@ -51,12 +60,16 @@ export function montarUi(def, entity) {
 
   for (const slot of L.outputs) inv.setItem(slot, criarItem(L.placeholderItem));
 
+  const overlayPorSlot = new Map(overlays(L).map((o) => [o.slot, o.idPrefix]));
+
   for (let slot = 0; slot < inv.size; slot++) {
     if (L.inputs.includes(slot) || L.outputs.includes(slot)) continue;
     if (L.backgroundSlots.includes(slot)) {
       inv.setItem(slot, criarItem(idFundo(L, slot)));
     } else if (slot === L.progressSlot) {
       inv.setItem(slot, criarItem(idProgresso(L, 0)));
+    } else if (overlayPorSlot.has(slot)) {
+      inv.setItem(slot, criarItem(`${overlayPorSlot.get(slot)}_0`));
     } else if (!res.has(slot)) {
       inv.setItem(slot, criarItem(L.placeholderItem));
     }
@@ -88,9 +101,16 @@ export function restaurarSlotsDeUi(def, entity, inv, frameProp) {
 
   for (const slot of L.backgroundSlots) forcarPeca(entity, inv, slot, idFundo(L, slot));
 
+  const frameAtual = entity.getDynamicProperty(frameProp) ?? 0;
+
   if (L.progressSlot != null) {
-    const frame = entity.getDynamicProperty(frameProp) ?? 0;
-    forcarPeca(entity, inv, L.progressSlot, idProgresso(L, frame));
+    forcarPeca(entity, inv, L.progressSlot, idProgresso(L, frameAtual));
+  }
+
+  // Peças de animação (ex.: as duas metades do preenchimento da bateria):
+  // repostas todo tick, então o jogador não consegue retirá-las.
+  for (const o of overlays(L)) {
+    forcarPeca(entity, inv, o.slot, `${o.idPrefix}_${frameAtual}`);
   }
 
   // Protege inputs: se uma peca de UI parar num slot de entrada, devolve.
@@ -111,9 +131,16 @@ export function restaurarSlotsDeUi(def, entity, inv, frameProp) {
 /** Troca o item da barra só quando o frame muda de verdade. */
 export function aplicarFrame(def, entity, inv, frame, frameProp) {
   const L = def.layout;
-  if (L.progressSlot == null) return;
+  if (L.progressSlot == null && overlays(L).length === 0) return;
   if (entity.getDynamicProperty(frameProp) === frame) return;
-  inv.setItem(L.progressSlot, criarItem(idProgresso(L, frame)));
+
+  if (L.progressSlot != null) {
+    inv.setItem(L.progressSlot, criarItem(idProgresso(L, frame)));
+  }
+  for (const o of overlays(L)) {
+    inv.setItem(o.slot, criarItem(`${o.idPrefix}_${frame}`));
+  }
+
   entity.setDynamicProperty(frameProp, frame);
 }
 

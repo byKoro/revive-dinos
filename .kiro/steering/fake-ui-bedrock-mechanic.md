@@ -128,3 +128,104 @@ que SÃO renderizadas (ex.: `outline_selection`).
   renderize; a ausência de client entity é a solução comprovada.
 - **`minecraft:custom_hit_test` vazia** para remover sombra: descartado,
   quebrava a detecção de colisão ao agachar.
+
+
+---
+
+## Receita exata da UI (valores confirmados)
+
+Técnica estudada na fonte de referência (com permissão do autor, apenas para
+estudo — nenhum asset de terceiros é usado). O Extrator já segue estes valores;
+use-os como molde para toda UI nova.
+
+### O que faz o painel aparecer grande no slot
+
+O bloco-item tem uma geometria **plana e larga** (cubos com `size` Y = 1
+espalhados em X/Z). Quem transforma isso num painel de HUD é o
+`item_display_transforms.gui`, declarado **no nível da geometria** (irmão de
+`description` e `bones`), dentro do próprio `.geo.json`:
+
+```json
+"item_display_transforms": {
+  "gui": {
+    "rotation": [90, 0, 0],
+    "translation": [36, 0, 0],
+    "scale": [4, 4, 4],
+    "rotation_pivot": [0, 0, 0],
+    "scale_pivot": [0, 0, 0],
+    "fit_to_frame": false
+  }
+}
+```
+
+| Peça | `translation` |
+|---|---|
+| metade esquerda do fundo | `[36, 0, 0]` |
+| metade direita do fundo | `[-36, 0, 0]` |
+| ícone/barra sobre a metade esquerda | `[36, 18, 0]` |
+| ícone/barra sobre a metade direita | `[-36, 18, 0]` |
+
+- `rotation [90,0,0]` deita o modelo para ele virar um painel 2D.
+- `scale [4,4,4]` amplia até cobrir a área de vários slots.
+- `fit_to_frame: false` é obrigatório — sem isso o jogo reescala e o
+  alinhamento se perde.
+- O `+18` em Y desloca uma linha de slots para baixo; é assim que a barra de
+  progresso fica sobre o fundo, e não no lugar dele.
+- As demais transforms (`thirdperson_*`, `firstperson_*`) usam
+  `scale [0,0,0]` para a peça ficar **invisível na mão** — só aparece na GUI.
+
+### Atlas da textura
+
+`texture_width`/`texture_height` = **256×256** (as UIs simples da referência
+usam 64×64). A arte da UI é desenhada nesse atlas e recortada por
+`uv`/`uv_size` por face — vários `uv_size` são **negativos**, para espelhar o
+recorte. Ao desenhar arte nova, mantenha o atlas 256×256 do Extrator para os
+UVs existentes continuarem válidos.
+
+### Layout de slots da referência (grade de 27)
+
+```
+inputSlots: [2]        fuelSlot: 20      resultSlots: [15]
+flameIconSlot: 18      arrowIconSlot: 26  uiSlots: [9, 17]
+```
+
+É exatamente o layout que o Extrator (e agora a Incubadora) usam: entrada 2,
+segunda entrada 20, saída 15, fundo 9 e 17, barra 26. O slot 18 fica livre
+para um segundo indicador (na referência é o ícone de chama) — é a vaga
+natural para um indicador de energia nas nossas máquinas.
+
+### Componentes do bloco-item de UI
+
+```json
+"minecraft:collision_box": false,
+"minecraft:selection_box": false,
+"minecraft:light_dampening": 0,
+"minecraft:material_instances": {
+  "*": {
+    "texture": "<atlas da ui>",
+    "render_method": "opaque",
+    "face_dimming": false,
+    "ambient_occlusion": false
+  }
+}
+```
+
+`face_dimming` e `ambient_occlusion` em `false` são o que mantêm a arte com
+cor plana, sem sombreamento de bloco. A referência também usa
+`menu_category: none` + `is_hidden_in_commands: true` e um
+`placement_filter` impossível, para a peça nunca ser colocada no mundo; no
+nosso addon o componente `revive_dinos:ui_placeholder` (vira ar ao colocar)
+cumpre esse papel.
+
+### Barra de progresso por bones
+
+Um bloco-item por frame, e a visibilidade é **cumulativa** via
+`bone_visibility` lendo um state fixo:
+
+```json
+"progress_7": "q.block_state('revive_dinos:progress') >= 7"
+```
+
+Cada bone é uma fatia fina (`size` ~`[0.25, 2, 3.75]`), então acender de 1 a N
+preenche a barra. O state é fixo por bloco (nunca muda em runtime): o script
+troca o ITEM do slot para mudar o frame.

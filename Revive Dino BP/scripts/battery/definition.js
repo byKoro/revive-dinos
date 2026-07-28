@@ -25,6 +25,9 @@ import { consumirCargaPendente, registrarCargaDoJogador } from "./transfer";
 export const BATTERY_UI_ENTITY_ID = "revive_dinos:battery_ui";
 export const COMPONENT_BATTERY = "revive_dinos:battery_machine";
 
+/** Fatias da animação de preenchimento (por metade da UI). */
+export const BATTERY_UI_FRAMES = 20;
+
 /** Guarda a carga do tick anterior para calcular a variação exibida. */
 const PROP_ULTIMA_CARGA = "revive_dinos:last_charge";
 
@@ -36,14 +39,24 @@ export const batteryDef = {
   entityId: BATTERY_UI_ENTITY_ID,
   componentId: COMPONENT_BATTERY,
   layout: {
+    // A bateria não recebe nem produz itens: TODO slot é protegido.
     inputs: [],
     outputs: [],
     outputSlot: undefined,
-    backgroundSlots: [],
+
+    // Fundo (painel vazio) nas duas metades da interface
+    backgroundSlots: [9, 17],
+    uiBackgroundId: "revive_dinos:battery_ui",
+
+    // Preenchimento: duas metades, para a animação cobrir a UI inteira
     progressSlot: null,
-    uiBackgroundId: null,
     uiProgressId: null,
-    progressFrames: 0,
+    overlaySlots: [
+      { slot: 18, idPrefix: "revive_dinos:battery_ui_fill_left" },
+      { slot: 26, idPrefix: "revive_dinos:battery_ui_fill_right" },
+    ],
+    progressFrames: BATTERY_UI_FRAMES,
+
     placeholderItem: PLACEHOLDER_ITEM_ID,
   },
   processTick: tickBattery,

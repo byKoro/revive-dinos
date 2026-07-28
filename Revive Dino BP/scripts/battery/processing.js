@@ -20,7 +20,7 @@ import {
   PROP_ENTITY_CHARGE,
 } from "../energy/constants";
 import { buscarBlocoComCarga, entidadeDaFonte } from "../energy/network";
-import { limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
+import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
 import { gravarEspelho, lerEspelho } from "./mirror";
 
 /** Quanto a bateria puxa por tick. Alto para não ser gargalo da rede. */
@@ -37,6 +37,9 @@ export function tickBattery(entity, def) {
   }
 
   let charge = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
+
+  // A UI inteira é a bateria enchendo: o frame acompanha a carga.
+  if (inv) desenharPreenchimento(def, entity, inv, charge);
 
   // A carga pertence ao BLOCO: se a entidade está zerada mas o espelho tem
   // valor, ela foi recriada — recupera em vez de perder a energia.
@@ -63,4 +66,22 @@ export function tickBattery(entity, def) {
 
   genEnt.setDynamicProperty(PROP_ENTITY_CHARGE, genCharge - transferir);
   entity.setDynamicProperty(PROP_ENTITY_CHARGE, charge + transferir);
+}
+
+/**
+ * Traduz a carga em frame de preenchimento.
+ *
+ * Só chega ao último frame quando a bateria está realmente cheia, e só mostra
+ * o frame 0 quando está de fato vazia — assim o visual não "mente" nas pontas.
+ */
+function desenharPreenchimento(def, entity, inv, carga) {
+  const frames = def.layout.progressFrames;
+  const fracao = Math.min(1, Math.max(0, carga / BATTERY_MAX_CHARGE));
+
+  let frame;
+  if (fracao <= 0) frame = 0;
+  else if (fracao >= 1) frame = frames;
+  else frame = Math.min(frames - 1, Math.max(1, Math.round(fracao * frames)));
+
+  aplicarFrame(def, entity, inv, frame, PROP_FRAME);
 }
