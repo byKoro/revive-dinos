@@ -27,6 +27,20 @@ const idFundo = (L, slot) => `${L.uiBackgroundId}_${slot}`;
 const idProgresso = (L, frame) => `${L.uiProgressId}_${frame}`;
 
 /**
+ * Prende o frame ao intervalo que realmente tem peça criada.
+ *
+ * O frame vive numa dynamic property da entidade, então um valor gravado por
+ * uma versão anterior sobrevive à atualização. Quando a bateria passou de 20
+ * para 16 fatias, as entidades antigas continuaram pedindo o frame 20 e o
+ * `criarItem` estourava com "Invalid item identifier" a cada tick.
+ */
+function frameValido(L, frame) {
+  const max = L.progressFrames ?? 0;
+  if (!Number.isFinite(frame) || frame < 0) return 0;
+  return Math.min(Math.floor(frame), max);
+}
+
+/**
  * Conjunto de slots reservados, memoizado por layout. Antes isso recriava
  * arrays e fazia includes() dentro de um loop por tick — custo desnecessário
  * multiplicado por cada máquina no mundo.
@@ -83,6 +97,18 @@ export function montarUi(def, entity) {
 function forcarPeca(entity, inv, slot, esperado) {
   const atual = inv.getItem(slot);
   if (atual?.typeId === esperado) return;
+
+  // A peça esperada precisa existir. Se um id inválido chegasse aqui, o
+  // criarItem lançava e derrubava o tick INTEIRO da máquina — foi o que fazia a
+  // bateria parar de carregar e o status não aparecer. A UI nunca deve ter esse
+  // poder: na dúvida, deixa o slot como está e a máquina segue funcionando.
+  let peca;
+  try {
+    peca = criarItem(esperado);
+  } catch {
+    return;
+  }
+
   if (atual && !ehItemDeUi(atual)) {
     const jogador = entity.dimension.getPlayers({
       location: entity.location,
@@ -92,7 +118,7 @@ function forcarPeca(entity, inv, slot, esperado) {
     const dropPos = jogador?.location ?? entity.location;
     entity.dimension.spawnItem(atual, dropPos);
   }
-  inv.setItem(slot, criarItem(esperado));
+  inv.setItem(slot, peca);
 }
 
 /** Varredura por tick: garante que toda peça de UI está no lugar. */
@@ -101,7 +127,11 @@ export function restaurarSlotsDeUi(def, entity, inv, frameProp) {
 
   for (const slot of L.backgroundSlots) forcarPeca(entity, inv, slot, idFundo(L, slot));
 
-  const frameAtual = entity.getDynamicProperty(frameProp) ?? 0;
+  const frameGravado = entity.getDynamicProperty(frameProp) ?? 0;
+  const frameAtual = frameValido(L, frameGravado);
+
+  // Valor obsoleto (versão anterior tinha mais frames): corrige de vez
+  if (frameAtual !== frameGravado) entity.setDynamicProperty(frameProp, frameAtual);
 
   if (L.progressSlot != null) {
     forcarPeca(entity, inv, L.progressSlot, idProgresso(L, frameAtual));
@@ -132,16 +162,24 @@ export function restaurarSlotsDeUi(def, entity, inv, frameProp) {
 export function aplicarFrame(def, entity, inv, frame, frameProp) {
   const L = def.layout;
   if (L.progressSlot == null && overlays(L).length === 0) return;
-  if (entity.getDynamicProperty(frameProp) === frame) return;
 
-  if (L.progressSlot != null) {
-    inv.setItem(L.progressSlot, criarItem(idProgresso(L, frame)));
-  }
-  for (const o of overlays(L)) {
-    inv.setItem(o.slot, criarItem(`${o.idPrefix}_${frame}`));
+  const alvo = frameValido(L, frame);
+  if (entity.getDynamicProperty(frameProp) === alvo) return;
+
+  // Mesmo cuidado do forcarPeca: um id de frame inexistente não pode abortar o
+  // tick da máquina.
+  try {
+    if (L.progressSlot != null) {
+      inv.setItem(L.progressSlot, criarItem(idProgresso(L, alvo)));
+    }
+    for (const o of overlays(L)) {
+      inv.setItem(o.slot, criarItem(`${o.idPrefix}_${alvo}`));
+    }
+  } catch {
+    return;
   }
 
-  entity.setDynamicProperty(frameProp, frame);
+  entity.setDynamicProperty(frameProp, alvo);
 }
 
 /** Tira as peças do inventário e do cursor do jogador. */
