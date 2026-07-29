@@ -109,7 +109,7 @@
               "ambient_occlusion": false
             }
           },
-          "minecraft:light_emission": 4
+          "minecraft:light_emission": 8
         }
       },
       {
@@ -135,7 +135,7 @@
               "ambient_occlusion": false
             }
           },
-          "minecraft:light_emission": 5
+          "minecraft:light_emission": 8
         }
       },
       {
@@ -161,7 +161,7 @@
               "ambient_occlusion": false
             }
           },
-          "minecraft:light_emission": 6
+          "minecraft:light_emission": 8
         }
       },
       {
