@@ -28,6 +28,8 @@ export const incubatorDef = {
   blockId: INCUBATOR_BLOCK_ID,
   entityId: INCUBATOR_UI_ENTITY_ID,
   componentId: COMPONENT_INCUBATOR,
+  /** A frente do bloco anima por estágio de processo (ver machine/visual.js). */
+  frontAnimada: true,
   layout: {
     inputs: [cfg.inputA, cfg.inputB],
     outputs: [cfg.output],

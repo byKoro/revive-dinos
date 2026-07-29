@@ -26,6 +26,8 @@ export const sequencerDef = {
   blockId: SEQUENCER_BLOCK_ID,
   entityId: SEQUENCER_UI_ENTITY_ID,
   componentId: COMPONENT_SEQUENCER,
+  /** A frente do bloco anima por estágio de processo (ver machine/visual.js). */
+  frontAnimada: true,
   layout: {
     inputs: [...cfg.dnaSlots, cfg.enzyme],
     outputs: [cfg.output],

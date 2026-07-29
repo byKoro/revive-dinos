@@ -30,6 +30,8 @@ export const generatorDef = {
   blockId: GENERATOR_BLOCK_ID,
   entityId: GENERATOR_UI_ENTITY_ID,
   componentId: COMPONENT_GENERATOR,
+  /** A frente do bloco anima por estágio de processo (ver machine/visual.js). */
+  frontAnimada: true,
   layout: {
     inputs: [GENERATOR_FUEL_SLOT],
     outputs: [],

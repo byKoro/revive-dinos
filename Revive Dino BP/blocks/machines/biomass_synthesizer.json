@@ -8,11 +8,13 @@
       },
       "traits": {
         "minecraft:placement_direction": {
-          "enabled_states": ["minecraft:cardinal_direction"]
+          "enabled_states": ["minecraft:cardinal_direction"],
+          "y_rotation_offset": 180
         }
       },
       "states": {
-        "revive_dinos:fake_selection": [true, false]
+        "revive_dinos:fake_selection": [true, false],
+        "revive_dinos:machine_stage": [0, 1, 2, 3]
       }
     },
     "components": {
@@ -64,15 +66,85 @@
         }
       },
       {
-        "condition": "q.block_state('minecraft:cardinal_direction') == 'north'",
+        "condition": "q.block_state('revive_dinos:machine_stage') == 1",
         "components": {
-          "minecraft:transformation": {
-            "rotation": [0, 180, 0]
-          }
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "biomass_synthesizer_side",
+              "render_method": "opaque"
+            },
+            "up": {
+              "texture": "biomass_synthesizer_top",
+              "render_method": "opaque"
+            },
+            "down": {
+              "texture": "biomass_synthesizer_top",
+              "render_method": "opaque"
+            },
+            "north": {
+              "texture": "biomass_synthesizer_front_1",
+              "render_method": "opaque",
+              "face_dimming": false,
+              "ambient_occlusion": false
+            }
+          },
+          "minecraft:light_emission": 4
         }
       },
       {
-        "condition": "q.block_state('minecraft:cardinal_direction') == 'south'",
+        "condition": "q.block_state('revive_dinos:machine_stage') == 2",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "biomass_synthesizer_side",
+              "render_method": "opaque"
+            },
+            "up": {
+              "texture": "biomass_synthesizer_top",
+              "render_method": "opaque"
+            },
+            "down": {
+              "texture": "biomass_synthesizer_top",
+              "render_method": "opaque"
+            },
+            "north": {
+              "texture": "biomass_synthesizer_front_2",
+              "render_method": "opaque",
+              "face_dimming": false,
+              "ambient_occlusion": false
+            }
+          },
+          "minecraft:light_emission": 5
+        }
+      },
+      {
+        "condition": "q.block_state('revive_dinos:machine_stage') == 3",
+        "components": {
+          "minecraft:material_instances": {
+            "*": {
+              "texture": "biomass_synthesizer_side",
+              "render_method": "opaque"
+            },
+            "up": {
+              "texture": "biomass_synthesizer_top",
+              "render_method": "opaque"
+            },
+            "down": {
+              "texture": "biomass_synthesizer_top",
+              "render_method": "opaque"
+            },
+            "north": {
+              "texture": "biomass_synthesizer_front_3",
+              "render_method": "opaque",
+              "face_dimming": false,
+              "ambient_occlusion": false
+            }
+          },
+          "minecraft:light_emission": 6
+        }
+      },
+      {
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'north'",
         "components": {
           "minecraft:transformation": {
             "rotation": [0, 0, 0]
@@ -80,7 +152,7 @@
         }
       },
       {
-        "condition": "q.block_state('minecraft:cardinal_direction') == 'east'",
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'west'",
         "components": {
           "minecraft:transformation": {
             "rotation": [0, 90, 0]
@@ -88,10 +160,34 @@
         }
       },
       {
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'north'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 0, 0]
+          }
+        }
+      },
+      {
         "condition": "q.block_state('minecraft:cardinal_direction') == 'west'",
         "components": {
           "minecraft:transformation": {
-            "rotation": [0, 270, 0]
+            "rotation": [0, 90, 0]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'south'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, 180, 0]
+          }
+        }
+      },
+      {
+        "condition": "q.block_state('minecraft:cardinal_direction') == 'east'",
+        "components": {
+          "minecraft:transformation": {
+            "rotation": [0, -90, 0]
           }
         }
       }

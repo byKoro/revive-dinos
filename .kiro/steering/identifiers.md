@@ -19,8 +19,10 @@ Identifiers atuais (todos sem typo):
 | Entidade-container | `revive_dinos:genetic_extractor_ui` |
 | Bloco do minigame | `revive_dinos:fossilized_rock` |
 
-- Geometria/textura/arquivos do Extrator também usam `genetic_extractor`
-  (sem typo) — isso é seguro, não afeta dados do mundo.
+- As texturas do Extrator também usam `genetic_extractor` (sem typo) — isso é
+  seguro, não afeta dados do mundo. Ele usa `minecraft:geometry.full_block` e o
+  mesmo padrão das outras máquinas (`_side`, `_top`, `_front`, `_front_1..3`),
+  sem geometria própria.
 - **Nunca** dê ao custom component o mesmo nome do bloco.
 
 ## Renomear identifier de bloco quebra mundos existentes
