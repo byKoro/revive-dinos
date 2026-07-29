@@ -34,7 +34,10 @@ export const sequencerDef = {
     uiBackgroundId: "revive_dinos:gene_sequencer_ui",
     progressSlot: 26,
     uiProgressId: "revive_dinos:gene_sequencer_ui_progress",
-    progressFrames: 19,
+    // Precisa bater com a quantidade de bones progress_N da geometria
+    // `geometry.gene_sequencer_ui_progress`. Bone a mais na geometria do que
+    // frame declarado aqui = bone que nunca é escondido (fica sempre aceso).
+    progressFrames: 32,
     placeholderItem: PLACEHOLDER_ITEM_ID,
   },
   processTick: tickSequencer,
