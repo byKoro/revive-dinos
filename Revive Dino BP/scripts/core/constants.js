@@ -144,3 +144,30 @@ export const MACHINE_SOUND_PITCH = 1.4;
 
 /** Intervalo entre repetições do som enquanto a máquina processa (~4s). */
 export const MACHINE_SOUND_INTERVAL = 80;
+
+// ---------------------------------------------------------------------------
+// GERADOR A COMBUSTÃO — animação em loop + partículas
+// ---------------------------------------------------------------------------
+
+/**
+ * Duração de um ciclo completo de animação da frente do gerador (ticks).
+ * A cada GENERATOR_LOOP_TICKS a frente percorre 1→2→3→1→2→3... dando a
+ * impressão de uma máquina rápida e fluida em vez de uma barra lenta.
+ * 60 ticks = 3 segundos por loop (20 ticks por estágio).
+ */
+export const GENERATOR_LOOP_TICKS = 60;
+
+/**
+ * Partículas de fogo na frente do gerador quando ativo.
+ * Usa o mesmo id da fornalha vanilla (minecraft:basic_flame_particle).
+ */
+export const GENERATOR_PARTICLE_ID = "minecraft:basic_flame_particle";
+
+/** Intervalo médio entre spawns de partícula (ticks). Varia ±30%. */
+export const GENERATOR_PARTICLE_INTERVAL = 50;
+
+/**
+ * Dynamic property para o contador de ticks até a próxima partícula.
+ * Guardamos na entidade para sobreviver entre ticks sem custo de mapa externo.
+ */
+export const PROP_GEN_PARTICLE_TICK = "revive_dinos:gen_particle_tick";

@@ -50,6 +50,28 @@ export function marcarProgressoVisual(entity, fracao) {
   entity.setDynamicProperty(PROP_STAGE_TICK, system.currentTick);
 }
 
+/**
+ * Versão para máquinas que querem animar em LOOP (ex.: gerador). Em vez de
+ * mapear a fração de 0→1 num único passo, ciclam repetidamente 1→2→3→1→2→3...
+ * a cada `cycleTicks` ticks enquanto o chamador continuar invocando.
+ *
+ * @param {Entity} entity
+ * @param {number} cycleTicks  Duração completa de um ciclo (1→2→3)
+ */
+export function marcarProgressoVisualLoop(entity, cycleTicks) {
+  if (entity?.isValid !== true) return;
+
+  // Fração dentro do ciclo atual, derivada do tick global
+  const posicaoNoCiclo = system.currentTick % cycleTicks;
+  const fracao = posicaoNoCiclo / cycleTicks;
+  const estagio = Math.min(MACHINE_STAGES, 1 + Math.floor(fracao * MACHINE_STAGES));
+
+  if (entity.getDynamicProperty(PROP_STAGE) !== estagio) {
+    entity.setDynamicProperty(PROP_STAGE, estagio);
+  }
+  entity.setDynamicProperty(PROP_STAGE_TICK, system.currentTick);
+}
+
 /** Estágio que vale agora: 0 se o processamento não marcou nos últimos ticks. */
 function estagioAtual(entity) {
   const marcado = entity.getDynamicProperty(PROP_STAGE_TICK);

@@ -104,9 +104,12 @@
             },
             "north": {
               "texture": "incubator_front_1",
-              "render_method": "opaque"
+              "render_method": "opaque",
+              "face_dimming": false,
+              "ambient_occlusion": false
             }
-          }
+          },
+          "minecraft:light_emission": 4
         }
       },
       {
@@ -127,9 +130,12 @@
             },
             "north": {
               "texture": "incubator_front_2",
-              "render_method": "opaque"
+              "render_method": "opaque",
+              "face_dimming": false,
+              "ambient_occlusion": false
             }
-          }
+          },
+          "minecraft:light_emission": 5
         }
       },
       {
@@ -150,9 +156,12 @@
             },
             "north": {
               "texture": "incubator_front_3",
-              "render_method": "opaque"
+              "render_method": "opaque",
+              "face_dimming": false,
+              "ambient_occlusion": false
             }
-          }
+          },
+          "minecraft:light_emission": 6
         }
       },
       {

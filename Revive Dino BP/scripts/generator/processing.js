@@ -23,7 +23,21 @@ import {
 import { infoCombustivel } from "../energy/fuel";
 import { espelharDaEntidade, primeiroTick, restaurarNaEntidade } from "../machine/state";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
-import { marcarProgressoVisual } from "../machine/visual";
+import { marcarProgressoVisualLoop } from "../machine/visual";
+import {
+  GENERATOR_LOOP_TICKS,
+  GENERATOR_PARTICLE_ID,
+  GENERATOR_PARTICLE_INTERVAL,
+  PROP_GEN_PARTICLE_TICK,
+} from "../core/constants";
+
+/** Offset da face frontal por direção cardinal (normal apontando pra fora). */
+const FRONT_OFFSETS = {
+  north: { x: 0, z: -0.52 },
+  south: { x: 0, z: 0.52 },
+  east:  { x: 0.52, z: 0 },
+  west:  { x: -0.52, z: 0 },
+};
 
 /**
  * Estado do gerador espelhado por posição do bloco. É o que impede a máquina
@@ -92,20 +106,26 @@ export function tickGenerator(entity, def) {
 }
 
 /**
- * Altura da chama = combustível restante, como na fornalha: cheia ao acender e
- * baixando conforme queima. Sem combustível, apaga.
+ * Animação da frente em LOOP + partículas de fogo.
+ *
+ * Em vez de avançar 1→2→3 numa única passada ao longo de toda a queima (que
+ * deixava a animação travada por centenas de ticks em cada frame), agora os
+ * estágios ciclam rapidamente a cada GENERATOR_LOOP_TICKS — é o que dá a
+ * sensação de "máquina em funcionamento" como a fornalha vanilla.
  */
 function desenharChama(def, entity, inv, fuel) {
   const total = entity.getDynamicProperty(PROP_ENTITY_FUEL_MAX) ?? fuel;
   const restante = Math.min(1, Math.max(0, fuel / Math.max(1, total)));
 
-  // Frente do bloco + som. O gerador não tem PROP_PROGRESS: aqui "progresso" é
-  // o combustível JÁ QUEIMADO, então a frente avança de estágio conforme a
-  // fornada é consumida e apaga quando o combustível acaba.
-  //
-  // Não marcar nada quando fuel <= 0 é o que apaga a frente (ver visual.js).
-  if (fuel > 0) marcarProgressoVisual(entity, 1 - restante);
+  if (fuel > 0) {
+    // Animação em loop rápido na frente do bloco
+    marcarProgressoVisualLoop(entity, GENERATOR_LOOP_TICKS);
+    // Partículas de fogo na frente, piscando aleatoriamente
+    spawnParticulas(entity);
+  }
 
+  // Barra de chama na UI (mantém o comportamento original: proporcional ao
+  // combustível restante, não ao loop)
   const frames = def.layout.progressFrames;
   if (!frames) return;
 
@@ -115,4 +135,52 @@ function desenharChama(def, entity, inv, fuel) {
   }
 
   aplicarFrame(def, entity, inv, Math.max(1, Math.ceil(restante * frames)), PROP_FRAME);
+}
+
+/**
+ * Spawna 1–2 partículas de fogo (basic_flame_particle) na base da face frontal
+ * do gerador. Não é constante: pisca aleatoriamente a cada ~2.5s (±30%).
+ *
+ * Usa a posição da entidade (ancorada ao bloco) e lê a cardinal_direction do
+ * bloco para saber para onde a frente aponta. O getBlock é barato aqui: a
+ * entidade está no mesmo chunk e isto só roda a cada ~50 ticks.
+ */
+function spawnParticulas(entity) {
+  const contador = (entity.getDynamicProperty(PROP_GEN_PARTICLE_TICK) ?? 0) + 1;
+
+  const alvo = GENERATOR_PARTICLE_INTERVAL;
+  if (contador < alvo) {
+    entity.setDynamicProperty(PROP_GEN_PARTICLE_TICK, contador);
+    return;
+  }
+
+  // Reseta com variação aleatória para o próximo ciclo parecer orgânico
+  const variacao = Math.floor(alvo * 0.3 * (Math.random() * 2 - 1));
+  entity.setDynamicProperty(PROP_GEN_PARTICLE_TICK, variacao);
+
+  // Descobre a direção da frente via o bloco
+  const block = entity.dimension.getBlock(entity.location);
+  if (!block) return;
+  const dir = block.permutation.getState("minecraft:cardinal_direction") ?? "south";
+  const offsets = FRONT_OFFSETS[dir] ?? FRONT_OFFSETS.south;
+
+  // Centro do bloco
+  const cx = Math.floor(entity.location.x) + 0.5;
+  const cy = Math.floor(entity.location.y);
+  const cz = Math.floor(entity.location.z) + 0.5;
+
+  const quantidade = Math.random() < 0.4 ? 2 : 1;
+
+  for (let i = 0; i < quantidade; i++) {
+    // Deslocamento lateral (perpendicular à face) ±0.25 do centro
+    const lateral = (Math.random() - 0.5) * 0.5;
+    const offsetY = 0.1 + Math.random() * 0.2; // rente ao chão
+
+    // Lateral é no eixo perpendicular à normal da face
+    const px = cx + offsets.x + (offsets.z !== 0 ? lateral : 0);
+    const py = cy + offsetY;
+    const pz = cz + offsets.z + (offsets.x !== 0 ? lateral : 0);
+
+    entity.dimension.spawnParticle(GENERATOR_PARTICLE_ID, { x: px, y: py, z: pz });
+  }
 }
