@@ -607,5 +607,17 @@
   "revive_dinos:gene_sequencer_ui_progress_32": {
     "sound": "stone",
     "textures": "revive_dinos_gene_sequencer_ui"
+  },
+  "revive_dinos:incubator_ui_bar_17": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_18": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
+  },
+  "revive_dinos:incubator_ui_bar_19": {
+    "sound": "stone",
+    "textures": "revive_dinos_incubator_ui"
   }
 }

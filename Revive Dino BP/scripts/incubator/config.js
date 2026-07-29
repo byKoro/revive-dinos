@@ -26,7 +26,10 @@ export const layout = {
   progressSlot: null,
   uiProgressId: null,
   overlaySlots: [{ slot: 11, idPrefix: "revive_dinos:incubator_ui_bar" }],
-  progressFrames: 16,
+  // Precisa bater com a quantidade de bones progress_N em
+  // `geometry.incubator_ui_bar`. Bone que sobra na geometria não é citado em
+  // nenhum bone_visibility e fica permanentemente aceso.
+  progressFrames: 19,
 
   placeholderItem: "revive_dinos:placeholder_invisible",
 };
