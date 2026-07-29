@@ -28,7 +28,7 @@ export const layout = {
   // a barra nunca era colocada nem animada, o slot 11 ficava com o placeholder
   // invisível. `overlaySlots` existe para casos de VÁRIAS peças no mesmo frame
   // (as duas metades da bateria); a incubadora tem uma peça só.
-  progressSlot: 11,
+  progressSlot: 26,
   uiProgressId: "revive_dinos:incubator_ui_bar",
   // Precisa bater com a quantidade de bones progress_N em
   // `geometry.incubator_ui_bar`. Bone que sobra na geometria não é citado em

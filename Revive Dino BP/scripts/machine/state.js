@@ -58,3 +58,28 @@ export function restaurarNaEntidade(entity, location, campos) {
 export function limparCampos(location, campos) {
   for (const prefixo of Object.keys(campos)) limparEstado(prefixo, location);
 }
+
+/** Marca de que esta entidade já rodou pelo menos um tick. */
+const PROP_INICIADA = "revive_dinos:state_init";
+
+/**
+ * True apenas na PRIMEIRA vez que é chamada para uma entidade.
+ *
+ * É o sinal correto de "esta entidade acabou de nascer e precisa recuperar o
+ * estado do bloco". O que existia antes era um palpite: as máquinas tratavam
+ * "estado todo zerado" como prova de entidade recriada. Só que estado zerado é
+ * também o estado NORMAL de um gerador sem combustível cuja carga foi toda
+ * consumida — e o espelho da posição é gravado no FIM do tick, portanto antes
+ * do consumo que acontece depois. Resultado: a carga já gasta voltava no tick
+ * seguinte, para sempre. Energia infinita, gerador travado num valor fixo e
+ * bateria carregando sem combustível.
+ *
+ * A marca vive na própria entidade, então sobrevive ao recarregar do mundo
+ * (junto com o estado que ela guarda) e só falta numa entidade genuinamente
+ * nova.
+ */
+export function primeiroTick(entity) {
+  if (entity.getDynamicProperty(PROP_INICIADA) === true) return false;
+  entity.setDynamicProperty(PROP_INICIADA, true);
+  return true;
+}

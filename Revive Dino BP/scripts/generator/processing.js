@@ -21,7 +21,7 @@ import {
   PROP_ENTITY_RATE,
 } from "../energy/constants";
 import { infoCombustivel } from "../energy/fuel";
-import { espelharDaEntidade, restaurarNaEntidade } from "../machine/state";
+import { espelharDaEntidade, primeiroTick, restaurarNaEntidade } from "../machine/state";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
 
 /**
@@ -47,9 +47,14 @@ export function tickGenerator(entity, def) {
   let charge = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;
   let rate = entity.getDynamicProperty(PROP_ENTITY_RATE) ?? 0;
 
-  // Entidade nova/zerada mas o bloco tem estado guardado: recupera em vez de
-  // deixar o gerador parado (era o bug do "para de gerar ao voltar ao mundo").
-  if (fuel <= 0 && charge <= 0) {
+  // Entidade recém-nascida: recupera o estado que pertence ao bloco, para o
+  // gerador não "parar de gerar" quando a entidade é recriada.
+  //
+  // O gatilho é o primeiro tick DELA, não "estado zerado". Zerado é também o
+  // estado legítimo de um gerador sem combustível já drenado, e nesse caso o
+  // espelho (gravado no fim do tick anterior, antes do consumo que veio depois)
+  // devolvia a carga gasta a cada tick: energia infinita.
+  if (primeiroTick(entity)) {
     if (restaurarNaEntidade(entity, entity.location, CAMPOS_GERADOR)) {
       fuel = entity.getDynamicProperty(PROP_ENTITY_FUEL) ?? 0;
       charge = entity.getDynamicProperty(PROP_ENTITY_CHARGE) ?? 0;

@@ -20,6 +20,7 @@ import {
   PROP_ENTITY_CHARGE,
 } from "../energy/constants";
 import { buscarBlocoComCarga, entidadeDaFonte } from "../energy/network";
+import { primeiroTick } from "../machine/state";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
 import { gravarEspelho, lerEspelho } from "./mirror";
 
@@ -41,15 +42,20 @@ export function tickBattery(entity, def) {
   // A UI inteira é a bateria enchendo: o frame acompanha a carga.
   if (inv) desenharPreenchimento(def, entity, inv, charge);
 
-  // A carga pertence ao BLOCO: se a entidade está zerada mas o espelho tem
-  // valor, ela foi recriada — recupera em vez de perder a energia.
-  const espelho = lerEspelho(entity.location);
-  if (charge <= 0 && espelho > 0) {
-    charge = espelho;
-    entity.setDynamicProperty(PROP_ENTITY_CHARGE, charge);
-  } else if (charge !== espelho) {
-    gravarEspelho(entity.location, charge);
+  // A carga pertence ao BLOCO, então uma entidade recém-nascida recupera do
+  // espelho da posição. Isso vale SÓ no primeiro tick dela: usar "carga zerada"
+  // como sinal de entidade recriada devolvia a energia que as máquinas acabaram
+  // de consumir (o espelho é gravado antes do consumo), criando carga infinita.
+  if (primeiroTick(entity)) {
+    const espelho = lerEspelho(entity.location);
+    if (charge <= 0 && espelho > 0) {
+      charge = espelho;
+      entity.setDynamicProperty(PROP_ENTITY_CHARGE, charge);
+    }
   }
+
+  // Daqui pra frente o espelho só ACOMPANHA a entidade, nunca a corrige.
+  if (lerEspelho(entity.location) !== charge) gravarEspelho(entity.location, charge);
 
   if (charge >= BATTERY_MAX_CHARGE) return;
 
