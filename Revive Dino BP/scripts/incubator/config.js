@@ -22,10 +22,14 @@ export const layout = {
   backgroundSlots: [9, 17],
   uiBackgroundId: "revive_dinos:incubator_ui",
 
-  // Barra vertical (enche de baixo para cima) logo abaixo do slot do DNA
-  progressSlot: null,
-  uiProgressId: null,
-  overlaySlots: [{ slot: 11, idPrefix: "revive_dinos:incubator_ui_bar" }],
+  // Barra vertical (enche de baixo para cima) logo abaixo do slot do DNA.
+  // Mesmo mecanismo do Extrator: progressSlot + uiProgressId. Antes isto usava
+  // `overlaySlots`, que a definition.js não repassava para o layout — resultado:
+  // a barra nunca era colocada nem animada, o slot 11 ficava com o placeholder
+  // invisível. `overlaySlots` existe para casos de VÁRIAS peças no mesmo frame
+  // (as duas metades da bateria); a incubadora tem uma peça só.
+  progressSlot: 11,
+  uiProgressId: "revive_dinos:incubator_ui_bar",
   // Precisa bater com a quantidade de bones progress_N em
   // `geometry.incubator_ui_bar`. Bone que sobra na geometria não é citado em
   // nenhum bone_visibility e fica permanentemente aceso.
