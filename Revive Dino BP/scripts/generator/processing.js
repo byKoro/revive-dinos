@@ -23,6 +23,7 @@ import {
 import { infoCombustivel } from "../energy/fuel";
 import { espelharDaEntidade, primeiroTick, restaurarNaEntidade } from "../machine/state";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
+import { marcarProgressoVisual } from "../machine/visual";
 
 /**
  * Estado do gerador espelhado por posição do bloco. É o que impede a máquina
@@ -95,6 +96,16 @@ export function tickGenerator(entity, def) {
  * baixando conforme queima. Sem combustível, apaga.
  */
 function desenharChama(def, entity, inv, fuel) {
+  const total = entity.getDynamicProperty(PROP_ENTITY_FUEL_MAX) ?? fuel;
+  const restante = Math.min(1, Math.max(0, fuel / Math.max(1, total)));
+
+  // Frente do bloco + som. O gerador não tem PROP_PROGRESS: aqui "progresso" é
+  // o combustível JÁ QUEIMADO, então a frente avança de estágio conforme a
+  // fornada é consumida e apaga quando o combustível acaba.
+  //
+  // Não marcar nada quando fuel <= 0 é o que apaga a frente (ver visual.js).
+  if (fuel > 0) marcarProgressoVisual(entity, 1 - restante);
+
   const frames = def.layout.progressFrames;
   if (!frames) return;
 
@@ -103,7 +114,5 @@ function desenharChama(def, entity, inv, fuel) {
     return;
   }
 
-  const total = entity.getDynamicProperty(PROP_ENTITY_FUEL_MAX) ?? fuel;
-  const fracao = Math.min(1, Math.max(0, fuel / Math.max(1, total)));
-  aplicarFrame(def, entity, inv, Math.max(1, Math.ceil(fracao * frames)), PROP_FRAME);
+  aplicarFrame(def, entity, inv, Math.max(1, Math.ceil(restante * frames)), PROP_FRAME);
 }

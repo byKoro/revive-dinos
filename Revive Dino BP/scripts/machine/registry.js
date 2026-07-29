@@ -19,6 +19,9 @@
  *   },
  *   processTick(entity, def),   // lógica por tick da máquina
  *   routeIngredient(item, def), // slot destino de um item vindo de funil, ou undefined
+ *   frontAnimada,               // true = o bloco troca a textura da frente por
+ *                               // estágio de processo e toca o som de trabalho
+ *                               // (exige o state `machine_stage` no bloco)
  * }
  * ---------------------------------------------------------------------------
  */

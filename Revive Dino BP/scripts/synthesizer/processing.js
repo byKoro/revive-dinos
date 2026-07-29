@@ -17,6 +17,7 @@ import { consumirUm, criarItem, inventarioDe } from "../core/items";
 import { consumirEnergia } from "../energy/consumer";
 import { ENERGY_COST } from "../energy/constants";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
+import { marcarProgressoVisual } from "../machine/visual";
 import { BIOMASS_ITEM_ID, TEMPO, layout, rendimentoDe, saidasPossiveis } from "./config";
 
 const SAIDAS = saidasPossiveis();
@@ -90,6 +91,10 @@ function protegerSlotDeSaida(entity, inv) {
 }
 
 function desenhar(def, entity, inv, fracao) {
+  // Frente do bloco + som: antes do guard da UI, porque a animação do bloco não
+  // depende de a máquina ter barra de progresso desenhada.
+  marcarProgressoVisual(entity, fracao);
+
   const frames = def.layout.progressFrames;
   if (!frames) return;
   aplicarFrame(def, entity, inv, Math.min(frames, Math.ceil(fracao * frames)), PROP_FRAME);

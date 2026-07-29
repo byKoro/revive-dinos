@@ -4,9 +4,6 @@
   "padding": 8,
   "num_mip_levels": 4,
   "texture_data": {
-    "genetic_extractor": {
-      "textures": "textures/blocks/genetic_extractor"
-    },
     "revive_dinos_genetic_extractor_ui": {
       "textures": "textures/revive_dinos/ui/genetic_extractor_ui"
     },
@@ -28,6 +25,24 @@
     "energy_cable": {
       "textures": "textures/blocks/energy/energy_cable"
     },
+    "genetic_extractor_side": {
+      "textures": "textures/blocks/machines/genetic_extractor_side"
+    },
+    "genetic_extractor_top": {
+      "textures": "textures/blocks/machines/genetic_extractor_top"
+    },
+    "genetic_extractor_front": {
+      "textures": "textures/blocks/machines/genetic_extractor_front"
+    },
+    "genetic_extractor_front_1": {
+      "textures": "textures/blocks/machines/genetic_extractor_front_1"
+    },
+    "genetic_extractor_front_2": {
+      "textures": "textures/blocks/machines/genetic_extractor_front_2"
+    },
+    "genetic_extractor_front_3": {
+      "textures": "textures/blocks/machines/genetic_extractor_front_3"
+    },
     "combustion_generator_side": {
       "textures": "textures/blocks/energy/combustion_generator_side"
     },
@@ -36,6 +51,15 @@
     },
     "combustion_generator_front": {
       "textures": "textures/blocks/energy/combustion_generator_front"
+    },
+    "combustion_generator_front_1": {
+      "textures": "textures/blocks/energy/combustion_generator_front_1"
+    },
+    "combustion_generator_front_2": {
+      "textures": "textures/blocks/energy/combustion_generator_front_2"
+    },
+    "combustion_generator_front_3": {
+      "textures": "textures/blocks/energy/combustion_generator_front_3"
     },
     "battery_side": {
       "textures": "textures/blocks/energy/battery_side"
@@ -52,6 +76,15 @@
     "biomass_synthesizer_front": {
       "textures": "textures/blocks/machines/biomass_synthesizer_front"
     },
+    "biomass_synthesizer_front_1": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_front_1"
+    },
+    "biomass_synthesizer_front_2": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_front_2"
+    },
+    "biomass_synthesizer_front_3": {
+      "textures": "textures/blocks/machines/biomass_synthesizer_front_3"
+    },
     "gene_sequencer_side": {
       "textures": "textures/blocks/machines/gene_sequencer_side"
     },
@@ -61,6 +94,15 @@
     "gene_sequencer_front": {
       "textures": "textures/blocks/machines/gene_sequencer_front"
     },
+    "gene_sequencer_front_1": {
+      "textures": "textures/blocks/machines/gene_sequencer_front_1"
+    },
+    "gene_sequencer_front_2": {
+      "textures": "textures/blocks/machines/gene_sequencer_front_2"
+    },
+    "gene_sequencer_front_3": {
+      "textures": "textures/blocks/machines/gene_sequencer_front_3"
+    },
     "incubator_side": {
       "textures": "textures/blocks/machines/incubator_side"
     },
@@ -69,6 +111,15 @@
     },
     "incubator_front": {
       "textures": "textures/blocks/machines/incubator_front"
+    },
+    "incubator_front_1": {
+      "textures": "textures/blocks/machines/incubator_front_1"
+    },
+    "incubator_front_2": {
+      "textures": "textures/blocks/machines/incubator_front_2"
+    },
+    "incubator_front_3": {
+      "textures": "textures/blocks/machines/incubator_front_3"
     },
     "revive_dinos_battery_ui": {
       "textures": "textures/revive_dinos/ui/battery_ui"

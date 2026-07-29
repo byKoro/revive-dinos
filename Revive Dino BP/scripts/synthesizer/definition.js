@@ -22,6 +22,8 @@ export const synthesizerDef = {
   blockId: SYNTHESIZER_BLOCK_ID,
   entityId: SYNTHESIZER_UI_ENTITY_ID,
   componentId: COMPONENT_SYNTHESIZER,
+  /** A frente do bloco anima por estágio de processo (ver machine/visual.js). */
+  frontAnimada: true,
   layout: {
     inputs: [cfg.input],
     outputs: [cfg.output],

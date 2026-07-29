@@ -16,6 +16,7 @@ import {
 } from "./entity";
 import { gravarEstado, lerEstado, limparEstado } from "./state";
 import { atualizarStatus } from "./status";
+import { atualizarVisual } from "./visual";
 
 /** Contador de ticks sem achar a entidade, por posição de bloco. */
 const PREFIXO_FALTAS = "rd_miss";
@@ -64,6 +65,9 @@ export function makeMachineComponent(def) {
       limparEstado(PREFIXO_FALTAS, block.location);
       garantirPosicao(entity, block);
       def.processTick(entity, def);
+      // Animação da frente + som de processamento. Depois do processTick, que é
+      // quem marca o estágio; este é o único gancho com acesso ao bloco.
+      atualizarVisual(entity, block, def);
       // Status em tempo real (agachar + olhar), se a máquina expõe statusTexto
       atualizarStatus(entity, block, def);
     },
