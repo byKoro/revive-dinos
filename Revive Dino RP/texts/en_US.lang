@@ -61,3 +61,10 @@ tile.revive_dinos:battery.name=Energy Battery
 tile.revive_dinos:biomass_synthesizer.name=Biomass Synthesizer
 tile.revive_dinos:gene_sequencer.name=Gene Sequencer
 tile.revive_dinos:incubator.name=Incubator
+revive_dinos:machines=Machines
+revive_dinos:complete_dna=Complete DNA
+revive_dinos:fossils=Fossil
+revive_dinos:dna=Incomplete DNA
+
+entity.revive_dinos:dodo.name=Dodo
+item.spawn_egg.entity.revive_dinos:dodo.name=Spawn Dodo

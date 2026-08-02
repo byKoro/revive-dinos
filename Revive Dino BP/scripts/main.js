@@ -39,6 +39,8 @@ import { energyCableComponent } from "./energy/cable";
 import { registrarTransferenciaDeBateria } from "./battery/transfer";
 import { registrarMinigameDaRocha } from "./fossil/minigame";
 import { fossilRockComponent } from "./fossil/rock";
+import { registrarSlowFallDodo } from "./dodo/slowfall";
+import { registrarHurtDodo } from "./dodo/hurt";
 
 // Registra as máquinas no framework (os handlers genéricos despacham por elas)
 registrarMaquina(extractorDef);
@@ -75,3 +77,5 @@ registrarLimpezaAoEntrar();
 registrarResetDeSelecaoAoEntrar();
 registrarTransferenciaDeBateria();
 registrarMinigameDaRocha();
+registrarSlowFallDodo();
+registrarHurtDodo();

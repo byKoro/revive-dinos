@@ -14,9 +14,10 @@ import { consumirUm, criarItem, inventarioDe } from "../core/items";
 import { consumirEnergia } from "../energy/consumer";
 import { ENERGY_COST } from "../energy/constants";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
-import { marcarProgressoVisual } from "../machine/visual";
+import { marcarProgressoVisualLoop } from "../machine/visual";
 import {
   ENZYME_ITEM_ID,
+  SEQUENCER_LOOP_TICKS,
   TEMPO,
   dnaCompletoDe,
   especieDoDna,
@@ -101,9 +102,9 @@ function protegerSlotDeSaida(entity, inv) {
 }
 
 function desenhar(def, entity, inv, fracao) {
-  // Frente do bloco + som: antes do guard da UI, porque a animação do bloco não
-  // depende de a máquina ter barra de progresso desenhada.
-  marcarProgressoVisual(entity, fracao);
+  // Frente do bloco em loop: a animação cicla várias vezes durante o
+  // processamento, dando um aspecto mais fluido em vez de um único passo lento.
+  marcarProgressoVisualLoop(entity, SEQUENCER_LOOP_TICKS);
 
   const frames = def.layout.progressFrames;
   if (!frames) return;

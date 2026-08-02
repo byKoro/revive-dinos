@@ -73,14 +73,15 @@ export function marcarProgressoVisualLoop(entity, cycleTicks) {
 }
 
 /** Estágio que vale agora: 0 se o processamento não marcou nos últimos ticks. */
-function estagioAtual(entity) {
+function estagioAtual(entity, maxStages) {
+  const max = maxStages ?? MACHINE_STAGES;
   const marcado = entity.getDynamicProperty(PROP_STAGE_TICK);
   if (typeof marcado !== "number") return 0;
   if (system.currentTick - marcado > MACHINE_STAGE_STALE_TICKS) return 0;
 
   const estagio = entity.getDynamicProperty(PROP_STAGE) ?? 0;
   if (!Number.isFinite(estagio)) return 0;
-  return Math.min(MACHINE_STAGES, Math.max(0, Math.floor(estagio)));
+  return Math.min(max, Math.max(0, Math.floor(estagio)));
 }
 
 /**
@@ -93,7 +94,7 @@ export function atualizarVisual(entity, block, def) {
   if (def.frontAnimada !== true) return;
   if (entity?.isValid !== true) return;
 
-  const estagio = estagioAtual(entity);
+  const estagio = estagioAtual(entity, def.maxStages);
 
   // setPermutation por tick seria caro e piscaria o bloco: só quando muda.
   if (block.permutation.getState(STATE_MACHINE_STAGE) !== estagio) {
@@ -103,7 +104,7 @@ export function atualizarVisual(entity, block, def) {
   }
 
   if (estagio > 0) {
-    tocarSom(entity, block);
+    if (!def.semSom) tocarSom(entity, block);
     return;
   }
 

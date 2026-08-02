@@ -1,0 +1,1 @@
+{"format_version":"1.10.0","render_controllers":{"controller.render.oreville_ans.mgjogc":{"geometry":"v.ifqpks?(v.cdrzno?Geometry.gnfiwu:Geometry.repbvl):v.cdrzno?Geometry.xivjxm:Geometry.default","textures":["v.ifqpks?Texture.repbvl:Texture.default"],"materials":[{"*":"Material.default"}],"on_fire_color":{"r":1,"g":0.4,"b":0,"a":"Math.cos(q.life_time*1200)*-0.35+0.35"}}}}

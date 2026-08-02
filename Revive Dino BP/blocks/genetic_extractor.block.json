@@ -4,7 +4,8 @@
     "description": {
       "identifier": "revive_dinos:genetic_extractor",
       "menu_category": {
-        "category": "nature"
+        "category": "construction",
+        "group": "revive_dinos:machines"
       },
       "traits": {
         "minecraft:placement_direction": {

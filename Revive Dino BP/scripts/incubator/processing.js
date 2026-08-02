@@ -15,10 +15,11 @@ import { cabeNaPilha, consumirUm, consumirVarios, criarItem, inventarioDe } from
 import { consumirEnergia } from "../energy/consumer";
 import { ENERGY_COST } from "../energy/constants";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
-import { marcarProgressoVisual } from "../machine/visual";
+import { marcarProgressoVisualLoop } from "../machine/visual";
 import {
   BIOMASSA_POR_ESPECIE,
   BIOMASS_ITEM_ID,
+  INCUBATOR_LOOP_TICKS,
   TEMPO,
   especieDoDnaCompleto,
   layout,
@@ -117,8 +118,9 @@ function protegerSlotDeSaida(entity, inv) {
 }
 
 function desenhar(def, entity, inv, fracao) {
-  // Frente do bloco + som: só é chamado quando o progresso avança de verdade
-  marcarProgressoVisual(entity, fracao);
+  // Topo do bloco em loop: a animação cicla repetidamente durante o
+  // processamento, dando um aspecto mais fluido.
+  marcarProgressoVisualLoop(entity, INCUBATOR_LOOP_TICKS);
   const frames = layout.progressFrames;
   aplicarFrame(def, entity, inv, Math.min(frames, Math.ceil(fracao * frames)), PROP_FRAME);
 }

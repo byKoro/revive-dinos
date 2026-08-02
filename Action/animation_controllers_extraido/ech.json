@@ -1,0 +1,1 @@
+{"format_version":"1.19.60","animation_controllers":{"controller.animation.oreville_ans.pzgdkv":{"states":{"default":{"animations":["cxqbtk"],"transitions":[{"vwstjh":"q.has_rider"}]},"vwstjh":{"animations":["udqfnv"],"transitions":[{"pqblez":"!q.has_rider"}]},"pqblez":{"transitions":[{"pqblez":"q.has_rider"},{"default":"q.state_time>1&&q.property('minecraft:can_move')"}]}}}}}

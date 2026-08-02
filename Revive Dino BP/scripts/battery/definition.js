@@ -42,6 +42,9 @@ export const batteryDef = {
   blockId: BATTERY_BLOCK_ID,
   entityId: BATTERY_UI_ENTITY_ID,
   componentId: COMPONENT_BATTERY,
+  frontAnimada: true,
+  maxStages: 4,
+  semSom: true,
   layout: {
     // A bateria não recebe nem produz itens: TODO slot é protegido.
     inputs: [],

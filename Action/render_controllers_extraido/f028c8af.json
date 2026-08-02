@@ -1,0 +1,1 @@
+{"format_version":"1.10","render_controllers":{"controller.render.shield":{"geometry":"Geometry.default","materials":[{"*":"v.is_patterned?(v.is_enchanted?Material.pattern_enchanted:Material.pattern):(v.is_enchanted?Material.enchanted:Material.default)"}],"textures":["Texture.default","Texture.enchanted","Texture.pattern"]}}}

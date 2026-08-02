@@ -3,9 +3,7 @@
   "minecraft:item": {
     "description": {
       "identifier": "revive_dinos:fossil_garra_intacto",
-      "menu_category": {
-        "category": "items"
-      }
+      "menu_category": { "category": "nature", "group": "revive_dinos:fossils" }
     },
     "components": {
       "minecraft:icon": "revive_dinos_fossil_garra_intacto",

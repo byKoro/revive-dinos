@@ -31,6 +31,13 @@ export const layout = {
   placeholderItem: "revive_dinos:placeholder_invisible",
 };
 
+/**
+ * Duração de um ciclo completo de animação da frente do extrator (ticks).
+ * A cada EXTRACTOR_LOOP_TICKS a frente percorre 1→2→3→1→2→3... repetidamente.
+ * 28 ticks ≈ 1.4s por loop → ~7 ciclos durante os 10s de processamento.
+ */
+export const EXTRACTOR_LOOP_TICKS = 28;
+
 // ---------------------------------------------------------------------------
 // ESPÉCIES
 // A ordem define o índice de raridade (0 = mais comum, 4 = mais raro).

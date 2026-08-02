@@ -1,0 +1,58 @@
+{
+  "format_version": "1.20.80",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "revive_dinos:dodo",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "white": "textures/entity/dodo/dodo_white",
+        "brown": "textures/entity/dodo/dodo_brown",
+        "gray": "textures/entity/dodo/dodo_gray",
+        "black": "textures/entity/dodo/dodo_black",
+        "tan": "textures/entity/dodo/dodo_tan",
+        "green": "textures/entity/dodo/dodo_green",
+        "blue": "textures/entity/dodo/dodo_blue",
+        "red": "textures/entity/dodo/dodo_red"
+      },
+      "geometry": {
+        "default": "geometry.dodo"
+      },
+      "animations": {
+        "idle": "animation.dodo.idle",
+        "walk": "animation.dodo.walk",
+        "run": "animation.dodo.run",
+        "jump": "animation.dodo.jump",
+        "fall": "animation.dodo.fall",
+        "swimming": "animation.dodo.swimming",
+        "step_down": "animation.dodo.step_down",
+        "high_fall_landing": "animation.dodo.high_fall_landing",
+        "hurt": "animation.dodo.hurt",
+        "head_tilt": "animation.dodo.head_tilt",
+        "pecking": "animation.dodo.pecking",
+        "look_at_target": "animation.dodo.look_at_target",
+        "move_controller": "controller.animation.dodo.move",
+        "idle_extras_controller": "controller.animation.dodo.idle_extras",
+        "hurt_controller": "controller.animation.dodo.hurt",
+        "look_controller": "controller.animation.dodo.look"
+      },
+      "scripts": {
+        "animate": [
+          "move_controller",
+          "idle_extras_controller",
+          "hurt_controller",
+          "look_controller"
+        ]
+      },
+      "render_controllers": ["controller.render.dodo"],
+      "spawn_egg": {
+        "base_color": "#8B7355",
+        "overlay_color": "#F5F5DC"
+      },
+      "particle_effects": {
+        "feathers": "revive_dinos:dodo_feathers"
+      }
+    }
+  }
+}

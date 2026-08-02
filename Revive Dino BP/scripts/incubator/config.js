@@ -41,6 +41,13 @@ export const layout = {
 /** Ticks para incubar um ovo (o processo mais longo do addon). */
 export const TEMPO = 1200; // 60 segundos
 
+/**
+ * Duração de um ciclo completo de animação do topo da incubadora (ticks).
+ * A cada INCUBATOR_LOOP_TICKS o topo percorre 1→2→3→1→2→3... repetidamente.
+ * 60 ticks = 3 segundos por loop → 20 ciclos durante os 60s de processamento.
+ */
+export const INCUBATOR_LOOP_TICKS = 60;
+
 /** Biomassa necessária por espécie (mais raro = mais caro). */
 export const BIOMASSA_POR_ESPECIE = {
   dodo: 8,

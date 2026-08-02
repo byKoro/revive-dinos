@@ -4,7 +4,8 @@
     "description": {
       "identifier": "revive_dinos:incubator",
       "menu_category": {
-        "category": "construction"
+        "category": "construction",
+        "group": "revive_dinos:machines"
       },
       "traits": {
         "minecraft:placement_direction": {
@@ -49,11 +50,7 @@
           "render_method": "opaque"
         },
         "down": {
-          "texture": "incubator_top",
-          "render_method": "opaque"
-        },
-        "north": {
-          "texture": "incubator_front",
+          "texture": "incubator_bottom",
           "render_method": "opaque"
         }
       },
@@ -95,18 +92,14 @@
               "render_method": "opaque"
             },
             "up": {
-              "texture": "incubator_top",
-              "render_method": "opaque"
-            },
-            "down": {
-              "texture": "incubator_top",
-              "render_method": "opaque"
-            },
-            "north": {
-              "texture": "incubator_front_1",
+              "texture": "incubator_top_1",
               "render_method": "opaque",
               "face_dimming": false,
               "ambient_occlusion": false
+            },
+            "down": {
+              "texture": "incubator_bottom",
+              "render_method": "opaque"
             }
           },
           "minecraft:light_emission": 8
@@ -121,18 +114,14 @@
               "render_method": "opaque"
             },
             "up": {
-              "texture": "incubator_top",
-              "render_method": "opaque"
-            },
-            "down": {
-              "texture": "incubator_top",
-              "render_method": "opaque"
-            },
-            "north": {
-              "texture": "incubator_front_2",
+              "texture": "incubator_top_2",
               "render_method": "opaque",
               "face_dimming": false,
               "ambient_occlusion": false
+            },
+            "down": {
+              "texture": "incubator_bottom",
+              "render_method": "opaque"
             }
           },
           "minecraft:light_emission": 8
@@ -147,18 +136,14 @@
               "render_method": "opaque"
             },
             "up": {
-              "texture": "incubator_top",
-              "render_method": "opaque"
-            },
-            "down": {
-              "texture": "incubator_top",
-              "render_method": "opaque"
-            },
-            "north": {
-              "texture": "incubator_front_3",
+              "texture": "incubator_top_3",
               "render_method": "opaque",
               "face_dimming": false,
               "ambient_occlusion": false
+            },
+            "down": {
+              "texture": "incubator_bottom",
+              "render_method": "opaque"
             }
           },
           "minecraft:light_emission": 8

@@ -4,7 +4,8 @@
     "description": {
       "identifier": "revive_dinos:combustion_generator",
       "menu_category": {
-        "category": "construction"
+        "category": "construction",
+        "group": "revive_dinos:machines"
       },
       "traits": {
         "minecraft:placement_direction": {

@@ -1,0 +1,26 @@
+{
+  "format_version": "1.20.80",
+  "render_controllers": {
+    "controller.render.dodo": {
+      "arrays": {
+        "textures": {
+          "Array.skins": [
+            "Texture.white",
+            "Texture.brown",
+            "Texture.gray",
+            "Texture.black",
+            "Texture.tan",
+            "Texture.green",
+            "Texture.blue",
+            "Texture.red"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [
+        { "*": "Material.default" }
+      ],
+      "textures": ["Array.skins[query.variant]"]
+    }
+  }
+}

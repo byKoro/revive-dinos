@@ -1,0 +1,103 @@
+{
+    "format_version": "1.21.60",
+    "minecraft:crafting_items_catalog": {
+        "categories": [
+            {
+                "category_name": "nature",
+                "groups": [
+                    {
+                        "group_identifier": {
+                            "icon": "revive_dinos:complete_dna_trex",
+                            "name": "revive_dinos:complete_dna"
+                        },
+                        "items": [
+                            "revive_dinos:complete_dna_trex",
+                            "revive_dinos:complete_dna_velociraptor",
+                            "revive_dinos:complete_dna_triceratops",
+                            "revive_dinos:complete_dna_pterodactyl",
+                            "revive_dinos:complete_dna_dodo"
+                        ]
+                    }
+                ]
+            },
+            {
+                "category_name": "nature",
+                "groups": [
+                    {
+                        "group_identifier": {
+                            "icon": "revive_dinos:fossil_cranio_pristino",
+                            "name": "revive_dinos:fossils"
+                        },
+                        "items": [
+                            "revive_dinos:fossil_cranio_danificado",
+                            "revive_dinos:fossil_cranio_intacto",
+                            "revive_dinos:fossil_cranio_pristino",
+                            "revive_dinos:fossil_costela_danificado",
+                            "revive_dinos:fossil_costela_intacto",
+                            "revive_dinos:fossil_costela_pristino",
+                            "revive_dinos:fossil_cauda_danificado",
+                            "revive_dinos:fossil_cauda_intacto",
+                            "revive_dinos:fossil_cauda_pristino",
+                            "revive_dinos:fossil_dente_danificado",
+                            "revive_dinos:fossil_dente_intacto",
+                            "revive_dinos:fossil_dente_pristino",
+                            "revive_dinos:fossil_femur_danificado",
+                            "revive_dinos:fossil_femur_intacto",
+                            "revive_dinos:fossil_femur_pristino",
+                            "revive_dinos:fossil_fragmento_danificado",
+                            "revive_dinos:fossil_fragmento_intacto",
+                            "revive_dinos:fossil_fragmento_pristino",
+                            "revive_dinos:fossil_garra_danificado",
+                            "revive_dinos:fossil_garra_intacto",
+                            "revive_dinos:fossil_garra_pristino",
+                            "revive_dinos:fossil_umero_danificado",
+                            "revive_dinos:fossil_umero_intacto",
+                            "revive_dinos:fossil_umero_pristino",
+                            "revive_dinos:fossil_vertebra_danificado",
+                            "revive_dinos:fossil_vertebra_intacto",
+                            "revive_dinos:fossil_vertebra_pristino"
+                        ]
+                    }
+                ]
+            },
+            {
+                "category_name": "nature",
+                "groups": [
+                    {
+                        "group_identifier": {
+                            "icon": "revive_dinos:dna_trex",
+                            "name": "revive_dinos:dna"
+                        },
+                        "items": [
+                            "revive_dinos:dna_trex",
+                            "revive_dinos:dna_velociraptor",
+                            "revive_dinos:dna_triceratops",
+                            "revive_dinos:dna_pterodactyl",
+                            "revive_dinos:dna_dodo"
+                        ]
+                    }
+                ]
+            },
+            {
+                "category_name": "construction",
+                "groups": [
+                    {
+                        "group_identifier": {
+                            "icon": "revive_dinos:genetic_extractor",
+                            "name": "revive_dinos:machines"
+                        },
+                        "items": [
+                            "revive_dinos:genetic_extractor",
+                            "revive_dinos:gene_sequencer",
+                            "revive_dinos:biomass_synthesizer",
+                            "revive_dinos:incubator",
+                            "revive_dinos:combustion_generator",
+                            "revive_dinos:battery",
+                            "revive_dinos:energy_cable"
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

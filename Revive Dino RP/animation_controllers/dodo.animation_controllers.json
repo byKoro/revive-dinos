@@ -1,0 +1,162 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.dodo.move": {
+			"initial_state": "idle",
+			"states": {
+				"idle": {
+					"animations": ["idle"],
+					"transitions": [
+						{"walk": "q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6 && q.is_on_ground"},
+						{"run": "q.modified_move_speed > 0.6 && q.is_on_ground"},
+						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"jump": "!q.is_on_ground && !q.is_in_water && q.vertical_speed > 0.1"},
+						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"}
+					],
+					"blend_transition": 0.25
+				},
+				"walk": {
+					"animations": ["walk"],
+					"transitions": [
+						{"idle": "q.modified_move_speed <= 0.05 && q.is_on_ground"},
+						{"run": "q.modified_move_speed > 0.6 && q.is_on_ground"},
+						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"jump": "!q.is_on_ground && !q.is_in_water && q.vertical_speed > 0.1"},
+						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"}
+					],
+					"blend_transition": 0.2
+				},
+				"run": {
+					"animations": ["run"],
+					"transitions": [
+						{"idle": "q.modified_move_speed <= 0.05 && q.is_on_ground"},
+						{"walk": "q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6 && q.is_on_ground"},
+						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"jump": "!q.is_on_ground && !q.is_in_water && q.vertical_speed > 0.1"},
+						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"}
+					],
+					"blend_transition": 0.15
+				},
+				"swimming": {
+					"animations": ["swimming"],
+					"transitions": [
+						{"idle": "q.is_on_ground && q.modified_move_speed <= 0.05"},
+						{"walk": "q.is_on_ground && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
+						{"run": "q.is_on_ground && q.modified_move_speed > 0.6"},
+						{"fall": "!q.is_in_water && !q.is_on_ground && q.vertical_speed <= 0.1"}
+					],
+					"blend_transition": 0.3
+				},
+				"jump": {
+					"animations": ["jump"],
+					"transitions": [
+						{"fall": "q.vertical_speed <= 0.1 && !q.is_in_water && !q.is_on_ground"},
+						{"swimming": "q.is_in_water"},
+						{"step_down": "q.is_on_ground && q.anim_time >= 0.15"},
+						{"idle": "q.is_on_ground && q.anim_time < 0.15 && q.modified_move_speed <= 0.05"},
+						{"walk": "q.is_on_ground && q.anim_time < 0.15 && q.modified_move_speed > 0.05"}
+					],
+					"blend_transition": 0.1
+				},
+				"fall": {
+					"animations": ["fall"],
+					"transitions": [
+						{"high_fall_landing": "q.is_on_ground && q.anim_time >= 0.6"},
+						{"step_down": "q.is_on_ground && q.anim_time >= 0.2 && q.anim_time < 0.6"},
+						{"idle": "q.is_on_ground && q.anim_time < 0.2 && q.modified_move_speed <= 0.05"},
+						{"walk": "q.is_on_ground && q.anim_time < 0.2 && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
+						{"run": "q.is_on_ground && q.anim_time < 0.2 && q.modified_move_speed > 0.6"},
+						{"swimming": "q.is_in_water"}
+					],
+					"blend_transition": 0.08
+				},
+				"step_down": {
+					"animations": ["step_down"],
+					"transitions": [
+						{"idle": "q.any_animation_finished && q.modified_move_speed <= 0.05"},
+						{"walk": "q.any_animation_finished && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
+						{"run": "q.any_animation_finished && q.modified_move_speed > 0.6"},
+						{"walk": "q.modified_move_speed > 0.3"},
+						{"fall": "!q.is_on_ground && !q.is_in_water"}
+					],
+					"blend_transition": 0.15
+				},
+				"high_fall_landing": {
+					"animations": ["high_fall_landing"],
+					"transitions": [
+						{"idle": "q.any_animation_finished && q.modified_move_speed <= 0.05"},
+						{"walk": "q.any_animation_finished && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
+						{"run": "q.any_animation_finished && q.modified_move_speed > 0.6"},
+						{"walk": "q.modified_move_speed > 0.5"},
+						{"fall": "!q.is_on_ground && !q.is_in_water"}
+					],
+					"blend_transition": 0.2
+				}
+			}
+		},
+		"controller.animation.dodo.idle_extras": {
+			"initial_state": "waiting",
+			"states": {
+				"waiting": {
+					"transitions": [
+						{"head_tilt": "q.modified_move_speed <= 0.05 && q.is_on_ground && !q.is_in_water && Math.random(1,100) <= 1"},
+						{"pecking": "q.modified_move_speed <= 0.05 && q.is_on_ground && !q.is_in_water && Math.random(1,100) <= 1"}
+					]
+				},
+				"head_tilt": {
+					"animations": ["head_tilt"],
+					"transitions": [
+						{"waiting": "q.any_animation_finished"},
+						{"waiting": "q.modified_move_speed > 0.05"},
+						{"waiting": "q.is_in_water"}
+					],
+					"blend_transition": 0.25
+				},
+				"pecking": {
+					"animations": ["pecking"],
+					"transitions": [
+						{"waiting": "q.any_animation_finished"},
+						{"waiting": "q.modified_move_speed > 0.05"},
+						{"waiting": "q.is_in_water"}
+					],
+					"blend_transition": 0.25
+				}
+			}
+		},
+		"controller.animation.dodo.hurt": {
+			"initial_state": "default",
+			"states": {
+				"default": {
+					"transitions": [
+						{"hurt": "q.hurt_time > 0"}
+					]
+				},
+				"hurt": {
+					"animations": ["hurt"],
+					"transitions": [
+						{"default": "q.any_animation_finished"}
+					],
+					"blend_transition": 0.08
+				}
+			}
+		},
+		"controller.animation.dodo.look": {
+			"initial_state": "default",
+			"states": {
+				"default": {
+					"animations": ["look_at_target"],
+					"transitions": [
+						{"swimming_look": "q.is_in_water && !q.is_on_ground"}
+					],
+					"blend_transition": 0.2
+				},
+				"swimming_look": {
+					"transitions": [
+						{"default": "!q.is_in_water || q.is_on_ground"}
+					],
+					"blend_transition": 0.3
+				}
+			}
+		}
+	}
+}

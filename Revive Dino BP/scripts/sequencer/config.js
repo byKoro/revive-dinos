@@ -24,6 +24,14 @@ export const layout = {
 /** Ticks para completar uma sequência. */
 export const TEMPO = 300; // 15 segundos
 
+/**
+ * Duração de um ciclo completo de animação da frente do sequenciador (ticks).
+ * A cada SEQUENCER_LOOP_TICKS a frente percorre 1→2→3→1→2→3... repetidamente,
+ * dando uma animação fluida em vez de um único passo lento de início ao fim.
+ * 40 ticks = 2 segundos por loop (~7.5 ciclos durante os 15s de processamento).
+ */
+export const SEQUENCER_LOOP_TICKS = 40;
+
 /** Espécies válidas (mesma ordem/nomes usados no resto do addon). */
 export const ESPECIES = [
   "dodo",

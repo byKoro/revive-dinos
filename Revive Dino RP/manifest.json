@@ -8,6 +8,7 @@
 			"blockbench_block_wizard": ["1.7.0"]
 		}
 	},
+	
 	"header": {
 		"name": "pack.name",
 		"description": "pack.description",

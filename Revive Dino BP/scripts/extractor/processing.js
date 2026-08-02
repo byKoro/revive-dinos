@@ -12,8 +12,8 @@
 import { PROP_FRAME, PROP_PROGRESS } from "../core/constants";
 import { consumirUm, criarItem, inventarioDe } from "../core/items";
 import { aplicarFrame, limparItensDropados, restaurarSlotsDeUi } from "../machine/ui";
-import { marcarProgressoVisual } from "../machine/visual";
-import { findRecipe, layout, pickOutput, saidasPossiveis } from "./config";
+import { marcarProgressoVisualLoop } from "../machine/visual";
+import { EXTRACTOR_LOOP_TICKS, findRecipe, layout, pickOutput, saidasPossiveis } from "./config";
 import { ENERGY_COST } from "../energy/constants";
 import { consumirEnergia } from "../energy/consumer";
 
@@ -85,8 +85,9 @@ function protegerSlotDeSaida(entity, inv) {
 }
 
 function desenhar(def, entity, inv, fracao) {
-  // Frente do bloco + som: só é chamado quando o progresso avança de verdade
-  marcarProgressoVisual(entity, fracao);
+  // Frente do bloco em loop: a animação cicla várias vezes durante o
+  // processamento, dando um aspecto mais fluido.
+  marcarProgressoVisualLoop(entity, EXTRACTOR_LOOP_TICKS);
   const frame = Math.min(layout.progressFrames, Math.ceil(fracao * layout.progressFrames));
   aplicarFrame(def, entity, inv, frame, PROP_FRAME);
 }

@@ -3,9 +3,7 @@
   "minecraft:item": {
     "description": {
       "identifier": "revive_dinos:complete_dna_velociraptor",
-      "menu_category": {
-        "category": "items"
-      }
+      "menu_category": { "category": "nature", "group": "revive_dinos:complete_dna" }
     },
     "components": {
       "minecraft:icon": "revive_dinos_complete_dna_velociraptor",

@@ -91,8 +91,9 @@ export function tickGenerator(entity, def) {
     }
   }
 
-  // Queima 1 tick de combustível e acumula carga (pausa se o buffer encheu)
-  if (fuel > 0 && charge < GENERATOR_MAX_CHARGE) {
+  // Queima 1 tick de combustível e acumula carga (continua queimando até o fim,
+  // mesmo que o buffer esteja cheio — só não acumula além do máximo)
+  if (fuel > 0) {
     charge = Math.min(charge + rate, GENERATOR_MAX_CHARGE);
     fuel -= 1;
     entity.setDynamicProperty(PROP_ENTITY_CHARGE, charge);

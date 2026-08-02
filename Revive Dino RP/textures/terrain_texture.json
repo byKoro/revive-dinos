@@ -64,6 +64,18 @@
     "battery_side": {
       "textures": "textures/blocks/energy/battery_side"
     },
+    "battery_side_1": {
+      "textures": "textures/blocks/energy/battery_side_1"
+    },
+    "battery_side_2": {
+      "textures": "textures/blocks/energy/battery_side_2"
+    },
+    "battery_side_3": {
+      "textures": "textures/blocks/energy/battery_side_3"
+    },
+    "battery_side_4": {
+      "textures": "textures/blocks/energy/battery_side_4"
+    },
     "battery_top": {
       "textures": "textures/blocks/energy/battery_top"
     },
@@ -108,6 +120,18 @@
     },
     "incubator_top": {
       "textures": "textures/blocks/machines/incubator_top"
+    },
+    "incubator_top_1": {
+      "textures": "textures/blocks/machines/incubator_top_1"
+    },
+    "incubator_top_2": {
+      "textures": "textures/blocks/machines/incubator_top_2"
+    },
+    "incubator_top_3": {
+      "textures": "textures/blocks/machines/incubator_top_3"
+    },
+    "incubator_bottom": {
+      "textures": "textures/blocks/machines/incubator_bottom"
     },
     "incubator_front": {
       "textures": "textures/blocks/machines/incubator_front"
