@@ -41,6 +41,8 @@ import { registrarMinigameDaRocha } from "./fossil/minigame";
 import { fossilRockComponent } from "./fossil/rock";
 import { registrarSlowFallDodo } from "./dodo/slowfall";
 import { registrarHurtDodo } from "./dodo/hurt";
+import { registrarVooPterodactyl } from "./pterodactyl/flight";
+import { registrarHurtPterodactyl } from "./pterodactyl/hurt";
 
 // Registra as máquinas no framework (os handlers genéricos despacham por elas)
 registrarMaquina(extractorDef);
@@ -79,3 +81,5 @@ registrarTransferenciaDeBateria();
 registrarMinigameDaRocha();
 registrarSlowFallDodo();
 registrarHurtDodo();
+registrarVooPterodactyl();
+registrarHurtPterodactyl();

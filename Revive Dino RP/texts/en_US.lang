@@ -68,3 +68,6 @@ revive_dinos:dna=Incomplete DNA
 
 entity.revive_dinos:dodo.name=Dodo
 item.spawn_egg.entity.revive_dinos:dodo.name=Spawn Dodo
+
+entity.revive_dinos:pterodactyl.name=Pterodactyl
+item.spawn_egg.entity.revive_dinos:pterodactyl.name=Spawn Pterodactyl

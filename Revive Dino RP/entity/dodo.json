@@ -22,6 +22,7 @@
       "animations": {
         "idle": "animation.dodo.idle",
         "walk": "animation.dodo.walk",
+        "walk_elevation": "animation.dodo.walk_elevation",
         "run": "animation.dodo.run",
         "jump": "animation.dodo.jump",
         "fall": "animation.dodo.fall",
@@ -30,19 +31,47 @@
         "high_fall_landing": "animation.dodo.high_fall_landing",
         "hurt": "animation.dodo.hurt",
         "head_tilt": "animation.dodo.head_tilt",
-        "pecking": "animation.dodo.pecking",
         "look_at_target": "animation.dodo.look_at_target",
+        "blink": "animation.dodo.blink",
+        "pupils": "animation.dodo.pupils",
+        "pupils_idle": "animation.dodo.pupils_idle",
+        "pupils_run": "animation.dodo.pupils_run",
+        "pupils_swim": "animation.dodo.pupils_swim",
+        "pupils_hurt": "animation.dodo.pupils_hurt",
+        "pupils_fall": "animation.dodo.pupils_fall",
+        "turn_reaction": "animation.dodo.turn_reaction",
         "move_controller": "controller.animation.dodo.move",
         "idle_extras_controller": "controller.animation.dodo.idle_extras",
         "hurt_controller": "controller.animation.dodo.hurt",
-        "look_controller": "controller.animation.dodo.look"
+        "look_controller": "controller.animation.dodo.look",
+        "pupils_controller": "controller.animation.dodo.pupils"
       },
       "scripts": {
+        "initialize": [
+          "variable.prev_yaw = 0.0;",
+          "variable.raw_delta = 0.0;",
+          "variable.delta_yaw = 0.0;",
+          "variable.smooth_turn = 0.0;",
+          "variable.turn_abs = 0.0;",
+          "variable.head_turn = 0.0;"
+        ],
+        "pre_animation": [
+          "v.raw_delta = q.body_y_rotation - v.prev_yaw;",
+          "v.delta_yaw = v.raw_delta > 180.0 ? v.raw_delta - 360.0 : (v.raw_delta < -180.0 ? v.raw_delta + 360.0 : v.raw_delta);",
+          "v.prev_yaw = q.body_y_rotation;",
+          "v.smooth_turn = math.lerp(v.smooth_turn, v.delta_yaw, 0.18);",
+          "v.turn_abs = math.abs(v.smooth_turn);",
+          "v.head_turn = math.lerp(v.head_turn, v.delta_yaw, 0.35);"
+        ],
         "animate": [
+          "blink",
+          "pupils",
+          "turn_reaction",
           "move_controller",
           "idle_extras_controller",
           "hurt_controller",
-          "look_controller"
+          "look_controller",
+          "pupils_controller"
         ]
       },
       "render_controllers": ["controller.render.dodo"],

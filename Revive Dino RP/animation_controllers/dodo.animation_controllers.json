@@ -10,17 +10,19 @@
 						{"walk": "q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6 && q.is_on_ground"},
 						{"run": "q.modified_move_speed > 0.6 && q.is_on_ground"},
 						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"step_down": "q.is_on_ground && q.vertical_speed < -1.5 && q.vertical_speed >= -5.0"},
 						{"jump": "!q.is_on_ground && !q.is_in_water && q.vertical_speed > 0.1"},
 						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"}
 					],
-					"blend_transition": 0.25
+					"blend_transition": 0.2
 				},
 				"walk": {
-					"animations": ["walk"],
+					"animations": ["walk", "walk_elevation"],
 					"transitions": [
 						{"idle": "q.modified_move_speed <= 0.05 && q.is_on_ground"},
 						{"run": "q.modified_move_speed > 0.6 && q.is_on_ground"},
 						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"step_down": "q.is_on_ground && q.vertical_speed < -1.5 && q.vertical_speed >= -5.0"},
 						{"jump": "!q.is_on_ground && !q.is_in_water && q.vertical_speed > 0.1"},
 						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"}
 					],
@@ -32,10 +34,11 @@
 						{"idle": "q.modified_move_speed <= 0.05 && q.is_on_ground"},
 						{"walk": "q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6 && q.is_on_ground"},
 						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"step_down": "q.is_on_ground && q.vertical_speed < -1.5 && q.vertical_speed >= -5.0"},
 						{"jump": "!q.is_on_ground && !q.is_in_water && q.vertical_speed > 0.1"},
 						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"}
 					],
-					"blend_transition": 0.15
+					"blend_transition": 0.2
 				},
 				"swimming": {
 					"animations": ["swimming"],
@@ -43,10 +46,12 @@
 						{"idle": "q.is_on_ground && q.modified_move_speed <= 0.05"},
 						{"walk": "q.is_on_ground && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
 						{"run": "q.is_on_ground && q.modified_move_speed > 0.6"},
+						{"jump": "!q.is_in_water && !q.is_on_ground && q.vertical_speed > 0.1"},
 						{"fall": "!q.is_in_water && !q.is_on_ground && q.vertical_speed <= 0.1"}
 					],
-					"blend_transition": 0.3
+					"blend_transition": 0.4
 				},
+
 				"jump": {
 					"animations": ["jump"],
 					"transitions": [
@@ -56,19 +61,19 @@
 						{"idle": "q.is_on_ground && q.anim_time < 0.15 && q.modified_move_speed <= 0.05"},
 						{"walk": "q.is_on_ground && q.anim_time < 0.15 && q.modified_move_speed > 0.05"}
 					],
-					"blend_transition": 0.1
+					"blend_transition": 0.2
 				},
 				"fall": {
 					"animations": ["fall"],
 					"transitions": [
-						{"high_fall_landing": "q.is_on_ground && q.anim_time >= 0.6"},
-						{"step_down": "q.is_on_ground && q.anim_time >= 0.2 && q.anim_time < 0.6"},
-						{"idle": "q.is_on_ground && q.anim_time < 0.2 && q.modified_move_speed <= 0.05"},
-						{"walk": "q.is_on_ground && q.anim_time < 0.2 && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
-						{"run": "q.is_on_ground && q.anim_time < 0.2 && q.modified_move_speed > 0.6"},
+						{"high_fall_landing": "q.is_on_ground && q.vertical_speed < -5.0"},
+						{"step_down": "q.is_on_ground && q.vertical_speed >= -5.0 && q.vertical_speed < -0.8"},
+						{"idle": "q.is_on_ground && q.vertical_speed >= -0.8 && q.modified_move_speed <= 0.05"},
+						{"walk": "q.is_on_ground && q.vertical_speed >= -0.8 && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
+						{"run": "q.is_on_ground && q.vertical_speed >= -0.8 && q.modified_move_speed > 0.6"},
 						{"swimming": "q.is_in_water"}
 					],
-					"blend_transition": 0.08
+					"blend_transition": 0.06
 				},
 				"step_down": {
 					"animations": ["step_down"],
@@ -76,10 +81,10 @@
 						{"idle": "q.any_animation_finished && q.modified_move_speed <= 0.05"},
 						{"walk": "q.any_animation_finished && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
 						{"run": "q.any_animation_finished && q.modified_move_speed > 0.6"},
-						{"walk": "q.modified_move_speed > 0.3"},
+						{"walk": "q.anim_time > 0.2 && q.modified_move_speed > 0.3"},
 						{"fall": "!q.is_on_ground && !q.is_in_water"}
 					],
-					"blend_transition": 0.15
+					"blend_transition": 0.25
 				},
 				"high_fall_landing": {
 					"animations": ["high_fall_landing"],
@@ -87,33 +92,24 @@
 						{"idle": "q.any_animation_finished && q.modified_move_speed <= 0.05"},
 						{"walk": "q.any_animation_finished && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
 						{"run": "q.any_animation_finished && q.modified_move_speed > 0.6"},
-						{"walk": "q.modified_move_speed > 0.5"},
+						{"walk": "q.anim_time > 0.6 && q.modified_move_speed > 0.4"},
 						{"fall": "!q.is_on_ground && !q.is_in_water"}
 					],
-					"blend_transition": 0.2
+					"blend_transition": 0.45
 				}
 			}
 		},
+
 		"controller.animation.dodo.idle_extras": {
 			"initial_state": "waiting",
 			"states": {
 				"waiting": {
 					"transitions": [
-						{"head_tilt": "q.modified_move_speed <= 0.05 && q.is_on_ground && !q.is_in_water && Math.random(1,100) <= 1"},
-						{"pecking": "q.modified_move_speed <= 0.05 && q.is_on_ground && !q.is_in_water && Math.random(1,100) <= 1"}
+						{"head_tilt": "q.modified_move_speed <= 0.05 && q.is_on_ground && !q.is_in_water && Math.random(1,100) <= 1"}
 					]
 				},
 				"head_tilt": {
 					"animations": ["head_tilt"],
-					"transitions": [
-						{"waiting": "q.any_animation_finished"},
-						{"waiting": "q.modified_move_speed > 0.05"},
-						{"waiting": "q.is_in_water"}
-					],
-					"blend_transition": 0.25
-				},
-				"pecking": {
-					"animations": ["pecking"],
 					"transitions": [
 						{"waiting": "q.any_animation_finished"},
 						{"waiting": "q.modified_move_speed > 0.05"},
@@ -155,6 +151,74 @@
 						{"default": "!q.is_in_water || q.is_on_ground"}
 					],
 					"blend_transition": 0.3
+				}
+			}
+		},
+		"controller.animation.dodo.pupils": {
+			"initial_state": "idle",
+			"states": {
+				"idle": {
+					"animations": ["pupils_idle"],
+					"transitions": [
+						{"walk": "q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6 && q.is_on_ground"},
+						{"run": "q.modified_move_speed > 0.6 && q.is_on_ground"},
+						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"},
+						{"hurt": "q.hurt_time > 0"}
+					],
+					"blend_transition": 0.3
+				},
+				"walk": {
+					"animations": ["pupils_idle"],
+					"transitions": [
+						{"idle": "q.modified_move_speed <= 0.05 && q.is_on_ground"},
+						{"run": "q.modified_move_speed > 0.6 && q.is_on_ground"},
+						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"},
+						{"hurt": "q.hurt_time > 0"}
+					],
+					"blend_transition": 0.25
+				},
+				"run": {
+					"animations": ["pupils_run"],
+					"transitions": [
+						{"idle": "q.modified_move_speed <= 0.05 && q.is_on_ground"},
+						{"walk": "q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6 && q.is_on_ground"},
+						{"swimming": "!q.is_on_ground && q.is_in_water"},
+						{"fall": "!q.is_on_ground && !q.is_in_water && q.vertical_speed <= 0.1"},
+						{"hurt": "q.hurt_time > 0"}
+					],
+					"blend_transition": 0.2
+				},
+				"swimming": {
+					"animations": ["pupils_swim"],
+					"transitions": [
+						{"idle": "q.is_on_ground && q.modified_move_speed <= 0.05"},
+						{"walk": "q.is_on_ground && q.modified_move_speed > 0.05"},
+						{"fall": "!q.is_in_water && !q.is_on_ground"},
+						{"hurt": "q.hurt_time > 0"}
+					],
+					"blend_transition": 0.35
+				},
+				"fall": {
+					"animations": ["pupils_fall"],
+					"transitions": [
+						{"idle": "q.is_on_ground && q.modified_move_speed <= 0.05"},
+						{"walk": "q.is_on_ground && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
+						{"run": "q.is_on_ground && q.modified_move_speed > 0.6"},
+						{"swimming": "q.is_in_water"},
+						{"hurt": "q.hurt_time > 0"}
+					],
+					"blend_transition": 0.15
+				},
+				"hurt": {
+					"animations": ["pupils_hurt"],
+					"transitions": [
+						{"idle": "q.hurt_time <= 0 && q.modified_move_speed <= 0.05"},
+						{"walk": "q.hurt_time <= 0 && q.modified_move_speed > 0.05 && q.modified_move_speed <= 0.6"},
+						{"run": "q.hurt_time <= 0 && q.modified_move_speed > 0.6"}
+					],
+					"blend_transition": 0.2
 				}
 			}
 		}
